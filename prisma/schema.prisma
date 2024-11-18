@@ -1,0 +1,114 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Profile {
+  id       String @id @default(cuid())
+  userId   String @unique
+  name     String
+  imageUrl String @db.Text
+  email    String @db.Text
+
+  events   Event[]
+  members  Member[]
+  contents Content[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Event {
+  id         String @id @default(cuid())
+  name       String
+  imageUrl   String @db.Text
+  inviteCode String @unique
+
+  profileId String
+  profile   Profile @relation(fields: [profileId], references: [id], onDelete: Cascade)
+
+  members  Member[]
+  contents Content[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([profileId])
+}
+
+enum MemberRole {
+  ADMIN
+  MODERATOR
+  GUEST
+}
+
+model Member {
+  id   String     @id @default(cuid())
+  role MemberRole @default(GUEST)
+
+  profileId String
+  profile   Profile @relation(fields: [profileId], references: [id], onDelete: Cascade)
+
+  eventId String
+  server  Event  @relation(fields: [eventId], references: [id], onDelete: Cascade)
+
+  messages Message[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([profileId])
+  @@index([eventId])
+}
+
+enum ContentType {
+  TEXT
+  IMAGE
+  VIDEO
+}
+
+model Content {
+  id   String      @id @default(cuid())
+  name String
+  type ContentType @default(IMAGE)
+  url  String      @db.Text
+
+  profileId String
+  profile   Profile @relation(fields: [profileId], references: [id], onDelete: Cascade)
+
+  eventId String
+  server  Event  @relation(fields: [eventId], references: [id], onDelete: Cascade)
+
+  messages Message[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([profileId])
+  @@index([eventId])
+}
+
+model Message {
+  id   String @id @default(cuid())
+  text String @db.Text
+
+  fileUrl String? @db.Text
+
+  memberId String
+  member   Member @relation(fields: [memberId], references: [id], onDelete: Cascade)
+
+  contentId String
+  content   Content @relation(fields: [contentId], references: [id], onDelete: Cascade)
+
+  deleted Boolean @default(false)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([contentId])
+  @@index([memberId])
+}

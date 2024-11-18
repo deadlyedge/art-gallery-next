@@ -3,6 +3,8 @@ import { Noto_Serif } from "next/font/google"
 import "./globals.css"
 import { cn } from "@/lib/utils"
 import { ThemeProvider } from "@/components/providers/themeProvider"
+import { QueryProvider } from "@/components/providers/queryProvider"
+import { ModalProvider } from "@/components/providers/modal-provider"
 
 const notoSerif = Noto_Serif({
   subsets: ["latin"],
@@ -28,7 +30,11 @@ export default function RootLayout({
           defaultTheme={"dark"}
           enableSystem
           storageKey='aganex-theme'>
-          {children}
+              <ModalProvider />
+              <QueryProvider>
+
+          {children}              </QueryProvider>
+
         </ThemeProvider>
       </body>
     </html>
