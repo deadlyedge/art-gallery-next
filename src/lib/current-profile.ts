@@ -1,10 +1,10 @@
-import { auth } from "@clerk/nextjs"
+import { auth } from "@clerk/nextjs/server"
 
 import { db } from "@/lib/db"
 
 export const currentProfile = async () => {
   // 根据登录状况获取用户ID
-  const { userId } = auth()
+  const { userId } = await auth()
 
   if (!userId) {
     return null
