@@ -5,7 +5,7 @@ import axios from "axios"
 import * as z from "zod"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
-import { ChannelType } from "@prisma/client"
+import { ContentType } from "@prisma/client"
 
 import {
   Dialog,
@@ -40,44 +40,44 @@ const formSchema = z.object({
   name: z
     .string()
     .min(1, {
-      message: "Channel name is required.",
+      message: "Content name is required.",
     })
     .refine((name) => name !== "general", {
-      message: "Channel name cannot be 'general'",
+      message: "Content name cannot be 'general'",
     }),
-  type: z.nativeEnum(ChannelType),
+  type: z.nativeEnum(ContentType),
 })
 
-export const CreateChannelModal = () => {
+export const CreateContentModal = () => {
   const { isOpen, onClose, type, data } = useModal()
   const router = useRouter()
   const params = useParams()
 
-  const isModalOpen = isOpen && type === "createChannel"
-  const { channelType } = data
+  const isModalOpen = isOpen && type === "createContent"
+  const { contentType } = data
 
   const form = useForm({
     resolver: zodResolver(formSchema),
     defaultValues: {
       name: "",
-      type: channelType || ChannelType.TEXT,
+      type: contentType || ContentType.TEXT,
     },
   })
 
   useEffect(() => {
-    if (channelType) {
-      form.setValue("type", channelType)
+    if (contentType) {
+      form.setValue("type", contentType)
     } else {
-      form.setValue("type", ChannelType.TEXT)
+      form.setValue("type", ContentType.TEXT)
     }
-  }, [channelType, form])
+  }, [contentType, form])
 
   const isLoading = form.formState.isSubmitting
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
       const url = qs.stringifyUrl({
-        url: "/api/channels",
+        url: "/api/contents",
         query: {
           serverId: params?.serverId,
         },
@@ -123,7 +123,7 @@ export const CreateChannelModal = () => {
                       <Input
                         disabled={isLoading}
                         className='bg-zinc-300/50 border-0 focus-visible:ring-0 text-black focus-visible:ring-offset-0'
-                        placeholder='Enter channel name'
+                        placeholder='Enter content name'
                         {...field}
                       />
                     </FormControl>
@@ -147,11 +147,11 @@ export const CreateChannelModal = () => {
                         </SelectTrigger>
                       </FormControl>
                       <SelectContent>
-                        {Object.values(ChannelType).map((type) => (
+                        {Object.values(ContentType).map((type) => (
                           <SelectItem
                             key={type}
                             value={type}
-                            disabled={type !== 'TEXT'} // 无法连接livekit
+                            disabled={type !== "TEXT"} // 无法连接livekit
                             className='capitalize'>
                             {type.toLowerCase()}
                           </SelectItem>
@@ -164,7 +164,7 @@ export const CreateChannelModal = () => {
               />
             </div>
             <DialogFooter className='bg-gray-100 px-6 py-4'>
-              <Button variant='primary' disabled={isLoading}>
+              <Button variant='default' disabled={isLoading}>
                 创建
               </Button>
             </DialogFooter>

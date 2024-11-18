@@ -40,20 +40,20 @@ const formSchema = z.object({
   name: z
     .string()
     .min(1, {
-      message: "Channel name is required.",
+      message: "Content name is required.",
     })
     .refine((name) => name !== "general", {
-      message: "Channel name cannot be 'general'",
+      message: "Content name cannot be 'general'",
     }),
   type: z.nativeEnum(ContentType),
 })
 
-export const EditChannelModal = () => {
+export const EditContentModal = () => {
   const { isOpen, onClose, type, data } = useModal()
   const router = useRouter()
 
-  const isModalOpen = isOpen && type === "editChannel"
-  const { content, server } = data
+  const isModalOpen = isOpen && type === "editContent"
+  const { content, event } = data
 
   const form = useForm({
     resolver: zodResolver(formSchema),
@@ -77,7 +77,7 @@ export const EditChannelModal = () => {
       const url = qs.stringifyUrl({
         url: `/api/contents/${content?.id}`,
         query: {
-          serverId: server?.id,
+          eventId: event?.id,
         },
       })
       await axios.patch(url, values)

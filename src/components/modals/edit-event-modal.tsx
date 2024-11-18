@@ -30,19 +30,19 @@ import { useModal } from "@/hooks/use-modal-store"
 
 const formSchema = z.object({
   name: z.string().min(1, {
-    message: "Server name is required.",
+    message: "Event name is required.",
   }),
   imageUrl: z.string().min(1, {
-    message: "Server image is required.",
+    message: "Event image is required.",
   }),
 })
 
-export const EditServerModal = () => {
+export const EditEventModal = () => {
   const { isOpen, onClose, type, data } = useModal()
   const router = useRouter()
 
-  const isModalOpen = isOpen && type === "editServer"
-  const { server } = data
+  const isModalOpen = isOpen && type === "editEvent"
+  const { event } = data
 
   const form = useForm({
     resolver: zodResolver(formSchema),
@@ -53,17 +53,17 @@ export const EditServerModal = () => {
   })
 
   useEffect(() => {
-    if (server) {
-      form.setValue("name", server.name)
-      form.setValue("imageUrl", server.imageUrl)
+    if (event) {
+      form.setValue("name", event.name)
+      form.setValue("imageUrl", event.imageUrl)
     }
-  }, [server, form, isOpen])
+  }, [event, form, isOpen])
 
   const isLoading = form.formState.isSubmitting
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
-      await axios.patch(`/api/servers/${server?.id}`, values)
+      await axios.patch(`/api/events/${event?.id}`, values)
 
       form.reset()
       router.refresh()
@@ -100,7 +100,7 @@ export const EditServerModal = () => {
                     <FormItem>
                       <FormControl>
                         <FileUpload
-                          endpoint='serverImage'
+                          endpoint='eventImage'
                           value={field.value}
                           onChange={field.onChange}
                         />
@@ -132,7 +132,7 @@ export const EditServerModal = () => {
               />
             </div>
             <DialogFooter className='bg-gray-100 px-6 py-4'>
-              <Button variant='primary' disabled={isLoading}>
+              <Button variant='default' disabled={isLoading}>
                 保存
               </Button>
             </DialogFooter>

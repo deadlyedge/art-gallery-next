@@ -16,12 +16,12 @@ import {
 import { useModal } from "@/hooks/use-modal-store"
 import { Button } from "@/components/ui/button"
 
-export const DeleteChannelModal = () => {
+export const DeleteContentModal = () => {
   const { isOpen, onClose, type, data } = useModal()
   const router = useRouter()
 
-  const isModalOpen = isOpen && type === "deleteChannel"
-  const { server, channel } = data
+  const isModalOpen = isOpen && type === "deleteContent"
+  const { event, content } = data
 
   const [isLoading, setIsLoading] = useState(false)
 
@@ -29,9 +29,9 @@ export const DeleteChannelModal = () => {
     try {
       setIsLoading(true)
       const url = qs.stringifyUrl({
-        url: `/api/channels/${channel?.id}`,
+        url: `/api/contents/${content?.id}`,
         query: {
-          serverId: server?.id,
+          eventId: event?.id,
         },
       })
 
@@ -39,7 +39,7 @@ export const DeleteChannelModal = () => {
 
       onClose()
       router.refresh()
-      router.push(`/servers/${server?.id}`)
+      router.push(`/events/${event?.id}`)
     } catch (error) {
       console.log(error)
     } finally {
@@ -57,7 +57,7 @@ export const DeleteChannelModal = () => {
           <DialogDescription className='text-center text-zinc-500'>
             确定要删除吗？ <br />
             <span className='text-indigo-500 font-semibold'>
-              #{channel?.name}
+              #{content?.name}
             </span>{" "}
             将被永久移除
           </DialogDescription>
@@ -67,7 +67,7 @@ export const DeleteChannelModal = () => {
             <Button disabled={isLoading} onClick={onClose} variant='ghost'>
               放弃
             </Button>
-            <Button disabled={isLoading} variant='primary' onClick={onClick}>
+            <Button disabled={isLoading} variant='default' onClick={onClick}>
               确认
             </Button>
           </div>

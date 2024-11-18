@@ -17,7 +17,7 @@ export const NavigationSidebar = async () => {
     return redirect("/")
   }
 
-  const servers = await db.server.findMany({
+  const events = await db.event.findMany({
     where: {
       members: {
         some: {
@@ -32,12 +32,12 @@ export const NavigationSidebar = async () => {
       <NavigationAction />
       <Separator className='h-[2px] bg-zinc-300 dark:bg-zinc-700 rounded-md w-10 mx-auto' />
       <ScrollArea className='flex-1 w-full'>
-        {servers.map((server) => (
-          <div key={server.id} className='mb-4'>
+        {events.map((event) => (
+          <div key={event.id} className='mb-4'>
             <NavigationItem
-              id={server.id}
-              name={server.name}
-              imageUrl={server.imageUrl}
+              id={event.id}
+              name={event.name}
+              imageUrl={event.imageUrl}
             />
           </div>
         ))}

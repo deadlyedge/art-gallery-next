@@ -15,12 +15,12 @@ import {
 import { useModal } from "@/hooks/use-modal-store"
 import { Button } from "@/components/ui/button"
 
-export const LeaveServerModal = () => {
+export const LeaveEventModal = () => {
   const { isOpen, onClose, type, data } = useModal()
   const router = useRouter()
 
-  const isModalOpen = isOpen && type === "leaveServer"
-  const { server } = data
+  const isModalOpen = isOpen && type === "leaveEvent"
+  const { event } = data
 
   const [isLoading, setIsLoading] = useState(false)
 
@@ -28,7 +28,7 @@ export const LeaveServerModal = () => {
     try {
       setIsLoading(true)
 
-      await axios.patch(`/api/servers/${server?.id}/leave`)
+      await axios.patch(`/api/events/${event?.id}/leave`)
 
       onClose()
       router.refresh()
@@ -50,7 +50,7 @@ export const LeaveServerModal = () => {
           <DialogDescription className='text-center text-zinc-500'>
             确定要离开{" "}
             <span className='font-semibold text-indigo-500'>
-              {server?.name}
+              {event?.name}
             </span>{" "}
             吗？
           </DialogDescription>
@@ -60,7 +60,7 @@ export const LeaveServerModal = () => {
             <Button disabled={isLoading} onClick={onClose} variant='ghost'>
               留下
             </Button>
-            <Button disabled={isLoading} variant='primary' onClick={onClick}>
+            <Button disabled={isLoading} variant='default' onClick={onClick}>
               离开
             </Button>
           </div>

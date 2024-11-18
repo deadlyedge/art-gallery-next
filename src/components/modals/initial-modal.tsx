@@ -57,7 +57,7 @@ export const InitialModal = () => {
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
-      await axios.post("/api/servers", values)
+      await axios.post("/api/events", values)
 
       form.reset()
       router.refresh()
@@ -93,7 +93,7 @@ export const InitialModal = () => {
                     <FormItem>
                       <FormControl>
                         <FileUpload
-                          endpoint='serverImage'
+                          endpoint='eventImage'
                           value={field.value}
                           onChange={field.onChange}
                         />
@@ -115,7 +115,7 @@ export const InitialModal = () => {
                       <Input
                         disabled={isLoading}
                         className='bg-zinc-300/50 border-0 focus-visible:ring-0 text-black focus-visible:ring-offset-0'
-                        placeholder='Enter server name'
+                        placeholder='Enter event name'
                         {...field}
                       />
                     </FormControl>
@@ -125,7 +125,7 @@ export const InitialModal = () => {
               />
             </div>
             <DialogFooter className='bg-gray-100 px-6 py-4'>
-              <Button variant='primary' disabled={isLoading}>
+              <Button variant='default' disabled={isLoading}>
                 创建
               </Button>
             </DialogFooter>

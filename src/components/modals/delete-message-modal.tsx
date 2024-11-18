@@ -58,7 +58,7 @@ export const DeleteMessageModal = () => {
             <Button disabled={isLoading} onClick={onClose} variant='ghost'>
               取消
             </Button>
-            <Button disabled={isLoading} variant='primary' onClick={onClick}>
+            <Button disabled={isLoading} variant='default' onClick={onClick}>
               确认
             </Button>
           </div>

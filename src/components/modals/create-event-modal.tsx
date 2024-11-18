@@ -36,11 +36,11 @@ const formSchema = z.object({
   }),
 })
 
-export const CreateServerModal = () => {
+export const CreateEventModal = () => {
   const { isOpen, onClose, type } = useModal()
   const router = useRouter()
 
-  const isModalOpen = isOpen && type === "createServer"
+  const isModalOpen = isOpen && type === "createEvent"
 
   const form = useForm({
     resolver: zodResolver(formSchema),
@@ -54,7 +54,7 @@ export const CreateServerModal = () => {
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
-      await axios.post("/api/servers", values)
+      await axios.post("/api/events", values)
 
       form.reset()
       router.refresh()
@@ -91,7 +91,7 @@ export const CreateServerModal = () => {
                     <FormItem>
                       <FormControl>
                         <FileUpload
-                          endpoint='serverImage'
+                          endpoint='eventImage'
                           value={field.value}
                           onChange={field.onChange}
                         />
@@ -123,7 +123,7 @@ export const CreateServerModal = () => {
               />
             </div>
             <DialogFooter className='bg-gray-100 px-6 py-4'>
-              <Button variant='primary' disabled={isLoading}>
+              <Button variant='default' disabled={isLoading}>
                 创建
               </Button>
             </DialogFooter>

@@ -5,6 +5,8 @@ import { cn } from "@/lib/utils"
 import { ThemeProvider } from "@/components/providers/themeProvider"
 import { QueryProvider } from "@/components/providers/queryProvider"
 import { ModalProvider } from "@/components/providers/modal-provider"
+import { SocketProvider } from "@/components/providers/socket-provider"
+import { ClerkProvider } from "@clerk/nextjs"
 
 const notoSerif = Noto_Serif({
   subsets: ["latin"],
@@ -23,20 +25,27 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang='en' suppressContentEditableWarning>
-      <body className={cn(notoSerif.className, "antialiased")}>
-        <ThemeProvider
-          attribute={"class"}
-          defaultTheme={"dark"}
-          enableSystem
-          storageKey='aganex-theme'>
+    <ClerkProvider
+      dynamic
+      signInUrl='/sign-in'
+      signUpUrl='/sign-up'
+      signInFallbackRedirectUrl='/'
+      signUpFallbackRedirectUrl='/'
+      afterSignOutUrl='/'>
+      <html lang='en' suppressContentEditableWarning>
+        <body className={cn(notoSerif.className, "antialiased")}>
+          <ThemeProvider
+            attribute={"class"}
+            defaultTheme={"dark"}
+            enableSystem
+            storageKey='aganx-theme'>
+            <SocketProvider>
               <ModalProvider />
-              <QueryProvider>
-
-          {children}              </QueryProvider>
-
-        </ThemeProvider>
-      </body>
-    </html>
+              <QueryProvider>{children} </QueryProvider>
+            </SocketProvider>
+          </ThemeProvider>
+        </body>
+      </html>
+    </ClerkProvider>
   )
 }

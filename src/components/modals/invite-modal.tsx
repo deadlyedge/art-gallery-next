@@ -21,12 +21,12 @@ export const InviteModal = () => {
   const origin = useOrigin()
 
   const isModalOpen = isOpen && type === "invite"
-  const { server } = data
+  const { event } = data
 
   const [copied, setCopied] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
 
-  const inviteUrl = `${origin}/invite/${server?.inviteCode}`
+  const inviteUrl = `${origin}/invite/${event?.inviteCode}`
 
   const onCopy = () => {
     navigator.clipboard.writeText(inviteUrl)
@@ -41,10 +41,10 @@ export const InviteModal = () => {
     try {
       setIsLoading(true)
       const response = await axios.patch(
-        `/api/servers/${server?.id}/invite-code`
+        `/api/events/${event?.id}/invite-code`
       )
 
-      onOpen("invite", { server: response.data })
+      onOpen("invite", { event: response.data })
     } catch (error) {
       console.log(error)
     } finally {

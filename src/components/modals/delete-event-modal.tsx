@@ -15,12 +15,12 @@ import {
 import { useModal } from "@/hooks/use-modal-store"
 import { Button } from "@/components/ui/button"
 
-export const DeleteServerModal = () => {
+export const DeleteEventModal = () => {
   const { isOpen, onClose, type, data } = useModal()
   const router = useRouter()
 
-  const isModalOpen = isOpen && type === "deleteServer"
-  const { server } = data
+  const isModalOpen = isOpen && type === "deleteEvent"
+  const { event } = data
 
   const [isLoading, setIsLoading] = useState(false)
 
@@ -28,7 +28,7 @@ export const DeleteServerModal = () => {
     try {
       setIsLoading(true)
 
-      await axios.delete(`/api/servers/${server?.id}`)
+      await axios.delete(`/api/events/${event?.id}`)
 
       onClose()
       router.refresh()
@@ -50,7 +50,7 @@ export const DeleteServerModal = () => {
           <DialogDescription className='text-center text-zinc-500'>
             确认要删除吗？ <br />
             <span className='text-indigo-500 font-semibold'>
-              {server?.name}
+              {event?.name}
             </span>{" "}
             将被永久移除
           </DialogDescription>
