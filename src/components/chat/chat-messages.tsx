@@ -27,9 +27,9 @@ type ChatMessagesProps = {
   apiUrl: string
   socketUrl: string
   socketQuery: Record<string, string>
-  paramKey: "channelId" | "conversationId"
+  paramKey: "contentId" | "conversationId"
   paramValue: string
-  type: "channel" | "conversation"
+  type: "content" | "conversation"
 }
 
 export const ChatMessages = ({
@@ -66,7 +66,7 @@ export const ChatMessages = ({
     count: data?.pages?.[0]?.items?.length ?? 0,
   })
 
-  if (status === "loading") {
+  if (status === "pending") {
     return (
       <div className='flex flex-col flex-1 justify-center items-center'>
         <Loader2 className='h-7 w-7 text-zinc-500 animate-spin my-4' />
@@ -110,7 +110,7 @@ export const ChatMessages = ({
                 id={message.id}
                 currentMember={member}
                 member={message.member}
-                content={message.content}
+                content={message.text}
                 fileUrl={message.fileUrl}
                 deleted={message.deleted}
                 timestamp={format(new Date(message.createdAt), DATE_FORMAT)}

@@ -7,11 +7,14 @@ const nextConfig: NextConfig = {
       {
         protocol: "https",
         hostname: "utfs.io",
-        pathname: "/a/<APP_ID>/*",
       },
       {
         protocol: "https",
         hostname: "file.zick.me",
+      },
+      {
+        protocol: "https",
+        hostname: "uploadthing.com",
       },
     ],
   },

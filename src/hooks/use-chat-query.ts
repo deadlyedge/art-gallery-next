@@ -6,7 +6,7 @@ import { useSocket } from "@/components/providers/socket-provider"
 type ChatQueryProps = {
   queryKey: string
   apiUrl: string
-  paramKey: "channelId" | "conversationId"
+  paramKey: "contentId" | "conversationId"
   paramValue: string
 }
 
@@ -18,7 +18,7 @@ export const useChatQuery = ({
 }: ChatQueryProps) => {
   const { isConnected } = useSocket()
 
-  const fetchMessages = async ({ pageParam = undefined }) => {
+  const fetchMessages = async ({ pageParam = 1 }) => {
     const url = qs.stringifyUrl(
       {
         url: apiUrl,
@@ -38,10 +38,10 @@ export const useChatQuery = ({
     useInfiniteQuery({
       queryKey: [queryKey],
       queryFn: fetchMessages,
+      initialPageParam: 1,
       getNextPageParam: (lastPage) => lastPage?.nextCursor,
       refetchInterval: isConnected ? false : 1000,
     })
-
   return {
     data,
     fetchNextPage,

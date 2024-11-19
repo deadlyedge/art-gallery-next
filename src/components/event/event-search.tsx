@@ -4,14 +4,14 @@ import { Search } from "lucide-react"
 import { useEffect, useState } from "react"
 import { useParams, useRouter } from "next/navigation"
 
-import {
-  CommandDialog,
-  CommandEmpty,
-  CommandGroup,
-  CommandInput,
-  CommandItem,
-  CommandList,
-} from "@/components/ui/command"
+// import {
+//   CommandDialog,
+//   CommandEmpty,
+//   CommandGroup,
+//   CommandInput,
+//   CommandItem,
+//   CommandList,
+// } from "@/components/ui/command"
 
 type EventSearchProps = {
   data: {
@@ -75,7 +75,7 @@ export const EventSearch = ({ data }: EventSearchProps) => {
           <span className='text-xs'>⌘</span>K
         </kbd>
       </button>
-      <CommandDialog open={open} onOpenChange={setOpen}>
+      {/* <CommandDialog open={open} onOpenChange={setOpen}>
         <CommandInput placeholder='Search all contents and members' />
         <CommandList>
           <CommandEmpty>没找到结果</CommandEmpty>
@@ -98,7 +98,7 @@ export const EventSearch = ({ data }: EventSearchProps) => {
             )
           })}
         </CommandList>
-      </CommandDialog>
+      </CommandDialog> */}
     </>
   )
 }

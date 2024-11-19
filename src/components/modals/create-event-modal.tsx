@@ -74,7 +74,7 @@ export const CreateEventModal = () => {
       <DialogContent className='bg-white text-black p-0 overflow-hidden'>
         <DialogHeader className='pt-8 px-6'>
           <DialogTitle className='text-2xl text-center font-bold'>
-            自定义您的服务器
+            请添加一个事件
           </DialogTitle>
           <DialogDescription className='text-center text-zinc-500'>
             给服务器定义个性化的名称和图标。你以后还可以做修改。

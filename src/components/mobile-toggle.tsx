@@ -3,9 +3,9 @@ import { Menu } from "lucide-react"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 import { Button } from "@/components/ui/button"
 import { NavigationSidebar } from "@/components/navigation/navigation-sidebar"
-import { ServerSidebar } from "@/components/event/event-sidebar"
+import { EventSidebar } from "@/components/event/event-sidebar"
 
-export const MobileToggle = ({ serverId }: { serverId: string }) => {
+export const MobileToggle = ({ eventId }: { eventId: string }) => {
   return (
     <Sheet>
       <SheetTrigger asChild>
@@ -17,7 +17,7 @@ export const MobileToggle = ({ serverId }: { serverId: string }) => {
         <div className='w-[72px]'>
           <NavigationSidebar />
         </div>
-        <ServerSidebar serverId={serverId} />
+        <EventSidebar eventId={eventId} />
       </SheetContent>
     </Sheet>
   )

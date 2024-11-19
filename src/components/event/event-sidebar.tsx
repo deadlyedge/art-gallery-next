@@ -92,7 +92,7 @@ export const EventSidebar = async ({ eventId }: EventSidebarProps) => {
       <EventHeader event={event} role={role} />
       <ScrollArea className='flex-1 px-3'>
         <div className='mt-2'>
-          <EventSearch
+          {/* <EventSearch
             data={[
               {
                 label: "文字频道",
@@ -131,7 +131,7 @@ export const EventSidebar = async ({ eventId }: EventSidebarProps) => {
                 })),
               },
             ]}
-          />
+          /> */}
         </div>
         <Separator className='bg-zinc-200 dark:bg-zinc-700 rounded-md my-2' />
         {!!textContents?.length && (

@@ -7,22 +7,22 @@ import { SocketIndicator } from "@/components/socket-indicator"
 import { ChatVideoButton } from "./chat-video-button"
 
 type ChatHeaderProps = {
-  serverId: string
+  eventId: string
   name: string
-  type: "channel" | "conversation"
+  type: "content" | "conversation"
   imageUrl?: string
 }
 
 export const ChatHeader = ({
-  serverId,
+  eventId,
   name,
   type,
   imageUrl,
 }: ChatHeaderProps) => {
   return (
     <div className='text-md font-semibold px-3 flex items-center h-12 border-neutral-200 dark:border-neutral-800 border-b-2'>
-      <MobileToggle serverId={serverId} />
-      {type === "channel" && (
+      <MobileToggle eventId={eventId} />
+      {type === "content" && (
         <Hash className='w-5 h-5 text-zinc-500 dark:text-zinc-400 mr-2' />
       )}
       {type === "conversation" && (

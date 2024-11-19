@@ -17,7 +17,7 @@ type ChatInputProps = {
   apiUrl: string
   query: Record<string, any>
   name: string
-  type: "conversation" | "channel"
+  type: "conversation" | "content"
 }
 
 const formSchema = z.object({

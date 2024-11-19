@@ -66,7 +66,7 @@ export const ChatItem = ({
       return
     }
 
-    router.push(`/servers/${params?.serverId}/conversations/${member.id}`)
+    router.push(`/events/${params?.eventId}/conversations/${member.id}`)
   }
 
   useEffect(() => {
@@ -211,7 +211,7 @@ export const ChatItem = ({
                     </FormItem>
                   )}
                 />
-                <Button disabled={isLoading} size='sm' variant='primary'>
+                <Button disabled={isLoading} size='sm' variant='default'>
                   Save
                 </Button>
               </form>

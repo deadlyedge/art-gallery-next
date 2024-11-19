@@ -7,6 +7,7 @@ import { useState } from "react"
 import {
   Dialog,
   DialogContent,
+  DialogDescription,
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog"
@@ -40,9 +41,7 @@ export const InviteModal = () => {
   const onNew = async () => {
     try {
       setIsLoading(true)
-      const response = await axios.patch(
-        `/api/events/${event?.id}/invite-code`
-      )
+      const response = await axios.patch(`/api/events/${event?.id}/invite-code`)
 
       onOpen("invite", { event: response.data })
     } catch (error) {
@@ -55,6 +54,10 @@ export const InviteModal = () => {
   return (
     <Dialog open={isModalOpen} onOpenChange={onClose}>
       <DialogContent className='bg-white text-black p-0 overflow-hidden'>
+        <DialogDescription className='pt-4 text-center text-zinc-500'>
+          任何人都可以使用此链接加入服务器
+        </DialogDescription>
+
         <DialogHeader className='pt-8 px-6'>
           <DialogTitle className='text-2xl text-center font-bold'>
             邀请朋友
