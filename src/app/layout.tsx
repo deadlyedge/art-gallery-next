@@ -32,7 +32,7 @@ export default function RootLayout({
       signInFallbackRedirectUrl='/'
       signUpFallbackRedirectUrl='/'
       afterSignOutUrl='/'>
-      <html lang='en' suppressContentEditableWarning>
+      <html lang='en' suppressHydrationWarning>
         <body className={cn(notoSerif.className, "antialiased")}>
           <ThemeProvider
             attribute={"class"}

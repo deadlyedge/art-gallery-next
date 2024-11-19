@@ -2,12 +2,14 @@ import Image from "next/image"
 
 import { Button } from "@/components/ui/button"
 import { Heart, Info, MessageSquareMore } from "lucide-react"
+import LogoMotion from "./logo-motion"
 
 type ContentsProps = {}
 
 export const Contents = ({}: ContentsProps) => {
   return (
-    <section className='w-full mx-auto'>
+    <section className='w-full mx-auto flex flex-col items-center justify-center'>
+      <LogoMotion componentSize="xl" />
       <h2 className='flex flex-row flex-wrap justify-center py-12 text-2xl'>
         中文测试: 虽然即将发售的《逆转检察官1&2
       </h2>

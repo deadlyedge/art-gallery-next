@@ -1,14 +1,13 @@
 import { Button } from "@/components/ui/button"
 import { CircleEllipsis, DiamondPlus } from "lucide-react"
+import LogoMotion from "./logo-motion"
 
 type NavbarProps = {}
 
 export const Navbar = ({}: NavbarProps) => {
   return (
-    <nav className='sticky top-0 z-20 bg-slate-800/75 text-xs md:text-base flex justify-between h-12 p-2'>
-      <a className='flex flex-row items-center' href='/'>
-        <span>Kaka&apos;s Gallery</span>
-      </a>
+    <nav className='sticky top-0 z-20 bg-black/50 text-xs md:text-base flex justify-between h-12 p-2'>
+      <LogoMotion componentSize="lg" />
       <div className='flex grow items-center justify-between'>
         <ul></ul>
         <ul className='flex flex-row items-center gap-1'>
