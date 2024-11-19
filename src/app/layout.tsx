@@ -7,6 +7,7 @@ import { QueryProvider } from "@/components/providers/queryProvider"
 import { ModalProvider } from "@/components/providers/modal-provider"
 import { SocketProvider } from "@/components/providers/socket-provider"
 import { ClerkProvider } from "@clerk/nextjs"
+import { dark } from "@clerk/themes"
 
 const notoSerif = Noto_Serif({
   subsets: ["latin"],
@@ -27,6 +28,7 @@ export default function RootLayout({
   return (
     <ClerkProvider
       dynamic
+      appearance={{ baseTheme: dark }}
       signInUrl='/sign-in'
       signUpUrl='/sign-up'
       signInFallbackRedirectUrl='/'
@@ -40,8 +42,8 @@ export default function RootLayout({
             enableSystem
             storageKey='aganx-theme'>
             {/* <SocketProvider> */}
-              <ModalProvider />
-              <QueryProvider>{children} </QueryProvider>
+            <ModalProvider />
+            <QueryProvider>{children}</QueryProvider>
             {/* </SocketProvider> */}
           </ThemeProvider>
         </body>

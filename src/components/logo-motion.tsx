@@ -2,64 +2,71 @@ import { cn } from "@/lib/utils"
 
 type LogoMotionProps = {
   className?: string
-  componentSize: "sm" | "lg" | "xl" | "md"
+  size: "sm" | "lg" | "xl" | "md"
 }
 
 const marginClasses = {
   sm: {
-    size: "text-sm",
+    textSize: "text-sm",
     a: "-ml-[0.7rem]",
     ga: "-ml-4.5",
     nx: "-ml-[1.85rem]",
   },
-  md: { size: "text-base", a: "ml-0", ga: "-ml-6.5", nx: "-ml-[2.4rem]" },
+  md: { textSize: "text-base", a: "ml-0", ga: "-ml-6.5", nx: "-ml-[2.4rem]" },
   lg: {
-    size: "text-lg w-[7rem]",
-    a: "-ml-[4.6rem]",
-    ga: "-ml-6.5",
-    nx: "-ml-[4rem]",
+    textSize: "text-lg w-[6.6rem]",
+    a: "ml-[0rem]",
+    ga: "-ml-[4.2rem]",
+    nx: "-ml-[3.6rem]",
   },
-  xl: { size: "text-4xl", a: "-ml-7", ga: "-ml-8.5", nx: "-ml-[4.8rem]" },
+  xl: {
+    textSize: "text-4xl",
+    a: "-ml-[1rem]",
+    ga: "-ml-[1.7rem]",
+    nx: "-ml-[4.8rem]",
+  },
 }
 
 const MarginFade = ({
   text,
   hoverText,
-  size,
+  textSize,
   margin,
 }: {
   text: string
   hoverText?: string
-  size: string
+  textSize: string
   margin: string
 }) => (
   <div
     className={cn(
-      size,
+      textSize,
       margin,
-      "flex transition-all duration-300 group-hover:ml-0"
+      "transition-all duration-300 group-hover:ml-0 relative"
     )}>
-    <div className={cn("text-white text")}>{text}</div>
+    <span className={cn("text-white text")}>{text}</span>
     {hoverText && (
-      <div className='text-zinc-500 invisible group-hover:motion-preset-fade group-hover:visible'>
+      <span className='text-zinc-500 invisible group-hover:motion-preset-fade group-hover:visible'>
         {hoverText}
-      </div>
+      </span>
     )}
   </div>
 )
 
-const LogoMotion: React.FC<LogoMotionProps> = ({
-  className,
-  componentSize,
-}) => {
-  const { ga, a, nx, size } = marginClasses[componentSize]
+const LogoMotion: React.FC<LogoMotionProps> = ({ className, size }) => {
+  const { ga, a, nx, textSize } = marginClasses[size]
 
   return (
-    <a href='/' className={cn(className, "group block", size)}>
+    <a href='/' className={cn(className, "group block ml-2 group-hover:ml-0", textSize)}>
       <div className='flex items-center'>
-        <MarginFade text='a' hoverText='rt' size={size} margin={ga} />
-        <MarginFade text='ga' hoverText='llery' size={size} margin={a} />
-        <MarginFade text='nx' size={size} margin={nx} />
+        <MarginFade text='a' hoverText='rt' textSize={textSize} margin={a} />
+        <MarginFade
+          text='ga'
+          hoverText='llery'
+          textSize={textSize}
+          margin={ga}
+        />
+        <MarginFade text='nx' textSize={textSize} margin={nx} />
       </div>
     </a>
   )
