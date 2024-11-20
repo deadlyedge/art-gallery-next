@@ -87,129 +87,129 @@ export const EventSidebar = async ({ eventId }: EventSidebarProps) => {
     (member) => member.profileId === profile.id
   )?.role
 
-  return (
-    <div className='flex flex-col h-full text-primary w-full dark:bg-[#2B2D31] bg-[#F2F3F5]'>
-      <EventHeader event={event} role={role} />
-      <ScrollArea className='flex-1 px-3'>
-        <div className='mt-2'>
-          {/* <EventSearch
-            data={[
-              {
-                label: "文字频道",
-                type: "content",
-                data: textContents?.map((content) => ({
-                  id: content.id,
-                  name: content.name,
-                  icon: iconMap[content.type],
-                })),
-              },
-              {
-                label: "音频频道",
-                type: "content",
-                data: audioContents?.map((content) => ({
-                  id: content.id,
-                  name: content.name,
-                  icon: iconMap[content.type],
-                })),
-              },
-              {
-                label: "视频频道",
-                type: "content",
-                data: videoContents?.map((content) => ({
-                  id: content.id,
-                  name: content.name,
-                  icon: iconMap[content.type],
-                })),
-              },
-              {
-                label: "成员",
-                type: "member",
-                data: members?.map((member) => ({
-                  id: member.id,
-                  name: member.profile.name,
-                  icon: roleIconMap[member.role],
-                })),
-              },
-            ]}
-          /> */}
-        </div>
-        <Separator className='bg-zinc-200 dark:bg-zinc-700 rounded-md my-2' />
-        {!!textContents?.length && (
-          <div className='mb-2'>
-            <EventSection
-              sectionType='contents'
-              contentType={ContentType.TEXT}
-              role={role}
-              label='文字频道'
-            />
-            <div className='space-y-[2px]'>
-              {textContents.map((content) => (
-                <EventContent
-                  key={content.id}
-                  content={content}
-                  role={role}
-                  event={event}
-                />
-              ))}
-            </div>
-          </div>
-        )}
-        {!!audioContents?.length && (
-          <div className='mb-2'>
-            <EventSection
-              sectionType='contents'
-              contentType={ContentType.IMAGE}
-              role={role}
-              label='音频频道'
-            />
-            <div className='space-y-[2px]'>
-              {audioContents.map((content) => (
-                <EventContent
-                  key={content.id}
-                  content={content}
-                  role={role}
-                  event={event}
-                />
-              ))}
-            </div>
-          </div>
-        )}
-        {!!videoContents?.length && (
-          <div className='mb-2'>
-            <EventSection
-              sectionType='contents'
-              contentType={ContentType.VIDEO}
-              role={role}
-              label='视频频道'
-            />
-            <div className='space-y-[2px]'>
-              {videoContents.map((content) => (
-                <EventContent
-                  key={content.id}
-                  content={content}
-                  role={role}
-                  event={event}
-                />
-              ))}
-            </div>
-          </div>
-        )}
-        {!!members?.length && (
-          <div className='mb-2'>
-            <EventSection
-              sectionType='members'
-              role={role}
-              label='成员'
-              event={event}
-            />
-            <div className='space-y-[2px]'>
-              {members.map((member) => (
-                <EventMember key={member.id} member={member} event={event} />
-              ))}
-            </div>
-          </div>
-        )}
-      </ScrollArea>
-    </div>
+  return (<></>
+    // <div className='flex flex-col h-full text-primary w-full dark:bg-[#2B2D31] bg-[#F2F3F5]'>
+    //   <EventHeader event={event} role={role} />
+    //   <ScrollArea className='flex-1 px-3'>
+    //     <div className='mt-2'>
+    //       <EventSearch
+    //         data={[
+    //           {
+    //             label: "文字频道",
+    //             type: "content",
+    //             data: textContents?.map((content) => ({
+    //               id: content.id,
+    //               name: content.name,
+    //               icon: iconMap[content.type],
+    //             })),
+    //           },
+    //           {
+    //             label: "音频频道",
+    //             type: "content",
+    //             data: audioContents?.map((content) => ({
+    //               id: content.id,
+    //               name: content.name,
+    //               icon: iconMap[content.type],
+    //             })),
+    //           },
+    //           {
+    //             label: "视频频道",
+    //             type: "content",
+    //             data: videoContents?.map((content) => ({
+    //               id: content.id,
+    //               name: content.name,
+    //               icon: iconMap[content.type],
+    //             })),
+    //           },
+    //           {
+    //             label: "成员",
+    //             type: "member",
+    //             data: members?.map((member) => ({
+    //               id: member.id,
+    //               name: member.profile.name,
+    //               icon: roleIconMap[member.role],
+    //             })),
+    //           },
+    //         ]}
+    //       />
+    //     </div>
+    //     <Separator className='bg-zinc-200 dark:bg-zinc-700 rounded-md my-2' />
+    //     {!!textContents?.length && (
+    //       <div className='mb-2'>
+    //         <EventSection
+    //           sectionType='contents'
+    //           contentType={ContentType.TEXT}
+    //           role={role}
+    //           label='文字频道'
+    //         />
+    //         <div className='space-y-[2px]'>
+    //           {textContents.map((content) => (
+    //             <EventContent
+    //               key={content.id}
+    //               content={content}
+    //               role={role}
+    //               event={event}
+    //             />
+    //           ))}
+    //         </div>
+    //       </div>
+    //     )}
+    //     {!!audioContents?.length && (
+    //       <div className='mb-2'>
+    //         <EventSection
+    //           sectionType='contents'
+    //           contentType={ContentType.IMAGE}
+    //           role={role}
+    //           label='音频频道'
+    //         />
+    //         <div className='space-y-[2px]'>
+    //           {audioContents.map((content) => (
+    //             <EventContent
+    //               key={content.id}
+    //               content={content}
+    //               role={role}
+    //               event={event}
+    //             />
+    //           ))}
+    //         </div>
+    //       </div>
+    //     )}
+    //     {!!videoContents?.length && (
+    //       <div className='mb-2'>
+    //         <EventSection
+    //           sectionType='contents'
+    //           contentType={ContentType.VIDEO}
+    //           role={role}
+    //           label='视频频道'
+    //         />
+    //         <div className='space-y-[2px]'>
+    //           {videoContents.map((content) => (
+    //             <EventContent
+    //               key={content.id}
+    //               content={content}
+    //               role={role}
+    //               event={event}
+    //             />
+    //           ))}
+    //         </div>
+    //       </div>
+    //     )}
+    //     {!!members?.length && (
+    //       <div className='mb-2'>
+    //         <EventSection
+    //           sectionType='members'
+    //           role={role}
+    //           label='成员'
+    //           event={event}
+    //         />
+    //         <div className='space-y-[2px]'>
+    //           {members.map((member) => (
+    //             <EventMember key={member.id} member={member} event={event} />
+    //           ))}
+    //         </div>
+    //       </div>
+    //     )}
+    //   </ScrollArea>
+    // </div>
   )
 }
