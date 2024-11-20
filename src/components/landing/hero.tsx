@@ -15,12 +15,14 @@ export function LandingHero() {
         art gallery next
       </h1>
       <p className='text-lg text-foreground'>in short:</p>
-      <LogoMotion size='xl' />
+      <div className='ml-2'>
+        <LogoMotion size='xl' />
+      </div>
       <div className='text-sm md:text-xl mt-12 text-foreground'>
         100% free. No-fee. No ads. No watermark.
       </div>
       <div>
-        <Link href={isSignedIn ? "/dashboard" : "/sign-in"}>
+        <Link href={isSignedIn ? "/events" : "/sign-in"}>
           <Button className='md:text-lg p-4 md:p-6 rounded-full font-semibold w-fit'>
             Start NOW!
           </Button>

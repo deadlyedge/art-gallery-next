@@ -42,11 +42,11 @@ const MarginFade = ({
     className={cn(
       textSize,
       margin,
-      "transition-all duration-300 group-hover:ml-0 relative"
+      "transition-all duration-300 group-hover/logo:ml-0 relative"
     )}>
     <span className={cn("text-white text")}>{text}</span>
     {hoverText && (
-      <span className='text-zinc-500 invisible group-hover:motion-preset-fade group-hover:visible'>
+      <span className='text-zinc-500 invisible group-hover/logo:motion-preset-fade group-hover/logo:visible'>
         {hoverText}
       </span>
     )}
@@ -57,7 +57,7 @@ const LogoMotion: React.FC<LogoMotionProps> = ({ className, size }) => {
   const { ga, a, nx, textSize } = marginClasses[size]
 
   return (
-    <a href='/' className={cn(className, "group block ml-2 group-hover:ml-0", textSize)}>
+    <a href='/' className={cn(className, "group/logo block ml-2", textSize)}>
       <div className='flex items-center'>
         <MarginFade text='a' hoverText='rt' textSize={textSize} margin={a} />
         <MarginFade

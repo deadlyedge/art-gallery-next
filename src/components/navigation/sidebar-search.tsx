@@ -25,7 +25,7 @@ type EventSearchProps = {
   }[]
 }
 
-export const EventSearch = ({ data }: EventSearchProps) => {
+export const SidebarSearch = ({ data }: EventSearchProps) => {
   const [open, setOpen] = useState(false)
   const router = useRouter()
   const params = useParams()

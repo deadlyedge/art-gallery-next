@@ -3,17 +3,13 @@ import { NavigationSidebar } from "@/components/navigation/navigation-sidebar"
 
 const MainLayout = async ({ children }: { children: React.ReactNode }) => {
   return (
-    <div>
-
-      <SidebarProvider >
-        <NavigationSidebar />
-        <main>
-          {/* <SidebarTrigger /> */}
-          {children}
-        </main>
-      </SidebarProvider>
-      {/* <main className='md:pl-[72px] h-full'>{children}</main> */}
-    </div>
+    <SidebarProvider>
+      <NavigationSidebar />
+      <div className='w-full'>
+        <SidebarTrigger className='fixed z-50 mt-2 ml-1 md:hidden' />
+        {children}
+      </div>
+    </SidebarProvider>
   )
 }
 

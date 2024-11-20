@@ -1,50 +1,177 @@
+import { ContentType, MemberRole } from "@prisma/client"
 import { redirect } from "next/navigation"
+import {
+  Hash,
+  ImageIcon,
+  Mic,
+  ShieldAlert,
+  ShieldCheck,
+  Video,
+} from "lucide-react"
 
+import { ScrollArea } from "@/components/ui/scroll-area"
+import { Separator } from "@/components/ui/separator"
 import { currentProfile } from "@/lib/current-profile"
 import { db } from "@/lib/db"
 
-interface EventIdPageProps {
-  params: {
-    eventId: string
-  }
+import { EventHeader } from "@/components/event/event-header"
+import { EventSearch } from "@/components/event/event-search"
+import { EventSection } from "@/components/event/event-section"
+import { EventContent } from "@/components/event/event-content"
+import { EventMember } from "@/components/event/event-member"
+
+const iconMap = {
+  [ContentType.TEXT]: <Hash className='mr-2 h-4 w-4' />,
+  [ContentType.IMAGE]: <ImageIcon className='mr-2 h-4 w-4' />,
+  [ContentType.VIDEO]: <Video className='mr-2 h-4 w-4' />,
 }
 
-const EventIdPage = async ({ params }: EventIdPageProps) => {
+const roleIconMap = {
+  [MemberRole.GUEST]: null,
+  [MemberRole.MODERATOR]: (
+    <ShieldCheck className='h-4 w-4 mr-2 text-indigo-500' />
+  ),
+  [MemberRole.ADMIN]: <ShieldAlert className='h-4 w-4 mr-2 text-rose-500' />,
+}
+
+const EventContentsPage = async ({
+  params,
+}: {
+  params: { eventId: string }
+}) => {
   const profile = await currentProfile()
   const { eventId } = await params
-
   if (!profile) {
-    return redirect("/sign-in")
+    return redirect("/")
   }
 
   const event = await db.event.findUnique({
     where: {
       id: eventId,
-      members: {
-        some: {
-          profileId: profile.id,
-        },
-      },
     },
     include: {
       contents: {
-        where: {
-          name: "general",
-        },
         orderBy: {
           createdAt: "asc",
+        },
+      },
+      members: {
+        include: {
+          profile: true,
+        },
+        orderBy: {
+          role: "asc",
         },
       },
     },
   })
 
-  const initialContent = event?.contents[0]
+  const textContents = event?.contents.filter(
+    (content) => content.type === ContentType.TEXT
+  )
+  const audioContents = event?.contents.filter(
+    (content) => content.type === ContentType.IMAGE
+  )
+  const videoContents = event?.contents.filter(
+    (content) => content.type === ContentType.VIDEO
+  )
+  const members = event?.members.filter(
+    (member) => member.profileId !== profile.id
+  )
 
-  if (initialContent?.name !== "general") {
-    return null
+  if (!event) {
+    return redirect("/")
   }
 
-  return redirect(`/events/${eventId}/contents/${initialContent?.id}`)
+  const role = event.members.find(
+    (member) => member.profileId === profile.id
+  )?.role
+
+  return (
+    <div className='flex flex-col h-full'>
+      <div className='sticky top-0 z-10 bg-black/40 flex items-center justify-center w-full h-10 '>
+        <EventHeader event={event} role={role} />
+      </div>
+
+      <ScrollArea className='flex-1 px-3'>
+        {!!textContents?.length && (
+          <div className='mb-2'>
+            <EventSection
+              sectionType='contents'
+              contentType={ContentType.TEXT}
+              role={role}
+              label='文字频道'
+            />
+            <div className='space-y-[2px]'>
+              {textContents.map((content) => (
+                <EventContent
+                  key={content.id}
+                  content={content}
+                  role={role}
+                  event={event}
+                />
+              ))}
+            </div>
+          </div>
+        )}
+        {!!audioContents?.length && (
+          <div className='mb-2'>
+            <EventSection
+              sectionType='contents'
+              contentType={ContentType.IMAGE}
+              role={role}
+              label='音频频道'
+            />
+            <div className='space-y-[2px]'>
+              {audioContents.map((content) => (
+                <EventContent
+                  key={content.id}
+                  content={content}
+                  role={role}
+                  event={event}
+                />
+              ))}
+            </div>
+          </div>
+        )}
+        {!!videoContents?.length && (
+          <div className='mb-2'>
+            <EventSection
+              sectionType='contents'
+              contentType={ContentType.VIDEO}
+              role={role}
+              label='视频频道'
+            />
+            <div className='space-y-[2px]'>
+              {videoContents.map((content) => (
+                <EventContent
+                  key={content.id}
+                  content={content}
+                  role={role}
+                  event={event}
+                />
+              ))}
+            </div>
+          </div>
+        )}
+        {!!members?.length && (
+          <div className='mb-2'>
+            <EventSection
+              sectionType='members'
+              role={role}
+              label='成员'
+              event={event}
+            />
+            <div className='space-y-[2px]'>
+              {members.map((member) => (
+                <EventMember key={member.id} member={member} event={event} />
+              ))}
+            </div>
+          </div>
+        )}
+      </ScrollArea>
+    </div>
+  )
 }
 
-export default EventIdPage
+export default EventContentsPage

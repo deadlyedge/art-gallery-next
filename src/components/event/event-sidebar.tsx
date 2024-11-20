@@ -87,7 +87,7 @@ export const EventSidebar = async ({ eventId }: EventSidebarProps) => {
     (member) => member.profileId === profile.id
   )?.role
 
-  return (<></>
+  return (<>hello world</>
     // <div className='flex flex-col h-full text-primary w-full dark:bg-[#2B2D31] bg-[#F2F3F5]'>
     //   <EventHeader event={event} role={role} />
     //   <ScrollArea className='flex-1 px-3'>

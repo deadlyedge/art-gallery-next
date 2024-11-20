@@ -34,7 +34,12 @@ const EventIdLayout = async ({
   }
 
   return (
-      <main className='w-full'>{children}</main>
+    <div className='h-full'>
+      <div className='md:flex h-full w-60 z-20 flex-col fixed inset-y-0'>
+        <EventSidebar eventId={eventId} />
+      </div>
+      <main className='h-full md:pl-80'>{children}</main>
+    </div>
   )
 }
 
