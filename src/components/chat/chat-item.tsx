@@ -21,7 +21,7 @@ import { useModal } from "@/hooks/use-modal-store"
 
 type ChatItemProps = {
   id: string
-  content: string
+  text: string
   member: Member & {
     profile: Profile
   }
@@ -41,12 +41,12 @@ const roleIconMap = {
 }
 
 const formSchema = z.object({
-  content: z.string().min(1),
+  text: z.string().min(1),
 })
 
 export const ChatItem = ({
   id,
-  content,
+  text,
   member,
   timestamp,
   fileUrl,
@@ -84,7 +84,7 @@ export const ChatItem = ({
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      content: content,
+      text,
     },
   })
 
@@ -108,9 +108,9 @@ export const ChatItem = ({
 
   useEffect(() => {
     form.reset({
-      content: content,
+      text,
     })
-  }, [content, form])
+  }, [text, form])
 
   const fileType = fileUrl?.split(".").pop()
 
@@ -154,7 +154,7 @@ export const ChatItem = ({
               className='relative aspect-square rounded-md mt-2 overflow-hidden border flex items-center bg-secondary h-48 w-48'>
               <Image
                 src={fileUrl}
-                alt={content}
+                alt={text}
                 fill
                 className='object-cover'
                 sizes='(max-width: 800px) 50vw, (max-width: 800px) 50vw, 50vw'
@@ -180,7 +180,7 @@ export const ChatItem = ({
                 deleted &&
                   "italic line-through text-zinc-400 dark:text-zinc-500 text-xs mt-1"
               )}>
-              {content}
+              {text}
               {isUpdated && !deleted && (
                 <span className='text-[10px] mx-2 text-zinc-500 dark:text-zinc-400'>
                   (编辑过)
@@ -195,7 +195,7 @@ export const ChatItem = ({
                 onSubmit={form.handleSubmit(onSubmit)}>
                 <FormField
                   control={form.control}
-                  name='content'
+                  name='text'
                   render={({ field }) => (
                     <FormItem className='flex-1'>
                       <FormControl>

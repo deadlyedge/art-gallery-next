@@ -16,22 +16,22 @@ import { EmojiPicker } from "@/components/emoji-picker"
 type ChatInputProps = {
   apiUrl: string
   query: Record<string, any>
-  title: string
+  name: string
   type: "conversation" | "content"
 }
 
 const formSchema = z.object({
-  content: z.string().min(1),
+  text: z.string().min(1),
 })
 
-export const ChatInput = ({ apiUrl, query, title, type }: ChatInputProps) => {
+export const ChatInput = ({ apiUrl, query, name, type }: ChatInputProps) => {
   const { onOpen } = useModal()
   const router = useRouter()
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      content: "",
+      text: "",
     },
   })
 
@@ -58,7 +58,7 @@ export const ChatInput = ({ apiUrl, query, title, type }: ChatInputProps) => {
       <form onSubmit={form.handleSubmit(onSubmit)}>
         <FormField
           control={form.control}
-          name='content'
+          name='text'
           render={({ field }) => (
             <FormItem>
               <FormControl>
@@ -73,7 +73,7 @@ export const ChatInput = ({ apiUrl, query, title, type }: ChatInputProps) => {
                     disabled={isLoading}
                     className='px-14 py-6 bg-zinc-200/90 dark:bg-zinc-700/75 border-none border-0 focus-visible:ring-0 focus-visible:ring-offset-0 text-zinc-600 dark:text-zinc-200'
                     placeholder={`Message ${
-                      type === "conversation" ? title : "#" + title
+                      type === "conversation" ? name : "#" + name
                     }`}
                     {...field}
                   />

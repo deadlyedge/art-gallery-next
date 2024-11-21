@@ -50,10 +50,10 @@ export default function RootLayout({
             defaultTheme={"dark"}
             enableSystem
             storageKey='aganx-theme'>
-            {/* <SocketProvider> */}
-            <ModalProvider />
-            <QueryProvider>{children}</QueryProvider>
-            {/* </SocketProvider> */}
+            <SocketProvider>
+              <ModalProvider />
+              <QueryProvider>{children}</QueryProvider>
+            </SocketProvider>
           </ThemeProvider>
         </body>
       </html>

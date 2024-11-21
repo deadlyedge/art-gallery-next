@@ -21,7 +21,7 @@ type MessageWithMemberWithProfile = Message & {
 }
 
 type ChatMessagesProps = {
-  title: string
+  name: string
   member: Member
   chatId: string
   apiUrl: string
@@ -33,7 +33,7 @@ type ChatMessagesProps = {
 }
 
 export const ChatMessages = ({
-  title,
+  name,
   member,
   chatId,
   apiUrl,
@@ -87,7 +87,7 @@ export const ChatMessages = ({
   return (
     <div ref={chatRef} className='flex-1 flex flex-col py-4 overflow-y-auto'>
       {!hasNextPage && <div className='flex-1' />}
-      {!hasNextPage && <ChatWelcome type={type} title={title} />}
+      {!hasNextPage && <ChatWelcome type={type} title={name} />}
       {hasNextPage && (
         <div className='flex justify-center'>
           {isFetchingNextPage ? (
@@ -110,7 +110,7 @@ export const ChatMessages = ({
                 id={message.id}
                 currentMember={member}
                 member={message.member}
-                content={message.text}
+                text={message.text}
                 fileUrl={message.fileUrl}
                 deleted={message.deleted}
                 timestamp={format(new Date(message.createdAt), DATE_FORMAT)}

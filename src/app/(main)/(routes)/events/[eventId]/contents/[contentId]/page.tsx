@@ -51,7 +51,7 @@ const ContentIdPage = async ({ params }: ContentIdPageProps) => {
         <>
           <ChatMessages
             member={member}
-            title={content.title}
+            name={content.title}
             chatId={content.id}
             type='content'
             apiUrl='/api/messages'
@@ -64,7 +64,7 @@ const ContentIdPage = async ({ params }: ContentIdPageProps) => {
             paramValue={content.id}
           />
           <ChatInput
-            title={content.title}
+            name={content.title}
             type='content'
             apiUrl='/api/socket/messages'
             query={{

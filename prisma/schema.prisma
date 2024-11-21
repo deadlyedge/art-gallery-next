@@ -99,7 +99,6 @@ model Content {
 model Message {
   id   String @id @default(cuid())
   text String @db.Text
-
   fileUrl String? @db.Text
 
   memberId String
@@ -110,7 +109,7 @@ model Message {
 
   deleted Boolean @default(false)
 
-  createdAt DateTime @default(now())
+  createdAt DateTime @default(now()) @unique
   updatedAt DateTime @updatedAt
 
   @@index([contentId])
@@ -118,7 +117,7 @@ model Message {
 }
 
 model Conversation {
-  id String @id @default(uuid())
+  id String @id @default(cuid())
 
   memberOneId String
   memberOne   Member @relation("MemberOne", fields: [memberOneId], references: [id], onDelete: Cascade)
@@ -133,8 +132,8 @@ model Conversation {
 }
 
 model DirectMessage {
-  id      String  @id @default(uuid())
-  content String  @db.Text
+  id      String  @id @default(cuid())
+  text    String  @db.Text
   fileUrl String? @db.Text
 
   memberId String

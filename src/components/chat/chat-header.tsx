@@ -32,7 +32,7 @@ export const ChatHeader = ({
         {title}
       </p>
       <div className='ml-auto flex items-center'>
-        {type === "conversation" && <ChatVideoButton />}
+        {/* {type === "conversation" && <ChatVideoButton />} */}
         <SocketIndicator />
       </div>
     </div>

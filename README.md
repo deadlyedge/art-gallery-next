@@ -5,3 +5,4 @@ todo:
 2. complete add content logic
 3. get pic exif
 4. connect api for messages
+5. prisma schema uuid to cuid
