@@ -29,10 +29,10 @@ import { useRouter } from "next/navigation"
 
 const formSchema = z.object({
   title: z.string().min(1, {
-    message: "Server name is required.",
+    message: "Event title is required.",
   }),
   imageUrl: z.string().min(1, {
-    message: "Server image is required.",
+    message: "Event image is required.",
   }),
 })
 

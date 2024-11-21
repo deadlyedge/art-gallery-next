@@ -18,6 +18,7 @@ type ModalData = {
   event?: Event
   content?: Content
   contentType?: ContentType
+  imageUrl?: string
   apiUrl?: string
   query?: Record<string, any>
 }

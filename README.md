@@ -2,4 +2,6 @@
 
 todo:
 1. page ui
-2. relative components
+2. complete add content logic
+3. get pic exif
+4. connect api for messages

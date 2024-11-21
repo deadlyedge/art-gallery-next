@@ -18,12 +18,12 @@ export const FileUpload = ({ onChange, value, endpoint }: FileUploadProps) => {
 
   if (value && fileType !== "pdf") {
     return (
-      <div className='relative h-20 w-20'>
+      <div className='relative h-40 w-60'>
         <Image
           fill
           src={value}
           alt='Upload'
-          className='rounded'
+          className='object-cover'
           sizes='(max-width: 500px) 40vw, (max-width: 500px) 40vw, 40vw'
         />
         <button

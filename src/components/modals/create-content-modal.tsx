@@ -35,6 +35,7 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 import { useEffect } from "react"
+import { FileUpload } from "../file-upload"
 
 const formSchema = z.object({
   title: z
@@ -46,6 +47,7 @@ const formSchema = z.object({
       message: "Content title cannot be 'general'",
     }),
   type: z.nativeEnum(ContentType),
+  imageUrl: z.string().optional(),
 })
 
 export const CreateContentModal = () => {
@@ -54,13 +56,14 @@ export const CreateContentModal = () => {
   const params = useParams()
 
   const isModalOpen = isOpen && type === "createContent"
-  const { contentType } = data
+  const { contentType, imageUrl } = data
 
   const form = useForm({
     resolver: zodResolver(formSchema),
     defaultValues: {
       title: "",
-      type: contentType || ContentType.TEXT,
+      type: contentType || ContentType.IMAGE,
+      imageUrl: imageUrl || "",
     },
   })
 
@@ -68,8 +71,13 @@ export const CreateContentModal = () => {
     if (contentType) {
       form.setValue("type", contentType)
     } else {
-      form.setValue("type", ContentType.TEXT)
+      form.setValue("type", ContentType.IMAGE)
     }
+    // if (imageUrl) {
+    //   form.setValue("imageUrl", imageUrl)
+    // } else {
+    //   form.setValue("imageUrl", "")
+    // }
   }, [contentType, form])
 
   const isLoading = form.formState.isSubmitting
@@ -79,7 +87,7 @@ export const CreateContentModal = () => {
       const url = qs.stringifyUrl({
         url: "/api/contents",
         query: {
-          serverId: params?.serverId,
+          eventId: params?.eventId,
         },
       })
       await axios.post(url, values)
@@ -162,6 +170,26 @@ export const CreateContentModal = () => {
                   </FormItem>
                 )}
               />
+              {form.getValues("type") === "IMAGE" && (
+                <div className='flex flex-col items-center justify-center text-center'>
+                  请在下面输入图片的URL:
+                  <FormField
+                    control={form.control}
+                    name='imageUrl'
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormControl>
+                          <FileUpload
+                            endpoint='contentImage'
+                            value={field.value}
+                            onChange={field.onChange}
+                          />
+                        </FormControl>
+                      </FormItem>
+                    )}
+                  />
+                </div>
+              )}
             </div>
             <DialogFooter className='bg-gray-100 px-6 py-4'>
               <Button variant='default' disabled={isLoading}>

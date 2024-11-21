@@ -35,6 +35,7 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 import { useEffect } from "react"
+import { FileUpload } from "../file-upload"
 
 const formSchema = z.object({
   title: z
@@ -46,6 +47,7 @@ const formSchema = z.object({
       message: "Content title cannot be 'general'",
     }),
   type: z.nativeEnum(ContentType),
+  imageUrl: z.string().url().optional(),
 })
 
 export const EditContentModal = () => {
@@ -59,7 +61,8 @@ export const EditContentModal = () => {
     resolver: zodResolver(formSchema),
     defaultValues: {
       title: "",
-      type: content?.type || ContentType.TEXT,
+      type: content?.type || ContentType.IMAGE,
+      imageUrl: content?.imageUrl || "",
     },
   })
 
@@ -67,6 +70,7 @@ export const EditContentModal = () => {
     if (content) {
       form.setValue("title", content.title)
       form.setValue("type", content.type)
+      form.setValue("imageUrl", content.imageUrl || "")
     }
   }, [form, content, isOpen])
 
@@ -149,7 +153,7 @@ export const EditContentModal = () => {
                           <SelectItem
                             key={type}
                             value={type}
-                            disabled={type !== "TEXT"} // 无法连接livekit
+                            // disabled={type !== "TEXT"} // 无法连接livekit
                             className='capitalize'>
                             {type.toLowerCase()}
                           </SelectItem>
@@ -159,7 +163,24 @@ export const EditContentModal = () => {
                     <FormMessage />
                   </FormItem>
                 )}
-              />
+              />{" "}
+              <div className='flex items-center justify-center text-center'>
+                <FormField
+                  control={form.control}
+                  name='imageUrl'
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormControl>
+                        <FileUpload
+                          endpoint='contentImage'
+                          value={field.value}
+                          onChange={field.onChange}
+                        />
+                      </FormControl>
+                    </FormItem>
+                  )}
+                />
+              </div>
             </div>
             <DialogFooter className='bg-gray-100 px-6 py-4'>
               <Button variant='default' disabled={isLoading}>
