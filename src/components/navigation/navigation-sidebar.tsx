@@ -63,7 +63,7 @@ export const NavigationSidebar = async () => {
                   <div key={event.id} className='mb-4'>
                     <NavigationItem
                       id={event.id}
-                      name={event.name}
+                      title={event.title}
                       imageUrl={event.imageUrl}
                     />
                     <SidebarEventMenu key={event.id} />

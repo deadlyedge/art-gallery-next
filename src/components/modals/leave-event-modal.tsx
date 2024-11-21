@@ -50,7 +50,7 @@ export const LeaveEventModal = () => {
           <DialogDescription className='text-center text-zinc-500'>
             确定要离开{" "}
             <span className='font-semibold text-indigo-500'>
-              {event?.name}
+              {event?.title}
             </span>{" "}
             吗？
           </DialogDescription>

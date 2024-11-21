@@ -43,7 +43,7 @@ const ContentIdPage = async ({ params }: ContentIdPageProps) => {
   return (
     <div className='bg-white dark:bg-[#313338] flex flex-col h-full'>
       <ChatHeader
-        name={content.name}
+        title={content.title}
         eventId={content.eventId}
         type='content'
       />
@@ -51,7 +51,7 @@ const ContentIdPage = async ({ params }: ContentIdPageProps) => {
         <>
           <ChatMessages
             member={member}
-            name={content.name}
+            title={content.title}
             chatId={content.id}
             type='content'
             apiUrl='/api/messages'
@@ -64,7 +64,7 @@ const ContentIdPage = async ({ params }: ContentIdPageProps) => {
             paramValue={content.id}
           />
           <ChatInput
-            name={content.name}
+            title={content.title}
             type='content'
             apiUrl='/api/socket/messages'
             query={{

@@ -37,13 +37,13 @@ import {
 import { useEffect } from "react"
 
 const formSchema = z.object({
-  name: z
+  title: z
     .string()
     .min(1, {
-      message: "Content name is required.",
+      message: "Content title is required.",
     })
-    .refine((name) => name !== "general", {
-      message: "Content name cannot be 'general'",
+    .refine((title) => title !== "general", {
+      message: "Content title cannot be 'general'",
     }),
   type: z.nativeEnum(ContentType),
 })
@@ -59,7 +59,7 @@ export const CreateContentModal = () => {
   const form = useForm({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      name: "",
+      title: "",
       type: contentType || ContentType.TEXT,
     },
   })
@@ -113,7 +113,7 @@ export const CreateContentModal = () => {
             <div className='space-y-8 px-6'>
               <FormField
                 control={form.control}
-                name='name'
+                name='title'
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel className='uppercase text-xs font-bold text-zinc-500 dark:text-secondary/70'>
@@ -123,7 +123,7 @@ export const CreateContentModal = () => {
                       <Input
                         disabled={isLoading}
                         className='bg-zinc-300/50 border-0 focus-visible:ring-0 text-black focus-visible:ring-offset-0'
-                        placeholder='Enter content name'
+                        placeholder='Enter content title'
                         {...field}
                       />
                     </FormControl>
@@ -151,7 +151,7 @@ export const CreateContentModal = () => {
                           <SelectItem
                             key={type}
                             value={type}
-                            disabled={type !== "TEXT"} // 无法连接livekit
+                            // disabled={type !== "TEXT"} // 无法连接livekit
                             className='capitalize'>
                             {type.toLowerCase()}
                           </SelectItem>

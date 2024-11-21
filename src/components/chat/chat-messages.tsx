@@ -21,7 +21,7 @@ type MessageWithMemberWithProfile = Message & {
 }
 
 type ChatMessagesProps = {
-  name: string
+  title: string
   member: Member
   chatId: string
   apiUrl: string
@@ -33,7 +33,7 @@ type ChatMessagesProps = {
 }
 
 export const ChatMessages = ({
-  name,
+  title,
   member,
   chatId,
   apiUrl,
@@ -87,7 +87,7 @@ export const ChatMessages = ({
   return (
     <div ref={chatRef} className='flex-1 flex flex-col py-4 overflow-y-auto'>
       {!hasNextPage && <div className='flex-1' />}
-      {!hasNextPage && <ChatWelcome type={type} name={name} />}
+      {!hasNextPage && <ChatWelcome type={type} title={title} />}
       {hasNextPage && (
         <div className='flex justify-center'>
           {isFetchingNextPage ? (

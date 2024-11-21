@@ -16,7 +16,7 @@ import {
 type EventSearchProps = {
   data: {
     id: string
-    name: string
+    title: string
     imageUrl: string
     createdAt: Date
     updatedAt: Date
@@ -65,12 +65,12 @@ export const SidebarSearch = ({ data }: EventSearchProps) => {
         <CommandInput placeholder='Search Your Events...' />
         <CommandList>
           <CommandEmpty>没找到结果</CommandEmpty>
-          {data.map(({ name, id }) => {
+          {data.map(({ title, id }) => {
             if (!id?.length) return null
 
             return (
               <CommandItem key={id} onSelect={() => onClick({ id })}>
-                {name}
+                {title}
               </CommandItem>
             )
           })}

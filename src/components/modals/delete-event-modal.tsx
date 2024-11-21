@@ -50,7 +50,7 @@ export const DeleteEventModal = () => {
           <DialogDescription className='text-center text-zinc-500'>
             确认要删除吗？ <br />
             <span className='text-indigo-500 font-semibold'>
-              {event?.name}
+              {event?.title}
             </span>{" "}
             将被永久移除
           </DialogDescription>

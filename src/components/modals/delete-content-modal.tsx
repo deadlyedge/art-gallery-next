@@ -57,7 +57,7 @@ export const DeleteContentModal = () => {
           <DialogDescription className='text-center text-zinc-500'>
             确定要删除吗？ <br />
             <span className='text-indigo-500 font-semibold'>
-              #{content?.name}
+              #{content?.title}
             </span>{" "}
             将被永久移除
           </DialogDescription>

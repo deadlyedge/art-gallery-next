@@ -29,7 +29,7 @@ import { useRouter } from "next/navigation"
 import { useModal } from "@/hooks/use-modal-store"
 
 const formSchema = z.object({
-  name: z.string().min(1, {
+  title: z.string().min(1, {
     message: "Event name is required.",
   }),
   imageUrl: z.string().min(1, {
@@ -47,14 +47,14 @@ export const EditEventModal = () => {
   const form = useForm({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      name: "",
+      title: "",
       imageUrl: "",
     },
   })
 
   useEffect(() => {
     if (event) {
-      form.setValue("name", event.name)
+      form.setValue("title", event.title)
       form.setValue("imageUrl", event.imageUrl)
     }
   }, [event, form, isOpen])
@@ -112,7 +112,7 @@ export const EditEventModal = () => {
 
               <FormField
                 control={form.control}
-                name='name'
+                name='title'
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel className='uppercase text-xs font-bold text-zinc-500 dark:text-secondary/70'>

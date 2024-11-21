@@ -24,7 +24,7 @@ model Profile {
 
 model Event {
   id         String @id @default(cuid())
-  name       String
+  title      String
   imageUrl   String @db.Text
   inviteCode String @unique
 
@@ -75,10 +75,11 @@ enum ContentType {
 }
 
 model Content {
-  id   String      @id @default(cuid())
-  name String
-  type ContentType @default(IMAGE)
-  url  String?     @db.Text
+  id         String      @id @default(cuid())
+  title      String
+  type       ContentType @default(IMAGE)
+  imageUrl   String?     @db.Text
+  descrition String?     @db.Text
 
   profileId String
   profile   Profile @relation(fields: [profileId], references: [id], onDelete: Cascade)

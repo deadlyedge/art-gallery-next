@@ -9,10 +9,10 @@ import { ActionTooltip } from "@/components/action-tooltip"
 type NavigationItemProps = {
   id: string
   imageUrl: string
-  name: string
+  title: string
 }
 
-export const NavigationItem = ({ id, imageUrl, name }: NavigationItemProps) => {
+export const NavigationItem = ({ id, imageUrl, title }: NavigationItemProps) => {
   const params = useParams()
   const router = useRouter()
 
@@ -21,7 +21,7 @@ export const NavigationItem = ({ id, imageUrl, name }: NavigationItemProps) => {
   }
 
   return (
-    <ActionTooltip side='right' align='center' label={name}>
+    <ActionTooltip side='right' align='center' label={title}>
       <button onClick={onClick} className='group/tooltip relative flex items-center'>
         <div
           className={cn(
@@ -43,7 +43,7 @@ export const NavigationItem = ({ id, imageUrl, name }: NavigationItemProps) => {
             sizes='(max-width: 500px) 30vw, (max-width: 800px) 40vw, 50vw'
             className='object-cover'
           />
-          <div className="absolute w-full h-[120px] mx-auto mt-12 text-xl drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)]">{name}</div>
+          <div className="absolute w-full h-[120px] mx-auto mt-12 text-xl drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)]">{title}</div>
         </div>
       </button>
     </ActionTooltip>

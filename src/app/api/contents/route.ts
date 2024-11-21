@@ -7,7 +7,7 @@ import { db } from "@/lib/db"
 export async function POST(req: Request) {
   try {
     const profile = await currentProfile()
-    const { name, type, url } = await req.json()
+    const { title, type, imageUrl } = await req.json()
     const { searchParams } = new URL(req.url)
 
     const eventId = searchParams.get("eventId")
@@ -20,7 +20,7 @@ export async function POST(req: Request) {
       return new NextResponse("Event ID missing", { status: 400 })
     }
 
-    if (name === "general") {
+    if (title === "general") {
       return new NextResponse("Name cannot be 'general'", { status: 400 })
     }
 
@@ -40,9 +40,9 @@ export async function POST(req: Request) {
         contents: {
           create: {
             profileId: profile.id,
-            name,
+            title,
             type,
-            url,
+            imageUrl,
           },
         },
       },

@@ -36,7 +36,7 @@ export const EventHeader = ({ event, role }: EventHeaderProps) => {
     <DropdownMenu>
       <DropdownMenuTrigger className='focus:outline-none' asChild>
         <button className='text-base font-semibold px-3 flex items-center h-10 text-foreground border-neutral-200 dark:border-neutral-800 hover:bg-zinc-700/10 hover:dark:text-white dark:hover:bg-zinc-700/50 transition gap-2'>
-          {event.name}
+          {event.title}
           <ChevronDown className='h-5 w-5 ml-auto' />
         </button>
       </DropdownMenuTrigger>

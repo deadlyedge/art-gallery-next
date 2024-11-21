@@ -42,7 +42,7 @@ export async function DELETE(
         contents: {
           delete: {
             id: params.contentId,
-            name: {
+            title: {
               not: "general",
             },
           },
@@ -63,7 +63,7 @@ export async function PATCH(
 ) {
   try {
     const profile = await currentProfile()
-    const { name, type, url } = await req.json()
+    const { title, type, imageUrl } = await req.json()
     const { searchParams } = new URL(req.url)
 
     const eventId = searchParams.get("eventId")
@@ -80,7 +80,7 @@ export async function PATCH(
       return new NextResponse("Channel ID missing", { status: 400 })
     }
 
-    if (name === "general") {
+    if (title === "general") {
       return new NextResponse("Name cannot be 'general'", { status: 400 })
     }
 
@@ -102,13 +102,13 @@ export async function PATCH(
             where: {
               id: params.contentId,
               NOT: {
-                name: "general",
+                title: "general",
               },
             },
             data: {
-              name,
+              title,
               type,
-              url,
+              imageUrl,
             },
           },
         },

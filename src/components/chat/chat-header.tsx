@@ -8,14 +8,14 @@ import { ChatVideoButton } from "./chat-video-button"
 
 type ChatHeaderProps = {
   eventId: string
-  name: string
+  title: string
   type: "content" | "conversation"
   imageUrl?: string
 }
 
 export const ChatHeader = ({
   eventId,
-  name,
+  title,
   type,
   imageUrl,
 }: ChatHeaderProps) => {
@@ -28,7 +28,9 @@ export const ChatHeader = ({
       {type === "conversation" && (
         <UserAvatar src={imageUrl} className='h-8 w-8 md:h-8 md:w-8 mr-2' />
       )}
-      <p className='font-semibold text-md text-black dark:text-white'>{name}</p>
+      <p className='font-semibold text-md text-black dark:text-white'>
+        {title}
+      </p>
       <div className='ml-auto flex items-center'>
         {type === "conversation" && <ChatVideoButton />}
         <SocketIndicator />

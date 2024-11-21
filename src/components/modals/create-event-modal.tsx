@@ -28,7 +28,7 @@ import { useRouter } from "next/navigation"
 import { useModal } from "@/hooks/use-modal-store"
 
 const formSchema = z.object({
-  name: z.string().min(1, {
+  title: z.string().min(1, {
     message: "请填写名字",
   }),
   imageUrl: z.string().min(1, {
@@ -45,7 +45,7 @@ export const CreateEventModal = () => {
   const form = useForm({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      name: "",
+      title: "",
       imageUrl: "",
     },
   })
@@ -103,7 +103,7 @@ export const CreateEventModal = () => {
 
               <FormField
                 control={form.control}
-                name='name'
+                name='title'
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel className='uppercase text-xs font-bold text-zinc-500 dark:text-secondary/70'>

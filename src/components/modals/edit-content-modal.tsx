@@ -37,13 +37,13 @@ import {
 import { useEffect } from "react"
 
 const formSchema = z.object({
-  name: z
+  title: z
     .string()
     .min(1, {
-      message: "Content name is required.",
+      message: "Content title is required.",
     })
-    .refine((name) => name !== "general", {
-      message: "Content name cannot be 'general'",
+    .refine((title) => title !== "general", {
+      message: "Content title cannot be 'general'",
     }),
   type: z.nativeEnum(ContentType),
 })
@@ -58,14 +58,14 @@ export const EditContentModal = () => {
   const form = useForm({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      name: "",
+      title: "",
       type: content?.type || ContentType.TEXT,
     },
   })
 
   useEffect(() => {
     if (content) {
-      form.setValue("name", content.name)
+      form.setValue("title", content.title)
       form.setValue("type", content.type)
     }
   }, [form, content, isOpen])
@@ -111,7 +111,7 @@ export const EditContentModal = () => {
             <div className='space-y-8 px-6'>
               <FormField
                 control={form.control}
-                name='name'
+                name='title'
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel className='uppercase text-xs font-bold text-zinc-500 dark:text-secondary/70'>

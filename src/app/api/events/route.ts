@@ -7,7 +7,7 @@ import { db } from "@/lib/db";
 
 export async function POST(req: Request) {
   try {
-    const { name, imageUrl } = await req.json();
+    const { title, imageUrl } = await req.json();
     const profile = await currentProfile();
 
     if (!profile) {
@@ -17,12 +17,12 @@ export async function POST(req: Request) {
     const event = await db.event.create({
       data: {
         profileId: profile.id,
-        name,
+        title,
         imageUrl,
         inviteCode: uuidv4(),
         contents: {
           create: [
-            { name: "general", profileId: profile.id }
+            { title: "general", profileId: profile.id }
           ]
         },
         members: {

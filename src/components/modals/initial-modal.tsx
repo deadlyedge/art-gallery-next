@@ -28,7 +28,7 @@ import { FileUpload } from "@/components/file-upload"
 import { useRouter } from "next/navigation"
 
 const formSchema = z.object({
-  name: z.string().min(1, {
+  title: z.string().min(1, {
     message: "Server name is required.",
   }),
   imageUrl: z.string().min(1, {
@@ -48,7 +48,7 @@ export const InitialModal = () => {
   const form = useForm({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      name: "",
+      title: "",
       imageUrl: "",
     },
   })
@@ -79,7 +79,7 @@ export const InitialModal = () => {
             请添加一个事件
           </DialogTitle>
           <DialogDescription className='text-center text-zinc-500'>
-            给事件添加一个名称和图片。你以后还可以做修改。
+            给事件添加一个title和图片。你以后还可以做修改。
           </DialogDescription>
         </DialogHeader>
         <Form {...form}>
@@ -105,11 +105,11 @@ export const InitialModal = () => {
 
               <FormField
                 control={form.control}
-                name='name'
+                name='title'
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel className='uppercase text-xs font-bold text-zinc-500 dark:text-secondary/70'>
-                      名称
+                      Title
                     </FormLabel>
                     <FormControl>
                       <Input

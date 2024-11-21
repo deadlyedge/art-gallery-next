@@ -54,9 +54,9 @@ export const EventContent = ({
           params?.contentId === content.id &&
             "text-primary dark:text-zinc-200 dark:group-hover:text-white"
         )}>
-        {content.name}
+        {content.title}
       </p>
-      {content.name !== "general" && role !== MemberRole.GUEST && (
+      {content.title !== "general" && role !== MemberRole.GUEST && (
         <div className='ml-auto flex items-center gap-x-2'>
           <ActionTooltip label='编辑'>
             <Edit
@@ -72,7 +72,7 @@ export const EventContent = ({
           </ActionTooltip>
         </div>
       )}
-      {content.name === "general" && (
+      {content.title === "general" && (
         <Lock className='ml-auto w-4 h-4 text-zinc-500 dark:text-zinc-400' />
       )}
     </button>
