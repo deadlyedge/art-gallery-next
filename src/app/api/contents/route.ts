@@ -7,9 +7,10 @@ import { db } from "@/lib/db"
 export async function POST(req: Request) {
   try {
     const profile = await currentProfile()
-    const { title, type, imageUrl } = await req.json()
-    const { searchParams } = new URL(req.url)
+    const { title, imageUrl, description } = await req.json()
+    const type = 'IMAGE'
 
+    const { searchParams } = new URL(req.url)
     const eventId = searchParams.get("eventId")
 
     if (!profile) {
@@ -43,6 +44,7 @@ export async function POST(req: Request) {
             title,
             type,
             imageUrl,
+            description,
           },
         },
       },

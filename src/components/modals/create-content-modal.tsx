@@ -36,6 +36,8 @@ import {
 } from "@/components/ui/select"
 import { useEffect } from "react"
 import { FileUpload } from "../file-upload"
+import { Description } from "@radix-ui/react-dialog"
+import { Textarea } from "../ui/textarea"
 
 const formSchema = z.object({
   title: z
@@ -46,7 +48,8 @@ const formSchema = z.object({
     .refine((title) => title !== "general", {
       message: "Content title cannot be 'general'",
     }),
-  type: z.nativeEnum(ContentType),
+  // type: z.nativeEnum(ContentType),
+  description: z.string().optional(),
   imageUrl: z.string().optional(),
 })
 
@@ -62,23 +65,24 @@ export const CreateContentModal = () => {
     resolver: zodResolver(formSchema),
     defaultValues: {
       title: "",
-      type: contentType || ContentType.IMAGE,
+      // type: contentType || ContentType.IMAGE,
+      description: "",
       imageUrl: imageUrl || "",
     },
   })
 
-  useEffect(() => {
-    if (contentType) {
-      form.setValue("type", contentType)
-    } else {
-      form.setValue("type", ContentType.IMAGE)
-    }
-    // if (imageUrl) {
-    //   form.setValue("imageUrl", imageUrl)
-    // } else {
-    //   form.setValue("imageUrl", "")
-    // }
-  }, [contentType, form])
+  // useEffect(() => {
+  //   if (contentType) {
+  //     form.setValue("type", contentType)
+  //   } else {
+  //     form.setValue("type", ContentType.IMAGE)
+  //   }
+  //   // if (imageUrl) {
+  //   //   form.setValue("imageUrl", imageUrl)
+  //   // } else {
+  //   //   form.setValue("imageUrl", "")
+  //   // }
+  // }, [contentType, form])
 
   const isLoading = form.formState.isSubmitting
 
@@ -109,23 +113,23 @@ export const CreateContentModal = () => {
     <Dialog open={isModalOpen} onOpenChange={handleClose}>
       <DialogContent className='bg-white text-black p-0 overflow-hidden'>
         <DialogHeader className='pt-8 px-6'>
-          <DialogTitle className='text-2xl text-center font-bold'>
-            创建频道
+          <DialogTitle className='text-base text-center font-bold'>
+            创建内容
           </DialogTitle>
-          <DialogDescription className='text-center text-zinc-500'>
+          {/* <DialogDescription className='text-center text-zinc-500'>
             目前只能选择文字类型的频道
-          </DialogDescription>
+          </DialogDescription> */}
         </DialogHeader>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-8'>
-            <div className='space-y-8 px-6'>
+            <div className='space-y-2 px-6'>
               <FormField
                 control={form.control}
                 name='title'
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel className='uppercase text-xs font-bold text-zinc-500 dark:text-secondary/70'>
-                      频道名
+                      Title
                     </FormLabel>
                     <FormControl>
                       <Input
@@ -141,57 +145,44 @@ export const CreateContentModal = () => {
               />
               <FormField
                 control={form.control}
-                name='type'
+                name='description'
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>频道类型</FormLabel>
-                    <Select
-                      disabled={isLoading}
-                      onValueChange={field.onChange}
-                      defaultValue={field.value}>
-                      <FormControl>
-                        <SelectTrigger className='bg-zinc-300/50 border-0 focus:ring-0 text-black ring-offset-0 focus:ring-offset-0 capitalize outline-none'>
-                          <SelectValue placeholder='选择一个类型' />
-                        </SelectTrigger>
-                      </FormControl>
-                      <SelectContent>
-                        {Object.values(ContentType).map((type) => (
-                          <SelectItem
-                            key={type}
-                            value={type}
-                            // disabled={type !== "TEXT"} // 无法连接livekit
-                            className='capitalize'>
-                            {type.toLowerCase()}
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
+                    <FormLabel className='uppercase text-xs font-bold text-zinc-500 dark:text-secondary/70'>
+                      Description
+                    </FormLabel>
+                    <FormControl>
+                      <Textarea
+                        disabled={isLoading}
+                        className='bg-zinc-300/50 border-0 focus-visible:ring-0 text-black focus-visible:ring-offset-0'
+                        placeholder='Enter Description'
+                        {...field}
+                      />
+                    </FormControl>
                     <FormMessage />
                   </FormItem>
                 )}
               />
-              {form.getValues("type") === "IMAGE" && (
-                <div className='flex flex-col items-center justify-center text-center'>
-                  请在下面输入图片的URL:
-                  <FormField
-                    control={form.control}
-                    name='imageUrl'
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormControl>
-                          <FileUpload
-                            endpoint='contentImage'
-                            value={field.value}
-                            onChange={field.onChange}
-                          />
-                        </FormControl>
-                      </FormItem>
-                    )}
-                  />
-                </div>
-              )}
+              <FormField
+                control={form.control}
+                name='imageUrl'
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className='uppercase text-xs font-bold text-zinc-500 dark:text-secondary/70'>
+                      Image
+                    </FormLabel>
+                    <FormControl>
+                      <FileUpload
+                        endpoint='contentImage'
+                        value={field.value}
+                        onChange={field.onChange}
+                      />
+                    </FormControl>
+                  </FormItem>
+                )}
+              />
             </div>
-            <DialogFooter className='bg-gray-100 px-6 py-4'>
+            <DialogFooter className='bg-gray-100 px-6 py-2'>
               <Button variant='default' disabled={isLoading}>
                 创建
               </Button>

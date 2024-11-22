@@ -151,13 +151,14 @@ export const ChatItem = ({
               href={fileUrl}
               target='_blank'
               rel='noopener noreferrer'
-              className='relative aspect-square rounded-md mt-2 overflow-hidden border flex items-center bg-secondary h-48 w-48'>
+              className='relative rounded-md mt-2 flex items-center justify-center h-48 w-48'>
               <Image
                 src={fileUrl}
                 alt={text}
-                fill
-                className='object-cover'
-                sizes='(max-width: 800px) 50vw, (max-width: 800px) 50vw, 50vw'
+                width={0}
+                height={0}
+                sizes='100vw'
+                style={{ width: "auto", height: "100%" }}
               />
             </a>
           )}

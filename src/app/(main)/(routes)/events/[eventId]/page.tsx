@@ -75,6 +75,8 @@ const EventContentsPage = async ({
   const videoContents = event?.contents.filter(
     (content) => content.type === ContentType.VIDEO
   )
+  const allContents = event?.contents
+
   const members = event?.members.filter(
     (member) => member.profileId !== profile.id
   )
@@ -89,84 +91,44 @@ const EventContentsPage = async ({
 
   return (
     <div className='flex flex-col h-full'>
-      <div className='sticky top-0 z-10 bg-black/20 flex items-center justify-center w-full h-10 gap-2 text-foreground/50'>
+      <div className='sticky top-0 z-10 bg-black/40 flex items-center justify-center w-full h-10 gap-2 text-foreground/50'>
         <EventHeader event={event} role={role} />
         <div className='text-xs'>{event.createdAt.toLocaleString()}</div>
         <div className='text-xs'>by {profile.name}</div>
       </div>
 
       <ScrollArea className='flex-1 px-3'>
-        {!!textContents?.length && (
-          <div className='mb-2'>
-            <EventSection
-              sectionType='contents'
-              contentType={ContentType.TEXT}
-              role={role}
-              label='文字频道'
-            />
-            <div className='space-y-[2px]'>
-              {textContents.map((content) => (
-                <EventContent
-                  key={content.id}
-                  content={content}
-                  role={role}
-                  event={event}
-                />
-              ))}
-            </div>
-          </div>
-        )}
-        {!!audioContents?.length && (
-          <div className='mb-2'>
-            <EventSection
-              sectionType='contents'
-              contentType={ContentType.IMAGE}
-              role={role}
-              label='音频频道'
-            />
-            <div className='space-y-[2px]'>
-              {audioContents.map((content) => (
-                <EventContent
-                  key={content.id}
-                  content={content}
-                  role={role}
-                  event={event}
-                />
-              ))}
-            </div>
-          </div>
-        )}
-        {!!videoContents?.length && (
-          <div className='mb-2'>
-            <EventSection
-              sectionType='contents'
-              contentType={ContentType.VIDEO}
-              role={role}
-              label='视频频道'
-            />
-            <div className='space-y-[2px]'>
-              {videoContents.map((content) => (
-                <EventContent
-                  key={content.id}
-                  content={content}
-                  role={role}
-                  event={event}
-                />
-              ))}
-            </div>
-          </div>
-        )}
         {!!members?.length && (
           <div className='mb-2'>
             <EventSection
               sectionType='members'
               role={role}
-              label='成员'
+              label='Members'
               event={event}
             />
             <div className='space-y-[2px]'>
               {members.map((member) => (
                 <EventMember key={member.id} member={member} event={event} />
+              ))}
+            </div>
+          </div>
+        )}
+        {!!event?.contents.length && (
+          <div className='mb-2'>
+            <EventSection
+              sectionType='contents'
+              // contentType={ContentType.TEXT}
+              role={role}
+              label='Contents'
+            />
+            <div className='space-y-[2px]'>
+              {event.contents.map((content) => (
+                <EventContent
+                  key={content.id}
+                  content={content}
+                  role={role}
+                  event={event}
+                />
               ))}
             </div>
           </div>

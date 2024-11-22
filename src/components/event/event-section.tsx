@@ -11,7 +11,7 @@ type EventSectionProps = {
   label: string
   role?: MemberRole
   sectionType: "contents" | "members"
-  contentType?: ContentType
+  // contentType?: ContentType
   event?: EventWithMembersWithProfiles
 }
 
@@ -19,10 +19,11 @@ export const EventSection = ({
   label,
   role,
   sectionType,
-  contentType,
+  // contentType,
   event,
 }: EventSectionProps) => {
   const { onOpen } = useModal()
+  const contentType = 'IMAGE'
 
   return (
     <div className='flex items-center justify-between py-2'>

@@ -79,7 +79,7 @@ model Content {
   title      String
   type       ContentType @default(IMAGE)
   imageUrl   String?     @db.Text
-  descrition String?     @db.Text
+  description String?     @db.Text
 
   profileId String
   profile   Profile @relation(fields: [profileId], references: [id], onDelete: Cascade)
@@ -109,7 +109,7 @@ model Message {
 
   deleted Boolean @default(false)
 
-  createdAt DateTime @default(now()) @unique
+  createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
   @@index([contentId])

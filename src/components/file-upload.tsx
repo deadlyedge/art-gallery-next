@@ -10,7 +10,7 @@ import "@uploadthing/react/styles.css"
 type FileUploadProps = {
   onChange: (url?: string) => void
   value: string
-  endpoint: "contentImage" | "eventImage" | "profileImage"
+  endpoint: "contentImage" | "eventImage" | "profileImage" | 'messageFile'
 }
 
 export const FileUpload = ({ onChange, value, endpoint }: FileUploadProps) => {

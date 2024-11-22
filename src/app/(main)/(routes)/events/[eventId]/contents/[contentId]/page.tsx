@@ -1,5 +1,4 @@
 import { redirect } from "next/navigation"
-import { ContentType } from "@prisma/client"
 
 import { currentProfile } from "@/lib/current-profile"
 import { ChatHeader } from "@/components/chat/chat-header"
@@ -47,39 +46,29 @@ const ContentIdPage = async ({ params }: ContentIdPageProps) => {
         eventId={content.eventId}
         type='content'
       />
-      {content.type === ContentType.TEXT && (
-        <>
-          <ChatMessages
-            member={member}
-            name={content.title}
-            chatId={content.id}
-            type='content'
-            apiUrl='/api/messages'
-            socketUrl='/api/socket/messages'
-            socketQuery={{
-              contentId: content.id,
-              eventId: content.eventId,
-            }}
-            paramKey='contentId'
-            paramValue={content.id}
-          />
-          <ChatInput
-            name={content.title}
-            type='content'
-            apiUrl='/api/socket/messages'
-            query={{
-              contentId: content.id,
-              eventId: content.eventId,
-            }}
-          />
-        </>
-      )}
-      {/* {content.type === ContentType.AUDIO && (
-        <MediaRoom chatId={content.id} video={false} audio={true} />
-      )}
-      {content.type === ContentType.VIDEO && (
-        <MediaRoom chatId={content.id} video={true} audio={true} />
-      )} */}
+      <ChatMessages
+        member={member}
+        name={content.title}
+        chatId={content.id}
+        type='content'
+        apiUrl='/api/messages'
+        socketUrl='/api/socket/messages'
+        socketQuery={{
+          contentId: content.id,
+          eventId: content.eventId,
+        }}
+        paramKey='contentId'
+        paramValue={content.id}
+      />
+      <ChatInput
+        name={content.title}
+        type='content'
+        apiUrl='/api/socket/messages'
+        query={{
+          contentId: content.id,
+          eventId: content.eventId,
+        }}
+      />
     </div>
   )
 }

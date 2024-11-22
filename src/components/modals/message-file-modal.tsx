@@ -56,7 +56,7 @@ export const MessageFileModal = () => {
 
       await axios.post(url, {
         ...values,
-        content: values.fileUrl,
+        text: values.fileUrl,
       })
 
       form.reset()
