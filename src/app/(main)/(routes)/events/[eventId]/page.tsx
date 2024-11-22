@@ -66,17 +66,6 @@ const EventContentsPage = async ({
     },
   })
 
-  const textContents = event?.contents.filter(
-    (content) => content.type === ContentType.TEXT
-  )
-  const audioContents = event?.contents.filter(
-    (content) => content.type === ContentType.IMAGE
-  )
-  const videoContents = event?.contents.filter(
-    (content) => content.type === ContentType.VIDEO
-  )
-  const allContents = event?.contents
-
   const members = event?.members.filter(
     (member) => member.profileId !== profile.id
   )
