@@ -10,7 +10,7 @@ import "@uploadthing/react/styles.css"
 type FileUploadProps = {
   onChange: (url?: string) => void
   value: string
-  endpoint: "contentImage" | "eventImage" | "profileImage" | 'messageFile'
+  endpoint: "contentImage" | "eventImage" | "profileImage" | "messageFile"
 }
 
 export const FileUpload = ({ onChange, value, endpoint }: FileUploadProps) => {
@@ -18,12 +18,13 @@ export const FileUpload = ({ onChange, value, endpoint }: FileUploadProps) => {
 
   if (value && fileType !== "pdf") {
     return (
-      <div className='relative h-40 w-60'>
+      <div className='relative h-40'>
         <Image
-          fill
           src={value}
           alt='Upload'
-          className='object-cover'
+          width={0}
+          height={0}
+          style={{ width: "auto", height: "100%" }}
           sizes='(max-width: 500px) 40vw, (max-width: 500px) 40vw, 40vw'
         />
         <button

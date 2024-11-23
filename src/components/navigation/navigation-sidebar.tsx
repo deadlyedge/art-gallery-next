@@ -42,10 +42,10 @@ export const NavigationSidebar = async () => {
   })
 
   return (
-    <Sidebar>
+    <Sidebar className='group/logo'>
       <SidebarHeader className='h-10 pt-1.5'>
         <SidebarMenu>
-          <SidebarMenuItem className='group/logo'>
+          <SidebarMenuItem>
             <LogoMotion size='lg' />
           </SidebarMenuItem>
         </SidebarMenu>

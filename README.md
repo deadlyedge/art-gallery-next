@@ -2,7 +2,9 @@
 
 todo:
 1. page ui
-2. complete add content logic
-3. get pic exif
-4. connect api for messages
-5. prisma schema uuid to cuid
+2. complete add content logic: general content need to be changed but not to be deleted
+3. add content description error in ~~db~~ api perhaps: solved
+4. get pic exif
+5. ??connect api for messages
+6. ~~prisma schema uuid to cuid~~
+7. add content search

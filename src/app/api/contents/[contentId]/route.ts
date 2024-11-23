@@ -63,10 +63,12 @@ export async function PATCH(
 ) {
   try {
     const profile = await currentProfile()
-    const { title, type, imageUrl } = await req.json()
+    const { title, type, imageUrl, description } = await req.json()
     const { searchParams } = new URL(req.url)
 
     const eventId = searchParams.get("eventId")
+
+    const { contentId } = await params
 
     if (!profile) {
       return new NextResponse("Unauthorized", { status: 401 })
@@ -76,7 +78,7 @@ export async function PATCH(
       return new NextResponse("Server ID missing", { status: 400 })
     }
 
-    if (!params.contentId) {
+    if (!contentId) {
       return new NextResponse("Channel ID missing", { status: 400 })
     }
 
@@ -100,7 +102,7 @@ export async function PATCH(
         contents: {
           update: {
             where: {
-              id: params.contentId,
+              id: contentId,
               NOT: {
                 title: "general",
               },
@@ -109,6 +111,7 @@ export async function PATCH(
               title,
               type,
               imageUrl,
+              description,
             },
           },
         },

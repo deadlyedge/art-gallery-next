@@ -1,28 +1,30 @@
-import { NextResponse } from "next/server";
+import { NextResponse } from "next/server"
 
-import { currentProfile } from "@/lib/current-profile";
-import { db } from "@/lib/db";
+import { currentProfile } from "@/lib/current-profile"
+import { db } from "@/lib/db"
 
 export async function DELETE(
   req: Request,
   { params }: { params: { memberId: string } }
 ) {
   try {
-    const profile = await currentProfile();
-    const { searchParams } = new URL(req.url);
+    const profile = await currentProfile()
+    const { searchParams } = new URL(req.url)
 
-    const eventId = searchParams.get("eventId");
+    const eventId = searchParams.get("eventId")
+
+    const { memberId } = await params
 
     if (!profile) {
-      return new NextResponse("Unauthorized" ,{ status: 401 });
+      return new NextResponse("Unauthorized", { status: 401 })
     }
 
     if (!eventId) {
-      return new NextResponse("Server ID missing", { status: 400 });
+      return new NextResponse("Server ID missing", { status: 400 })
     }
 
-    if (!params.memberId) {
-      return new NextResponse("Member ID missing", { status: 400 });
+    if (!memberId) {
+      return new NextResponse("Member ID missing", { status: 400 })
     }
 
     const event = await db.event.update({
@@ -33,12 +35,12 @@ export async function DELETE(
       data: {
         members: {
           deleteMany: {
-            id: params.memberId,
+            id: memberId,
             profileId: {
-              not: profile.id
-            }
-          }
-        }
+              not: profile.id,
+            },
+          },
+        },
       },
       include: {
         members: {
@@ -47,15 +49,15 @@ export async function DELETE(
           },
           orderBy: {
             role: "asc",
-          }
+          },
         },
       },
-    });
+    })
 
-    return NextResponse.json(event);
+    return NextResponse.json(event)
   } catch (error) {
-    console.log("[MEMBER_ID_DELETE]", error);
-    return new NextResponse("Internal Error", { status: 500 });
+    console.log("[MEMBER_ID_DELETE]", error)
+    return new NextResponse("Internal Error", { status: 500 })
   }
 }
 
@@ -64,22 +66,24 @@ export async function PATCH(
   { params }: { params: { memberId: string } }
 ) {
   try {
-    const profile = await currentProfile();
-    const { searchParams } = new URL(req.url);
-    const { role } = await req.json();
+    const profile = await currentProfile()
+    const { searchParams } = new URL(req.url)
+    const { role } = await req.json()
 
-    const eventId = searchParams.get("eventId");
+    const eventId = searchParams.get("eventId")
+
+    const { memberId } = await params
 
     if (!profile) {
-      return new NextResponse("Unauthorized", { status: 401 });
+      return new NextResponse("Unauthorized", { status: 401 })
     }
 
     if (!eventId) {
-      return new NextResponse("Server ID missing", { status: 400 });
+      return new NextResponse("Server ID missing", { status: 400 })
     }
 
-    if (!params.memberId) {
-      return new NextResponse("Member ID missing", { status: 400 });
+    if (!memberId) {
+      return new NextResponse("Member ID missing", { status: 400 })
     }
 
     const event = await db.event.update({
@@ -91,16 +95,16 @@ export async function PATCH(
         members: {
           update: {
             where: {
-              id: params.memberId,
+              id: memberId,
               profileId: {
-                not: profile.id
-              }
+                not: profile.id,
+              },
             },
             data: {
-              role
-            }
-          }
-        }
+              role,
+            },
+          },
+        },
       },
       include: {
         members: {
@@ -108,15 +112,15 @@ export async function PATCH(
             profile: true,
           },
           orderBy: {
-            role: "asc"
-          }
-        }
-      }
-    });
+            role: "asc",
+          },
+        },
+      },
+    })
 
-    return NextResponse.json(event);
+    return NextResponse.json(event)
   } catch (error) {
-    console.log("[MEMBERS_ID_PATCH]", error);
-    return new NextResponse("Internal Error", { status: 500 });
+    console.log("[MEMBERS_ID_PATCH]", error)
+    return new NextResponse("Internal Error", { status: 500 })
   }
 }

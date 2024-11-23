@@ -19,8 +19,8 @@ export const ChatWelcome = ({ title, type }: ChatWelcomeProps) => {
       </p> */}
       <p className='text-xs'>
         {type === "content"
-          ? `starting of #${title}`
-          : `starting of conversation with ${title}`}
+          ? `[starting of #${title}]`
+          : `[starting of conversation with ${title}]`}
       </p>
     </div>
   )

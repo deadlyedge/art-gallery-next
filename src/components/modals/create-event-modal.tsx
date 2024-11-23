@@ -29,10 +29,10 @@ import { useModal } from "@/hooks/use-modal-store"
 
 const formSchema = z.object({
   title: z.string().min(1, {
-    message: "请填写名字",
+    message: "Must write a title.",
   }),
   imageUrl: z.string().min(1, {
-    message: "请上传图片(最好是正方形或圆形)",
+    message: "请上传图片",
   }),
 })
 

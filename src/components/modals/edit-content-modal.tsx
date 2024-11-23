@@ -36,6 +36,7 @@ import {
 } from "@/components/ui/select"
 import { useEffect } from "react"
 import { FileUpload } from "../file-upload"
+import { Textarea } from "../ui/textarea"
 
 const formSchema = z.object({
   title: z
@@ -46,8 +47,9 @@ const formSchema = z.object({
     .refine((title) => title !== "general", {
       message: "Content title cannot be 'general'",
     }),
-  type: z.nativeEnum(ContentType),
-  imageUrl: z.string().url().optional(),
+  // type: z.nativeEnum(ContentType),
+  description: z.string().optional(),
+  imageUrl: z.string().optional(),
 })
 
 export const EditContentModal = () => {
@@ -61,7 +63,7 @@ export const EditContentModal = () => {
     resolver: zodResolver(formSchema),
     defaultValues: {
       title: "",
-      type: content?.type || ContentType.IMAGE,
+      description: content?.description || "",
       imageUrl: content?.imageUrl || "",
     },
   })
@@ -69,7 +71,7 @@ export const EditContentModal = () => {
   useEffect(() => {
     if (content) {
       form.setValue("title", content.title)
-      form.setValue("type", content.type)
+      form.setValue("description", content.description as string)
       form.setValue("imageUrl", content.imageUrl || "")
     }
   }, [form, content, isOpen])
@@ -104,11 +106,11 @@ export const EditContentModal = () => {
       <DialogContent className='bg-white text-black p-0 overflow-hidden'>
         <DialogHeader className='pt-8 px-6'>
           <DialogTitle className='text-2xl text-center font-bold'>
-            编辑频道
+            编辑内容
           </DialogTitle>
-          <DialogDescription className='text-center text-zinc-500'>
+          {/* <DialogDescription className='text-center text-zinc-500'>
             目前只能选择文字类型的频道
-          </DialogDescription>
+          </DialogDescription> */}
         </DialogHeader>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-8'>
@@ -119,13 +121,13 @@ export const EditContentModal = () => {
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel className='uppercase text-xs font-bold text-zinc-500 dark:text-secondary/70'>
-                      名称
+                      title
                     </FormLabel>
                     <FormControl>
                       <Input
                         disabled={isLoading}
                         className='bg-zinc-300/50 border-0 focus-visible:ring-0 text-black focus-visible:ring-offset-0'
-                        placeholder='输入频道名称'
+                        placeholder='输入内容标题'
                         {...field}
                       />
                     </FormControl>
@@ -135,42 +137,34 @@ export const EditContentModal = () => {
               />
               <FormField
                 control={form.control}
-                name='type'
+                name='description'
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>类型</FormLabel>
-                    <Select
-                      disabled={isLoading}
-                      onValueChange={field.onChange}
-                      defaultValue={field.value}>
-                      <FormControl>
-                        <SelectTrigger className='bg-zinc-300/50 border-0 focus:ring-0 text-black ring-offset-0 focus:ring-offset-0 capitalize outline-none'>
-                          <SelectValue placeholder='选择频道类型' />
-                        </SelectTrigger>
-                      </FormControl>
-                      <SelectContent>
-                        {Object.values(ContentType).map((type) => (
-                          <SelectItem
-                            key={type}
-                            value={type}
-                            // disabled={type !== "TEXT"} // 无法连接livekit
-                            className='capitalize'>
-                            {type.toLowerCase()}
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
+                    <FormLabel className='uppercase text-xs font-bold text-zinc-500 dark:text-secondary/70'>
+                      Description
+                    </FormLabel>
+                    <FormControl>
+                      <Textarea
+                        disabled={isLoading}
+                        className='bg-zinc-300/50 border-0 focus-visible:ring-0 text-black focus-visible:ring-offset-0'
+                        placeholder='Enter Description'
+                        {...field}
+                      />
+                    </FormControl>
                     <FormMessage />
                   </FormItem>
                 )}
-              />{" "}
+              />
               <div className='flex items-center justify-center text-center'>
                 <FormField
                   control={form.control}
                   name='imageUrl'
                   render={({ field }) => (
                     <FormItem>
-                      <FormControl>
+                      <FormLabel className='uppercase text-xs font-bold text-zinc-500 dark:text-secondary/70'>
+                        Image
+                      </FormLabel>
+                      <FormControl className='flex items-center justify-center'>
                         <FileUpload
                           endpoint='contentImage'
                           value={field.value}

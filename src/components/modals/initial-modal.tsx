@@ -60,7 +60,8 @@ export const InitialModal = () => {
       await axios.post("/api/events", values)
 
       form.reset()
-      router.refresh()
+      router.push("/events")
+      // router.refresh()
       window.location.reload()
     } catch (error) {
       console.log(error)

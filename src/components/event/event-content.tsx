@@ -71,8 +71,12 @@ export const EventContent = ({ content, event, role }: EventContentProps) => {
             <Lock className='ml-auto w-4 h-4 text-zinc-500 dark:text-zinc-400' />
           )}
         </div>
+        {content.description && (
+          <div className='text-xs h-auto mx-2 md:mx-0'>{content.description}</div>
+        )}
+
         <div className='text-xs h-auto'>
-            <ImageSideChat eventId={event.id} contentId={content.id} />
+          <ImageSideChat eventId={event.id} contentId={content.id} />
         </div>
       </div>
     </div>

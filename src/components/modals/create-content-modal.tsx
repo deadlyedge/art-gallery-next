@@ -163,24 +163,26 @@ export const CreateContentModal = () => {
                   </FormItem>
                 )}
               />
-              <FormField
-                control={form.control}
-                name='imageUrl'
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel className='uppercase text-xs font-bold text-zinc-500 dark:text-secondary/70'>
-                      Image
-                    </FormLabel>
-                    <FormControl>
-                      <FileUpload
-                        endpoint='contentImage'
-                        value={field.value}
-                        onChange={field.onChange}
-                      />
-                    </FormControl>
-                  </FormItem>
-                )}
-              />
+              <div className='flex items-center justify-center text-center'>
+                <FormField
+                  control={form.control}
+                  name='imageUrl'
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className='uppercase text-xs font-bold text-zinc-500 dark:text-secondary/70'>
+                        Image
+                      </FormLabel>
+                      <FormControl>
+                        <FileUpload
+                          endpoint='contentImage'
+                          value={field.value}
+                          onChange={field.onChange}
+                        />
+                      </FormControl>
+                    </FormItem>
+                  )}
+                />
+              </div>
             </div>
             <DialogFooter className='bg-gray-100 px-6 py-2'>
               <Button variant='default' disabled={isLoading}>
