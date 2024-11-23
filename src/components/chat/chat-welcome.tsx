@@ -17,10 +17,10 @@ export const ChatWelcome = ({ title, type }: ChatWelcomeProps) => {
         {type === "content" ? "欢迎来到 #" : ""}
         {title}
       </p> */}
-      <p className='text-zinc-600 dark:text-zinc-400 text-sm'>
+      <p className='text-xs'>
         {type === "content"
-          ? `这是 #${title} 频道的起始`
-          : `这是你和 ${title} 交谈的开始`}
+          ? `starting of #${title}`
+          : `starting of conversation with ${title}`}
       </p>
     </div>
   )

@@ -33,7 +33,7 @@ export const EventContent = ({ content, event, role }: EventContentProps) => {
   return (
     <div
       // onClick={onClick}
-      className='group/content px-2 py-2 rounded-md md:flex items-start justify-start gap-x-2 w-full mb-1'>
+      className='group/content px-0 md:px-2 py-2 rounded-md md:flex items-start justify-start gap-x-2 w-full mb-1'>
       <div className='w-full md:w-1/2'>
         <Image
           src={content.imageUrl || event.imageUrl}
@@ -46,7 +46,7 @@ export const EventContent = ({ content, event, role }: EventContentProps) => {
       </div>
 
       <div className='w-full md:w-1/2 flex flex-col'>
-        <div className='flex items-center'>
+        <div className='flex items-center p-2 md:p-0'>
           <Hash className='flex-shrink-0 w-5 h-5 text-zinc-500 dark:text-zinc-400' />
           <p className='line-clamp-1 font-semibold text-sm text-zinc-500 group-hover:text-zinc-600 dark:text-zinc-400 dark:group-hover:text-zinc-300 transition'>
             {content.title}

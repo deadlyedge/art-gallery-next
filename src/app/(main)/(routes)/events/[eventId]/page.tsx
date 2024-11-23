@@ -80,13 +80,13 @@ const EventContentsPage = async ({
 
   return (
     <div className='flex flex-col h-full'>
-      <div className='sticky top-0 z-10 bg-black/40 flex items-center justify-center w-full h-10 gap-2 text-foreground/50'>
+      <div className='sticky top-0 z-10 bg-black/40 flex items-center justify-center w-full h-10 gap-2 text-foreground/50 mb-2'>
         <EventHeader event={event} role={role} />
         <div className='text-xs'>{event.createdAt.toLocaleString()}</div>
         <div className='text-xs'>by {profile.name}</div>
       </div>
 
-      <ScrollArea className='flex-1 px-3'>
+      <ScrollArea className='flex-1 px-0 md:px-3'>
         {!!members?.length && (
           <div className='mb-2'>
             <EventSection

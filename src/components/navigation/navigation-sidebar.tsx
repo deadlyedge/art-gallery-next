@@ -43,7 +43,7 @@ export const NavigationSidebar = async () => {
 
   return (
     <Sidebar>
-      <SidebarHeader className="h-10 pt-1.5">
+      <SidebarHeader className='h-10 pt-1.5'>
         <SidebarMenu>
           <SidebarMenuItem className='group/logo'>
             <LogoMotion size='lg' />

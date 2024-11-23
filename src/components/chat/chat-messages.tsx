@@ -1,7 +1,7 @@
 "use client"
 
 import { Fragment, useRef, ElementRef } from "react"
-import { format } from "date-fns"
+import { format, formatDistanceToNow } from "date-fns"
 import { Member, Message, Profile } from "@prisma/client"
 import { Loader2, ServerCrash } from "lucide-react"
 
@@ -70,7 +70,7 @@ export const ChatMessages = ({
     return (
       <div className='flex flex-col flex-1 justify-center items-center'>
         <Loader2 className='h-7 w-7 text-zinc-500 animate-spin my-4' />
-        <p className='text-xs text-zinc-500 dark:text-zinc-400'>读取消息...</p>
+        <p className='text-xs text-zinc-500 dark:text-zinc-400'>reading messages...</p>
       </div>
     )
   }
@@ -79,13 +79,13 @@ export const ChatMessages = ({
     return (
       <div className='flex flex-col flex-1 justify-center items-center'>
         <ServerCrash className='h-7 w-7 text-zinc-500 my-4' />
-        <p className='text-xs text-zinc-500 dark:text-zinc-400'>出问题啦！</p>
+        <p className='text-xs text-zinc-500 dark:text-zinc-400'>something wrong.</p>
       </div>
     )
   }
 
   return (
-    <div ref={chatRef} className='flex-1 flex flex-col py-4 overflow-y-auto'>
+    <div ref={chatRef} className='flex-1 flex flex-col overflow-y-auto'>
       {!hasNextPage && <div className='flex-1' />}
       {!hasNextPage && <ChatWelcome type={type} title={name} />}
       {hasNextPage && (
@@ -95,8 +95,8 @@ export const ChatMessages = ({
           ) : (
             <button
               onClick={() => fetchNextPage()}
-              className='text-zinc-500 hover:text-zinc-600 dark:text-zinc-400 text-xs my-4 dark:hover:text-zinc-300 transition'>
-              读取之前的消息...
+              className='text-zinc-500 hover:text-zinc-600 dark:text-zinc-400 text-xs my-2 dark:hover:text-zinc-300 transition'>
+              read more messages...
             </button>
           )}
         </div>
@@ -113,7 +113,7 @@ export const ChatMessages = ({
                 text={message.text}
                 fileUrl={message.fileUrl}
                 deleted={message.deleted}
-                timestamp={format(new Date(message.createdAt), DATE_FORMAT)}
+                timestamp={formatDistanceToNow(message.createdAt)}
                 isUpdated={message.updatedAt !== message.createdAt}
                 socketUrl={socketUrl}
                 socketQuery={socketQuery}
