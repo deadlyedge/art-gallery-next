@@ -13,16 +13,12 @@ import { Content } from "next/font/google"
 import { ContentHeader } from "@/components/content/content-header"
 import { ScrollArea } from "@/components/ui/scroll-area"
 
-interface ContentIdPageProps {
-  params: {
-    eventId: string
-    contentId: string
-  }
-}
 
-const ContentIdPage = async ({ params }: ContentIdPageProps) => {
+const ContentIdPage = async (props: {
+  params: Promise<{ eventId: string; contentId: string }>
+}) => {
   const profile = await currentProfile()
-  const { eventId, contentId } = await params
+  const { eventId, contentId } = await props.params
 
   if (!profile) {
     return redirect("/sign-in")

@@ -6,7 +6,7 @@ import { db } from "@/lib/db"
 
 export async function DELETE(
   req: Request,
-  { params }: { params: { contentId: string } }
+  props: { params: Promise<{ contentId: string }> }
 ) {
   try {
     const profile = await currentProfile()
@@ -14,7 +14,7 @@ export async function DELETE(
 
     const eventId = searchParams.get("eventId")
 
-    const { contentId } = await params
+    const { contentId } = await props.params
 
     if (!profile) {
       return new NextResponse("Unauthorized", { status: 401 })
@@ -61,7 +61,7 @@ export async function DELETE(
 
 export async function PATCH(
   req: Request,
-  { params }: { params: { contentId: string } }
+  props: { params: Promise<{ contentId: string }> }
 ) {
   try {
     const profile = await currentProfile()
@@ -70,7 +70,7 @@ export async function PATCH(
 
     const eventId = searchParams.get("eventId")
 
-    const { contentId } = await params
+    const { contentId } = await props.params
 
     if (!profile) {
       return new NextResponse("Unauthorized", { status: 401 })

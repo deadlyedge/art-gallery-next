@@ -36,13 +36,11 @@ const roleIconMap = {
   [MemberRole.ADMIN]: <ShieldAlert className='h-4 w-4 mr-2 text-rose-500' />,
 }
 
-const EventContentsPage = async ({
-  params,
-}: {
-  params: { eventId: string; contentTitle?: string }
+const EventContentsPage = async (props: {
+  params: Promise<{ eventId: string; contentTitle?: string }>
 }) => {
   const profile = await currentProfile()
-  const { eventId } = await params
+  const { eventId } = await props.params
 
   if (!profile) {
     return redirect("/")

@@ -1,22 +1,23 @@
-import { v4 as uuidv4 } from "uuid";
-import { NextResponse } from "next/server";
+import { v4 as uuidv4 } from "uuid"
+import { NextResponse } from "next/server"
 
-import { currentProfile } from "@/lib/current-profile";
-import { db } from "@/lib/db";
+import { currentProfile } from "@/lib/current-profile"
+import { db } from "@/lib/db"
 
 export async function PATCH(
   req: Request,
-  { params }: { params: { eventId: string } }
+  props: { params: Promise<{ eventId: string }> }
 ) {
+  const params = await props.params
   try {
-    const profile = await currentProfile();
+    const profile = await currentProfile()
 
     if (!profile) {
-      return new NextResponse("Unauthorized", { status: 401 });
+      return new NextResponse("Unauthorized", { status: 401 })
     }
 
     if (!params.eventId) {
-      return new NextResponse("Event ID Missing", { status: 400 });
+      return new NextResponse("Event ID Missing", { status: 400 })
     }
 
     const event = await db.event.update({
@@ -27,11 +28,11 @@ export async function PATCH(
       data: {
         inviteCode: uuidv4(),
       },
-    });
+    })
 
-    return NextResponse.json(event);
+    return NextResponse.json(event)
   } catch (error) {
-    console.log("[EVENT_ID]", error);
-    return new NextResponse("Internal Error", { status: 500 });
+    console.log("[EVENT_ID]", error)
+    return new NextResponse("Internal Error", { status: 500 })
   }
 }

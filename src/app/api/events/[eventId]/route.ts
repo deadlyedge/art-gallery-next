@@ -5,8 +5,9 @@ import { db } from "@/lib/db"
 
 export async function DELETE(
   req: Request,
-  { params }: { params: { eventId: string } }
+  props: { params: Promise<{ eventId: string }> }
 ) {
+  const params = await props.params
   try {
     const profile = await currentProfile()
 
@@ -30,8 +31,9 @@ export async function DELETE(
 
 export async function PATCH(
   req: Request,
-  { params }: { params: { eventId: string } }
+  props: { params: Promise<{ eventId: string }> }
 ) {
+  const params = await props.params
   try {
     const profile = await currentProfile()
     const { title, imageUrl } = await req.json()

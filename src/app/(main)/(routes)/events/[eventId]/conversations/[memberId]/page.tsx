@@ -8,20 +8,12 @@ import { ChatMessages } from "@/components/chat/chat-messages"
 import { ChatInput } from "@/components/chat/chat-input"
 // import { MediaRoom } from "@/components/media-room"
 
-interface MemberIdPageProps {
-  params: {
-    memberId: string
-    eventId: string
-  }
-  searchParams: {
-    video?: boolean
-  }
-}
-
-const MemberIdPage = async ({ params, searchParams }: MemberIdPageProps) => {
+const MemberIdPage = async (props: {
+  params: Promise<{ memberId: string; eventId: string }>
+}) => {
   const profile = await currentProfile()
-  const { memberId, eventId } = await params
-  const { video } = await searchParams
+  const { memberId, eventId } = await props.params
+  // const { video } = await searchParams
 
   if (!profile) {
     return redirect("/sign-in")

@@ -3,11 +3,9 @@ import { redirect } from "next/navigation"
 import { db } from "@/lib/db"
 import { currentProfile } from "@/lib/current-profile"
 
-type InviteCodePageProps = Promise<{
-  inviteCode: string
-}>
-
-const InviteCodePage = async (props: { params: InviteCodePageProps }) => {
+const InviteCodePage = async (props: {
+  params: Promise<{inviteCode: string}>
+}) => {
   const profile = await currentProfile()
   const inviteCode = (await props.params).inviteCode
 

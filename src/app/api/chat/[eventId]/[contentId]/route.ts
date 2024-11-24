@@ -4,12 +4,12 @@ import { NextResponse } from "next/server"
 
 export async function GET(
   req: Request,
-  { params }: { params: { eventId: string; contentId: string } }
+  props: { params: Promise<{ eventId: string; contentId: string }> }
 ) {
   try {
     const profile = await currentProfile()
 
-    const { eventId, contentId } = await params
+    const { eventId, contentId } = await props.params
 
     if (!profile) {
       return new NextResponse("Unauthorized", { status: 401 })
