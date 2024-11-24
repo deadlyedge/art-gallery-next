@@ -1,27 +1,22 @@
-import { redirect } from "next/navigation";
+import { redirect } from "next/navigation"
 
-import { db } from "@/lib/db";
-import { currentProfile } from "@/lib/current-profile";
+import { db } from "@/lib/db"
+import { currentProfile } from "@/lib/current-profile"
 
-interface InviteCodePageProps {
-  params: {
-    inviteCode: string;
-  };
-};
+type InviteCodePageProps = Promise<{
+  inviteCode: string
+}>
 
-const InviteCodePage = async ({
-  params
-}: InviteCodePageProps) => {
-  const profile = await currentProfile();
-  const { inviteCode } = await params
-
+const InviteCodePage = async (props: { params: InviteCodePageProps }) => {
+  const profile = await currentProfile()
+  const inviteCode = (await props.params).inviteCode
 
   if (!profile) {
-    return redirect("/sign-in");
+    return redirect("/sign-in")
   }
 
   if (!inviteCode) {
-    return redirect("/");
+    return redirect("/")
   }
 
   const existingEvent = await db.event.findFirst({
@@ -29,14 +24,14 @@ const InviteCodePage = async ({
       inviteCode,
       members: {
         some: {
-          profileId: profile.id
-        }
-      }
-    }
-  });
+          profileId: profile.id,
+        },
+      },
+    },
+  })
 
   if (existingEvent) {
-    return redirect(`/events/${existingEvent.id}`);
+    return redirect(`/events/${existingEvent.id}`)
   }
 
   const event = await db.event.update({
@@ -48,17 +43,17 @@ const InviteCodePage = async ({
         create: [
           {
             profileId: profile.id,
-          }
-        ]
-      }
-    }
-  });
+          },
+        ],
+      },
+    },
+  })
 
   if (event) {
-    return redirect(`/events/${event.id}`);
+    return redirect(`/events/${event.id}`)
   }
-  
-  return null;
+
+  return null
 }
- 
-export default InviteCodePage;
+
+export default InviteCodePage
