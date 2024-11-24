@@ -9,9 +9,9 @@ import { useChatQuery } from "@/hooks/use-chat-query"
 import { useChatSocket } from "@/hooks/use-chat-socket"
 import { useChatScroll } from "@/hooks/use-chat-scroll"
 
-import { ChatWelcome } from "./chat-welcome"
-import { ChatItem } from "./chat-item"
-import { Button } from "../ui/button"
+import { ChatWelcome } from "@/components/chat/chat-welcome"
+import { ChatItem } from "@/components/chat/chat-item"
+import { Button } from "@/components/ui/button"
 
 // const DATE_FORMAT = "MMM d, yyyy, HH:mm"
 

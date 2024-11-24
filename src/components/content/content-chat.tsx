@@ -8,7 +8,7 @@ import { cn } from "@/lib/utils"
 import { ActionTooltip } from "@/components/action-tooltip"
 import { ModalType, useModal } from "@/hooks/use-modal-store"
 import Image from "next/image"
-import { ImageSideChat } from "./image-side-messages"
+import { ImageSideChat } from "../event/image-side-messages"
 import { ScrollArea } from "../ui/scroll-area"
 
 type EventContentProps = {
@@ -33,19 +33,17 @@ export const EventContent = ({ content, event, role }: EventContentProps) => {
 
   return (
     <div
-      onClick={onClick}
+      // onClick={onClick}
       className='group/content px-0 md:px-2 py-2 rounded-md md:flex items-start justify-start gap-x-2 w-full mb-1'>
       <div className='w-full md:w-1/2'>
-        {content.imageUrl && (
-          <Image
-            src={content.imageUrl}
-            alt='Content Image'
-            width={0}
-            height={0}
-            sizes='100vw'
-            style={{ width: "100%", height: "auto" }}
-          />
-        )}
+        <Image
+          src={content.imageUrl || event.imageUrl}
+          alt='Content Image'
+          width={0}
+          height={0}
+          sizes='100vw'
+          style={{ width: "100%", height: "auto" }}
+        />
       </div>
 
       <div className='w-full md:w-1/2 flex flex-col'>

@@ -19,6 +19,8 @@ import { EventSearch } from "@/components/event/event-search"
 import { EventSection } from "@/components/event/event-section"
 import { EventContent } from "@/components/event/event-content"
 import { EventMember } from "@/components/event/event-member"
+import { Suspense } from "react"
+import Loading from "./loading"
 
 const iconMap = {
   [ContentType.TEXT]: <Hash className='mr-2 h-4 w-4' />,
@@ -37,10 +39,11 @@ const roleIconMap = {
 const EventContentsPage = async ({
   params,
 }: {
-  params: { eventId: string }
+  params: { eventId: string; contentTitle?: string }
 }) => {
   const profile = await currentProfile()
   const { eventId } = await params
+
   if (!profile) {
     return redirect("/")
   }
@@ -78,14 +81,16 @@ const EventContentsPage = async ({
     (member) => member.profileId === profile.id
   )?.role
 
+  // redirect to hashtag after page fully loaded
+
   return (
     <div className='flex flex-col h-full'>
+      {/* <Suspense fallback={<Loading />}> */}
       <div className='sticky top-0 z-10 bg-black/40 flex items-center justify-center w-full h-10 gap-2 text-foreground/50 mb-2'>
         <EventHeader event={event} role={role} />
         <div className='text-xs'>{event.createdAt.toLocaleString()}</div>
         <div className='text-xs'>by {profile.name}</div>
       </div>
-
       <ScrollArea className='flex-1 px-0 md:px-3'>
         {!!members?.length && (
           <div className='mb-2'>
@@ -123,6 +128,7 @@ const EventContentsPage = async ({
           </div>
         )}
       </ScrollArea>
+      {/* </Suspense> */}
     </div>
   )
 }

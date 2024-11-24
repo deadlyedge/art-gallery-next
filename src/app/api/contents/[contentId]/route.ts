@@ -14,6 +14,8 @@ export async function DELETE(
 
     const eventId = searchParams.get("eventId")
 
+    const { contentId } = await params
+
     if (!profile) {
       return new NextResponse("Unauthorized", { status: 401 })
     }
@@ -22,7 +24,7 @@ export async function DELETE(
       return new NextResponse("Server ID missing", { status: 400 })
     }
 
-    if (!params.contentId) {
+    if (!contentId) {
       return new NextResponse("Channel ID missing", { status: 400 })
     }
 
@@ -41,7 +43,7 @@ export async function DELETE(
       data: {
         contents: {
           delete: {
-            id: params.contentId,
+            id: contentId,
             title: {
               not: "general",
             },

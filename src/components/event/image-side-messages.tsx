@@ -56,7 +56,7 @@ export const ImageSideChat = ({ eventId, contentId }: ImageSideChatProps) => {
         paramKey='contentId'
         paramValue={content.id}
       />
-      <ChatInput
+      {/* <ChatInput
         name={content.title}
         type='content'
         apiUrl='/api/socket/messages'
@@ -64,7 +64,7 @@ export const ImageSideChat = ({ eventId, contentId }: ImageSideChatProps) => {
           contentId: content.id,
           eventId: content.eventId,
         }}
-      />
+      /> */}
     </div>
   )
 }

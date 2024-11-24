@@ -135,14 +135,14 @@ export const ChatItem = ({
             <div className='flex items-center'>
               <p
                 onClick={onMemberClick}
-                className='font-semibold text-sm hover:underline cursor-pointer'>
+                className='font-semibold text-xs hover:underline cursor-pointer'>
                 {member.profile.name}
               </p>
               <ActionTooltip label={member.role}>
                 {roleIconMap[member.role]}
               </ActionTooltip>
             </div>
-            <span className='text-[11px] text-zinc-500 dark:text-zinc-400'>
+            <span className='text-[10px] text-zinc-500 dark:text-zinc-400'>
               {timestamp}
             </span>
           </div>

@@ -39,8 +39,15 @@ export const NavigationSidebar = async () => {
         },
       },
     },
+    include: {
+      contents: {
+        orderBy: {
+          createdAt: "asc",
+        },
+      },
+    },
   })
-
+ 
   return (
     <Sidebar className='group/logo'>
       <SidebarHeader className='h-10 pt-1.5'>
@@ -86,7 +93,7 @@ export const NavigationSidebar = async () => {
             />
           </SidebarMenuItem>
           <SidebarMenuItem>
-            <SidebarSearch data={events} />
+            <SidebarSearch data={events}/>
           </SidebarMenuItem>
           {/* <SidebarMenuItem>
             <ModeToggle />

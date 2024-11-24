@@ -1,6 +1,6 @@
 "use client"
 
-import { Search } from "lucide-react"
+import { Hash, Search } from "lucide-react"
 import { useEffect, useState } from "react"
 import { useParams, useRouter } from "next/navigation"
 
@@ -12,6 +12,7 @@ import {
   CommandItem,
   CommandList,
 } from "@/components/ui/command"
+import { Content } from "@prisma/client"
 
 type EventSearchProps = {
   data: {
@@ -22,6 +23,7 @@ type EventSearchProps = {
     updatedAt: Date
     inviteCode: string
     profileId: string
+    contents: Content[]
   }[]
 }
 
@@ -42,10 +44,10 @@ export const SidebarSearch = ({ data }: EventSearchProps) => {
     return () => document.removeEventListener("keydown", down)
   }, [])
 
-  const onClick = ({ id }: { id: string }) => {
+  const onClick = ({ eventId, id }: { eventId: string; id?: string }) => {
     setOpen(false)
 
-    return router.push(`/events/${id}`)
+    return router.push(`/events/${eventId}/contents/${id}`)
   }
 
   return (
@@ -65,13 +67,29 @@ export const SidebarSearch = ({ data }: EventSearchProps) => {
         <CommandInput placeholder='Search Your Events...' />
         <CommandList>
           <CommandEmpty>没找到结果</CommandEmpty>
-          {data.map(({ title, id }) => {
-            if (!id?.length) return null
+          {data.map(({ title, id: eventId, contents }) => {
+            if (!eventId?.length) return null
 
             return (
-              <CommandItem key={id} onSelect={() => onClick({ id })}>
-                {title}
-              </CommandItem>
+              <CommandGroup key={title}>
+                <CommandItem
+                  key={eventId}
+                  onSelect={() => onClick({ eventId })}>
+                  {title}
+                </CommandItem>
+                {contents.map(({ title, id }) => {
+                  if (!id?.length) return null
+
+                  return (
+                    <CommandItem
+                      key={id}
+                      onSelect={() => onClick({ eventId, id })}>
+                      <Hash />
+                      {title}
+                    </CommandItem>
+                  )
+                })}
+              </CommandGroup>
             )
           })}
         </CommandList>
