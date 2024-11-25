@@ -32,6 +32,7 @@ type ChatItemProps = {
   isUpdated: boolean
   socketUrl: string
   socketQuery: Record<string, string>
+  showMode?: boolean
 }
 
 const roleIconMap = {
@@ -55,6 +56,7 @@ export const ChatItem = ({
   isUpdated,
   socketUrl,
   socketQuery,
+  showMode = false,
 }: ChatItemProps) => {
   const [isEditing, setIsEditing] = useState(false)
   const { onOpen } = useModal()
@@ -118,12 +120,12 @@ export const ChatItem = ({
   const isModerator = currentMember.role === MemberRole.MODERATOR
   const isOwner = currentMember.id === member.id
   const canDeleteMessage = !deleted && (isAdmin || isModerator || isOwner)
-  const canEditMessage = !deleted && isOwner && !fileUrl
+  const canEditMessage = !deleted && isOwner && !fileUrl && !showMode
   const isPDF = fileType === "pdf" && fileUrl
   const isImage = !isPDF && fileUrl
 
   return (
-    <div className='relative group flex items-center hover:bg-black/5 p-2 transition w-full'>
+    <div className='relative group flex items-center hover:bg-black/10 p-2 my-1 transition w-full'>
       <div className='group flex gap-x-2 items-start w-full'>
         <div
           onClick={onMemberClick}

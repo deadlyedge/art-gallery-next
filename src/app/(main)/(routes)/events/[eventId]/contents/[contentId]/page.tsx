@@ -1,18 +1,11 @@
 import { redirect } from "next/navigation"
 import Image from "next/image"
+import { db } from "@/lib/db"
 import { currentProfile } from "@/lib/current-profile"
-import { ChatHeader } from "@/components/chat/chat-header"
+
 import { ChatInput } from "@/components/chat/chat-input"
 import { ChatMessages } from "@/components/chat/chat-messages"
-import { MediaRoom } from "@/components/media-room"
-import { db } from "@/lib/db"
-import { Edit, Hash, Trash, Lock } from "lucide-react"
-import { ActionTooltip } from "@/components/action-tooltip"
-import { MemberRole } from "@prisma/client"
-import { Content } from "next/font/google"
 import { ContentHeader } from "@/components/content/content-header"
-import { ScrollArea } from "@/components/ui/scroll-area"
-
 
 const ContentIdPage = async (props: {
   params: Promise<{ eventId: string; contentId: string }>
@@ -62,14 +55,19 @@ const ContentIdPage = async (props: {
     redirect("/")
   }
 
+  const hasImage =
+    content.imageUrl !== null && content.title !== "general"
+      ? content.imageUrl
+      : event.imageUrl
+
   return (
     <div
       // onClick={onClick}
       className='group/content px-0 md:px-2 py-2 rounded-md md:flex items-start justify-start gap-x-2 w-full mb-1'>
       <div className='w-full md:w-1/2'>
-        {content.imageUrl && (
+        {hasImage && (
           <Image
-            src={content.imageUrl}
+            src={hasImage}
             alt='Content Image'
             width={0}
             height={0}
@@ -82,11 +80,6 @@ const ContentIdPage = async (props: {
       <div className='w-full md:w-1/2 flex flex-col'>
         <ContentHeader content={content} member={member} event={event} />
         <div className='flex flex-col'>
-          {/* <ChatHeader
-            title={content.title}
-            eventId={content.eventId}
-            type='content'
-          /> */}
           <ChatMessages
             member={member}
             name={content.title}

@@ -27,11 +27,13 @@ import { Button } from "@/components/ui/button"
 import { FileUpload } from "@/components/file-upload"
 import { useRouter } from "next/navigation"
 import { useModal } from "@/hooks/use-modal-store"
+import { Textarea } from "../ui/textarea"
 
 const formSchema = z.object({
   title: z.string().min(1, {
     message: "Event name is required.",
   }),
+  description: z.string().optional(),
   imageUrl: z.string().min(1, {
     message: "Event image is required.",
   }),
@@ -48,6 +50,7 @@ export const EditEventModal = () => {
     resolver: zodResolver(formSchema),
     defaultValues: {
       title: "",
+      description: "",
       imageUrl: "",
     },
   })
@@ -55,6 +58,7 @@ export const EditEventModal = () => {
   useEffect(() => {
     if (event) {
       form.setValue("title", event.title)
+      form.setValue("description", event.description || "")
       form.setValue("imageUrl", event.imageUrl)
     }
   }, [event, form, isOpen])
@@ -83,33 +87,15 @@ export const EditEventModal = () => {
       <DialogContent className='bg-white text-black p-0 overflow-hidden'>
         <DialogHeader className='pt-8 px-6'>
           <DialogTitle className='text-2xl text-center font-bold'>
-            自定义您的服务器
+            编辑您的事件
           </DialogTitle>
           <DialogDescription className='text-center text-zinc-500'>
-            给服务器定义个性化的名称和图标。你以后还可以做修改。
+            给事件定义个性化的名称和图标。你以后还可以做修改。
           </DialogDescription>
         </DialogHeader>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-8'>
             <div className='space-y-8 px-6'>
-              <div className='flex items-center justify-center text-center'>
-                <FormField
-                  control={form.control}
-                  name='imageUrl'
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormControl>
-                        <FileUpload
-                          endpoint='eventImage'
-                          value={field.value}
-                          onChange={field.onChange}
-                        />
-                      </FormControl>
-                    </FormItem>
-                  )}
-                />
-              </div>
-
               <FormField
                 control={form.control}
                 name='title'
@@ -122,7 +108,7 @@ export const EditEventModal = () => {
                       <Input
                         disabled={isLoading}
                         className='bg-zinc-300/50 border-0 focus-visible:ring-0 text-black focus-visible:ring-offset-0'
-                        placeholder='输入服务器名称'
+                        placeholder='输入事件名称'
                         {...field}
                       />
                     </FormControl>
@@ -130,6 +116,46 @@ export const EditEventModal = () => {
                   </FormItem>
                 )}
               />
+              <FormField
+                control={form.control}
+                name='description'
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className='uppercase text-xs font-bold text-zinc-500 dark:text-secondary/70'>
+                      Description
+                    </FormLabel>
+                    <FormControl>
+                      <Textarea
+                        disabled={isLoading}
+                        className='bg-zinc-300/50 border-0 focus-visible:ring-0 text-black focus-visible:ring-offset-0'
+                        placeholder='Enter Description'
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <div className='flex items-center justify-center text-center'>
+                <FormField
+                  control={form.control}
+                  name='imageUrl'
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className='uppercase text-xs font-bold text-zinc-500 dark:text-secondary/70'>
+                        Image
+                      </FormLabel>
+                      <FormControl>
+                        <FileUpload
+                          endpoint='eventImage'
+                          value={field.value}
+                          onChange={field.onChange}
+                        />
+                      </FormControl>
+                    </FormItem>
+                  )}
+                />
+              </div>
             </div>
             <DialogFooter className='bg-gray-100 px-6 py-4'>
               <Button variant='default' disabled={isLoading}>

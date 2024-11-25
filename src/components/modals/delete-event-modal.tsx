@@ -45,13 +45,13 @@ export const DeleteEventModal = () => {
       <DialogContent className='bg-white text-black p-0 overflow-hidden'>
         <DialogHeader className='pt-8 px-6'>
           <DialogTitle className='text-2xl text-center font-bold'>
-            删除服务器
+            删除事件
           </DialogTitle>
           <DialogDescription className='text-center text-zinc-500'>
             确认要删除吗？ <br />
             <span className='text-indigo-500 font-semibold'>
               {event?.title}
-            </span>{" "}
+            </span>
             将被永久移除
           </DialogDescription>
         </DialogHeader>

@@ -26,11 +26,14 @@ import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { FileUpload } from "@/components/file-upload"
 import { useRouter } from "next/navigation"
+import { Textarea } from "../ui/textarea"
+import { useOrigin } from "@/hooks/use-origin"
 
 const formSchema = z.object({
   title: z.string().min(1, {
     message: "Event title is required.",
   }),
+  description: z.string().optional(),
   imageUrl: z.string().min(1, {
     message: "Event image is required.",
   }),
@@ -38,7 +41,6 @@ const formSchema = z.object({
 
 export const InitialModal = () => {
   const [isMounted, setIsMounted] = useState(false)
-
   const router = useRouter()
 
   useEffect(() => {
@@ -49,6 +51,7 @@ export const InitialModal = () => {
     resolver: zodResolver(formSchema),
     defaultValues: {
       title: "",
+      description: "",
       imageUrl: "",
     },
   })
@@ -60,8 +63,8 @@ export const InitialModal = () => {
       await axios.post("/api/events", values)
 
       form.reset()
-      router.push("/events")
-      // router.refresh()
+      // router.push(origin)
+      router.refresh()
       window.location.reload()
     } catch (error) {
       console.log(error)
@@ -80,30 +83,12 @@ export const InitialModal = () => {
             请添加一个事件
           </DialogTitle>
           <DialogDescription className='text-center text-zinc-500'>
-            给事件添加一个title和图片。你以后还可以做修改。
+            给事件添加一个title和图片。你以后还可以做修改。现在是你第一次来到这个网站，你必须创建一个自己的事件。如果你是通过邀请链接来到这个网站，创建事件后，你可以通过再次使用邀请链接来加入朋友的事件。
           </DialogDescription>
         </DialogHeader>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-8'>
             <div className='space-y-8 px-6'>
-              <div className='flex items-center justify-center text-center'>
-                <FormField
-                  control={form.control}
-                  name='imageUrl'
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormControl>
-                        <FileUpload
-                          endpoint='eventImage'
-                          value={field.value}
-                          onChange={field.onChange}
-                        />
-                      </FormControl>
-                    </FormItem>
-                  )}
-                />
-              </div>
-
               <FormField
                 control={form.control}
                 name='title'
@@ -124,6 +109,46 @@ export const InitialModal = () => {
                   </FormItem>
                 )}
               />
+              <FormField
+                control={form.control}
+                name='description'
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className='uppercase text-xs font-bold text-zinc-500 dark:text-secondary/70'>
+                      Description
+                    </FormLabel>
+                    <FormControl>
+                      <Textarea
+                        disabled={isLoading}
+                        className='bg-zinc-300/50 border-0 focus-visible:ring-0 text-black focus-visible:ring-offset-0'
+                        placeholder='Enter Description'
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <div className='flex items-center justify-center text-center'>
+                <FormField
+                  control={form.control}
+                  name='imageUrl'
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className='uppercase text-xs font-bold text-zinc-500 dark:text-secondary/70'>
+                        Image
+                      </FormLabel>
+                      <FormControl>
+                        <FileUpload
+                          endpoint='eventImage'
+                          value={field.value}
+                          onChange={field.onChange}
+                        />
+                      </FormControl>
+                    </FormItem>
+                  )}
+                />
+              </div>
             </div>
             <DialogFooter className='px-6 py-4'>
               <Button variant='default' disabled={isLoading}>

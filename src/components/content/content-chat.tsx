@@ -1,15 +1,13 @@
 "use client"
 
-import { Content, MemberRole, Event } from "@prisma/client"
-import { Edit, Hash, Lock, Mic, Trash, Video } from "lucide-react"
 import { useRouter } from "next/navigation"
+import Image from "next/image"
+import { Edit, Hash, Lock, Mic, Trash, Video } from "lucide-react"
+import { Content, MemberRole, Event } from "@prisma/client"
 
-import { cn } from "@/lib/utils"
 import { ActionTooltip } from "@/components/action-tooltip"
 import { ModalType, useModal } from "@/hooks/use-modal-store"
-import Image from "next/image"
-import { ImageSideChat } from "../event/image-side-messages"
-import { ScrollArea } from "../ui/scroll-area"
+import { EventSideMessages } from "@/components/event/event-side-messages"
 
 type EventContentProps = {
   content: Content
@@ -22,9 +20,9 @@ export const EventContent = ({ content, event, role }: EventContentProps) => {
   // const params = useParams()
   const router = useRouter()
 
-  const onClick = () => {
-    router.push(`/events/${event.id}/contents/${content.id}`)
-  }
+  // const onClick = () => {
+  //   router.push(`/events/${event.id}/contents/${content.id}`)
+  // }
 
   const onAction = (e: React.MouseEvent, action: ModalType) => {
     e.stopPropagation()
@@ -52,6 +50,7 @@ export const EventContent = ({ content, event, role }: EventContentProps) => {
           <p className='line-clamp-1 font-semibold text-sm text-zinc-500 group-hover:text-zinc-600 dark:text-zinc-400 dark:group-hover:text-zinc-300 transition'>
             {content.title}
           </p>
+
           {content.title !== "general" && role !== MemberRole.GUEST && (
             <div className='ml-auto flex items-center gap-x-2'>
               <ActionTooltip label='编辑'>
@@ -68,10 +67,12 @@ export const EventContent = ({ content, event, role }: EventContentProps) => {
               </ActionTooltip>
             </div>
           )}
+
           {content.title === "general" && (
             <Lock className='ml-auto w-4 h-4 text-zinc-500 dark:text-zinc-400' />
           )}
         </div>
+
         {content.description && (
           <div className='text-xs h-auto mx-2 md:mx-0'>
             {content.description}
@@ -79,7 +80,7 @@ export const EventContent = ({ content, event, role }: EventContentProps) => {
         )}
 
         <div className='text-xs h-auto'>
-          <ImageSideChat eventId={event.id} contentId={content.id} />
+          <EventSideMessages eventId={event.id} contentId={content.id} />
         </div>
       </div>
     </div>

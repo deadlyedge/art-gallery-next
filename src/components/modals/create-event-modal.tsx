@@ -26,11 +26,13 @@ import { Button } from "@/components/ui/button"
 import { FileUpload } from "@/components/file-upload"
 import { useRouter } from "next/navigation"
 import { useModal } from "@/hooks/use-modal-store"
+import { Textarea } from "../ui/textarea"
 
 const formSchema = z.object({
   title: z.string().min(1, {
     message: "Must write a title.",
   }),
+  description: z.string().optional(),
   imageUrl: z.string().min(1, {
     message: "请上传图片",
   }),
@@ -46,6 +48,7 @@ export const CreateEventModal = () => {
     resolver: zodResolver(formSchema),
     defaultValues: {
       title: "",
+      description: "",
       imageUrl: "",
     },
   })
@@ -83,24 +86,6 @@ export const CreateEventModal = () => {
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-8'>
             <div className='space-y-8 px-6'>
-              <div className='flex items-center justify-center text-center'>
-                <FormField
-                  control={form.control}
-                  name='imageUrl'
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormControl>
-                        <FileUpload
-                          endpoint='eventImage'
-                          value={field.value}
-                          onChange={field.onChange}
-                        />
-                      </FormControl>
-                    </FormItem>
-                  )}
-                />
-              </div>
-
               <FormField
                 control={form.control}
                 name='title'
@@ -121,6 +106,46 @@ export const CreateEventModal = () => {
                   </FormItem>
                 )}
               />
+              <FormField
+                control={form.control}
+                name='description'
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className='uppercase text-xs font-bold text-zinc-500 dark:text-secondary/70'>
+                      Description
+                    </FormLabel>
+                    <FormControl>
+                      <Textarea
+                        disabled={isLoading}
+                        className='bg-zinc-300/50 border-0 focus-visible:ring-0 text-black focus-visible:ring-offset-0'
+                        placeholder='Enter Description'
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <div className='flex items-center justify-center text-center'>
+                <FormField
+                  control={form.control}
+                  name='imageUrl'
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className='uppercase text-xs font-bold text-zinc-500 dark:text-secondary/70'>
+                        Image
+                      </FormLabel>
+                      <FormControl>
+                        <FileUpload
+                          endpoint='eventImage'
+                          value={field.value}
+                          onChange={field.onChange}
+                        />
+                      </FormControl>
+                    </FormItem>
+                  )}
+                />
+              </div>
             </div>
             <DialogFooter className='bg-gray-100 px-6 py-4'>
               <Button variant='default' disabled={isLoading}>

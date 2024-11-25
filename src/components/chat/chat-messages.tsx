@@ -59,13 +59,13 @@ export const ChatMessages = ({
       paramValue,
     })
   useChatSocket({ queryKey, addKey, updateKey })
-  useChatScroll({
-    chatRef,
-    bottomRef,
-    loadMore: fetchNextPage,
-    shouldLoadMore: !isFetchingNextPage && !!hasNextPage,
-    count: data?.pages?.[0]?.items?.length ?? 0,
-  })
+  // useChatScroll({
+  //   chatRef,
+  //   bottomRef,
+  //   loadMore: fetchNextPage,
+  //   shouldLoadMore: !isFetchingNextPage && !!hasNextPage,
+  //   count: data?.pages?.[0]?.items?.length ?? 0,
+  // })
 
   if (status === "pending") {
     return (

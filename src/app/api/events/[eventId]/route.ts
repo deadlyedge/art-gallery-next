@@ -36,7 +36,7 @@ export async function PATCH(
   const params = await props.params
   try {
     const profile = await currentProfile()
-    const { title, imageUrl } = await req.json()
+    const { title, description, imageUrl } = await req.json()
 
     if (!profile) {
       return new NextResponse("Unauthorized", { status: 401 })
@@ -49,6 +49,7 @@ export async function PATCH(
       },
       data: {
         title,
+        description,
         imageUrl,
       },
     })

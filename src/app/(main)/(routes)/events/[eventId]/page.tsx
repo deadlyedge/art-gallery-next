@@ -15,7 +15,7 @@ import { currentProfile } from "@/lib/current-profile"
 import { db } from "@/lib/db"
 
 import { EventHeader } from "@/components/event/event-header"
-import { EventSearch } from "@/components/event/event-search"
+// import { EventSearch } from "@/components/event/event-search"
 import { EventSection } from "@/components/event/event-section"
 import { EventContent } from "@/components/event/event-content"
 import { EventMember } from "@/components/event/event-member"
@@ -83,50 +83,64 @@ const EventContentsPage = async (props: {
 
   return (
     <div className='flex flex-col h-full'>
-      {/* <Suspense fallback={<Loading />}> */}
-      <div className='sticky top-0 z-10 bg-black/40 flex items-center justify-center w-full h-10 gap-2 text-foreground/50 mb-2'>
-        <EventHeader event={event} role={role} />
-        <div className='text-xs'>{event.createdAt.toLocaleString()}</div>
-        <div className='text-xs'>by {profile.name}</div>
-      </div>
-      <ScrollArea className='flex-1 px-0 md:px-3'>
-        {!!members?.length && (
-          <div className='mb-2'>
-            <EventSection
-              sectionType='members'
-              role={role}
-              label='Members'
-              event={event}
-            />
-            <div className='space-y-[2px]'>
-              {members.map((member) => (
-                <EventMember key={member.id} member={member} event={event} />
-              ))}
+      <Suspense fallback={<Loading />}>
+        <EventHeader event={event} role={role} profileName={profile.name} />
+        <div className='flex-1 px-0 md:px-3'>
+          {event?.description && (
+            <div className='mb-2'>
+              <span className='text-xs uppercase font-semibold'>
+                description:
+              </span>{" "}
+              <span>{event.description}</span>
             </div>
-          </div>
-        )}
-        {!!event?.contents.length && (
-          <div className='mb-2'>
-            <EventSection
-              sectionType='contents'
-              // contentType={ContentType.TEXT}
-              role={role}
-              label='Contents'
-            />
-            <div className='space-y-[2px]'>
-              {event.contents.map((content) => (
-                <EventContent
-                  key={content.id}
-                  content={content}
-                  role={role}
-                  event={event}
-                />
-              ))}
+          )}
+
+          <Separator />
+
+          {!!members?.length && (
+            <div className='mb-2'>
+              <EventSection
+                sectionType='members'
+                role={role}
+                label='Members'
+                event={event}
+              />
+              <div className='space-y-[2px]'>
+                {members.map((member) => (
+                  <EventMember key={member.id} member={member} event={event} />
+                ))}
+              </div>
+              <Separator />
             </div>
-          </div>
-        )}
-      </ScrollArea>
-      {/* </Suspense> */}
+          )}
+
+          {!!event?.contents.length && (
+            <div className='mb-2'>
+              <EventSection
+                sectionType='contents'
+                // contentType={ContentType.TEXT}
+                role={role}
+                label='Contents'
+              />
+              <div className='space-y-[2px]'>
+
+                {event.contents.map((content) => (
+                  <>
+                    <EventContent
+                      key={content.id}
+                      content={content}
+                      role={role}
+                      event={event}
+                    />
+                    <Separator key={content.id} />
+                  </>
+                ))}
+
+              </div>
+            </div>
+          )}
+        </div>
+      </Suspense>
     </div>
   )
 }

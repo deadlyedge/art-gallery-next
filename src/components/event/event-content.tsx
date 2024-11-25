@@ -8,8 +8,7 @@ import { cn } from "@/lib/utils"
 import { ActionTooltip } from "@/components/action-tooltip"
 import { ModalType, useModal } from "@/hooks/use-modal-store"
 import Image from "next/image"
-import { ImageSideChat } from "./image-side-messages"
-import { ScrollArea } from "../ui/scroll-area"
+import { EventSideMessages } from "./event-side-messages"
 
 type EventContentProps = {
   content: Content
@@ -31,14 +30,20 @@ export const EventContent = ({ content, event, role }: EventContentProps) => {
     onOpen(action, { content, event })
   }
 
+  const hasImage =
+    content.imageUrl !== null && content.title !== "general"
+      ? content.imageUrl
+      : event.imageUrl
+
   return (
     <div
+      key={content.id}
       onClick={onClick}
-      className='group/content px-0 md:px-2 py-2 rounded-md md:flex items-start justify-start gap-x-2 w-full mb-1'>
+      className='group/content px-0 md:px-2 py-2 rounded-md md:flex items-start justify-start gap-x-2 w-full mb-1 cursor-pointer'>
       <div className='w-full md:w-1/2'>
-        {content.imageUrl && (
+        {hasImage && (
           <Image
-            src={content.imageUrl}
+            src={hasImage}
             alt='Content Image'
             width={0}
             height={0}
@@ -81,7 +86,7 @@ export const EventContent = ({ content, event, role }: EventContentProps) => {
         )}
 
         <div className='text-xs h-auto'>
-          <ImageSideChat eventId={event.id} contentId={content.id} />
+          <EventSideMessages eventId={event.id} contentId={content.id} />
         </div>
       </div>
     </div>

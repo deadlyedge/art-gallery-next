@@ -23,10 +23,11 @@ model Profile {
 }
 
 model Event {
-  id         String @id @default(cuid())
-  title      String
-  imageUrl   String @db.Text
-  inviteCode String @unique
+  id          String  @id @default(cuid())
+  title       String
+  imageUrl    String  @db.Text
+  description String? @db.Text
+  inviteCode  String  @unique
 
   profileId String
   profile   Profile @relation(fields: [profileId], references: [id], onDelete: Cascade)
@@ -75,10 +76,10 @@ enum ContentType {
 }
 
 model Content {
-  id         String      @id @default(cuid())
-  title      String
-  type       ContentType @default(IMAGE)
-  imageUrl   String?     @db.Text
+  id          String      @id @default(cuid())
+  title       String
+  type        ContentType @default(IMAGE)
+  imageUrl    String?     @db.Text
   description String?     @db.Text
 
   profileId String
@@ -97,8 +98,8 @@ model Content {
 }
 
 model Message {
-  id   String @id @default(cuid())
-  text String @db.Text
+  id      String  @id @default(cuid())
+  text    String  @db.Text
   fileUrl String? @db.Text
 
   memberId String

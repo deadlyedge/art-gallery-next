@@ -71,7 +71,7 @@ export const EditContentModal = () => {
   useEffect(() => {
     if (content) {
       form.setValue("title", content.title)
-      form.setValue("description", content.description as string)
+      form.setValue("description", content.description || "")
       form.setValue("imageUrl", content.imageUrl || "")
     }
   }, [form, content, isOpen])

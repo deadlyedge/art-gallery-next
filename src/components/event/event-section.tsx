@@ -23,15 +23,13 @@ export const EventSection = ({
   event,
 }: EventSectionProps) => {
   const { onOpen } = useModal()
-  const contentType = 'IMAGE'
+  const contentType = "IMAGE"
 
   return (
     <div className='flex items-center justify-between py-2 px-2 md:px-0'>
-      <p className='text-xs uppercase font-semibold'>
-        {label}
-      </p>
+      <p className='text-xs uppercase font-semibold'>{label}</p>
       {role !== MemberRole.GUEST && sectionType === "contents" && (
-        <ActionTooltip label='创建频道' side='top'>
+        <ActionTooltip label='添加内容' side='top'>
           <button
             onClick={() => onOpen("createContent", { contentType })}
             className='text-zinc-500 hover:text-zinc-600 dark:text-zinc-400 dark:hover:text-zinc-300 transition'>
