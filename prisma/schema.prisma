@@ -81,6 +81,7 @@ model Content {
   type        ContentType @default(IMAGE)
   imageUrl    String?     @db.Text
   description String?     @db.Text
+  isPublic    Boolean?     @default(false)
 
   profileId String
   profile   Profile @relation(fields: [profileId], references: [id], onDelete: Cascade)

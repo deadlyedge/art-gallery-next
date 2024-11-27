@@ -18,6 +18,7 @@ import {
 import {
   Form,
   FormControl,
+  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -38,6 +39,8 @@ import { useEffect } from "react"
 import { FileUpload } from "../file-upload"
 import { Description } from "@radix-ui/react-dialog"
 import { Textarea } from "../ui/textarea"
+import Link from "next/link"
+import { Checkbox } from "../ui/checkbox"
 
 const formSchema = z.object({
   title: z
@@ -51,6 +54,7 @@ const formSchema = z.object({
   // type: z.nativeEnum(ContentType),
   description: z.string().optional(),
   imageUrl: z.string().optional(),
+  isPublic: z.boolean().default(false),
 })
 
 export const CreateContentModal = () => {
@@ -68,6 +72,7 @@ export const CreateContentModal = () => {
       // type: contentType || ContentType.IMAGE,
       description: "",
       imageUrl: imageUrl || "",
+      isPublic: false,
     },
   })
 
@@ -184,7 +189,30 @@ export const CreateContentModal = () => {
                 />
               </div>
             </div>
-            <DialogFooter className='bg-gray-100 px-6 py-2'>
+            <DialogFooter className='bg-gray-100 px-6 py-4'>
+              <FormField
+                control={form.control}
+                name='isPublic'
+                render={({ field }) => (
+                  <FormItem className='rounded-md flex items-center'>
+                    <FormControl>
+                      <Checkbox
+                        checked={field.value}
+                        onCheckedChange={field.onChange}
+                        className="w-5 h-5 mr-1"
+                      />
+                    </FormControl>
+                      <FormLabel className="pb-1.5">
+                        是否希望此内容和您的名字一起显示在首页
+                      </FormLabel>
+                      {/* <FormDescription>
+                        You can manage your mobile notifications in the{" "}
+                        <Link href='/examples/forms'>mobile settings</Link>{" "}
+                        page.
+                      </FormDescription> */}
+                  </FormItem>
+                )}
+              />
               <Button variant='default' disabled={isLoading}>
                 创建
               </Button>

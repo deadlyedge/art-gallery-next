@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server"
-import { MemberRole } from "@prisma/client"
+import { MemberRole, Content } from "@prisma/client"
 
 import { currentProfile } from "@/lib/current-profile"
 import { db } from "@/lib/db"
@@ -7,8 +7,8 @@ import { db } from "@/lib/db"
 export async function POST(req: Request) {
   try {
     const profile = await currentProfile()
-    const { title, imageUrl, description } = await req.json()
-    const type = 'IMAGE'
+    const { title, imageUrl, description, isPublic } = await req.json()
+    const type = "IMAGE"
 
     const { searchParams } = new URL(req.url)
     const eventId = searchParams.get("eventId")
@@ -45,6 +45,7 @@ export async function POST(req: Request) {
             type,
             imageUrl,
             description,
+            isPublic,
           },
         },
       },
@@ -53,6 +54,36 @@ export async function POST(req: Request) {
     return NextResponse.json(event)
   } catch (error) {
     console.log("CHANNELS_POST", error)
+    return new NextResponse("Internal Error", { status: 500 })
+  }
+}
+
+const CONTENTS_BATCH = 20
+
+export async function GET(req: Request) {
+  try {
+    // let contents: Content[] = []
+
+    const contents = await db.content.findMany({
+      take: CONTENTS_BATCH,
+      where: {
+        isPublic: true,
+      },
+      include: {
+        profile: true,
+      },
+    })
+    function getRandomElements(arr: Array<any>, count: number): Array<any> {
+      return arr.sort(() => Math.random() - 0.5).slice(0, count)
+    }
+
+    let randomContents = getRandomElements(contents, 5)
+
+    return NextResponse.json({
+      randomContents,
+    })
+  } catch (error) {
+    console.log("[CONTENTS_GET]", error)
     return new NextResponse("Internal Error", { status: 500 })
   }
 }

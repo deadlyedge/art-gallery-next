@@ -37,6 +37,7 @@ import {
 import { useEffect } from "react"
 import { FileUpload } from "../file-upload"
 import { Textarea } from "../ui/textarea"
+import { Checkbox } from "../ui/checkbox"
 
 const formSchema = z.object({
   title: z
@@ -50,6 +51,7 @@ const formSchema = z.object({
   // type: z.nativeEnum(ContentType),
   description: z.string().optional(),
   imageUrl: z.string().optional(),
+  isPublic: z.boolean().default(false),
 })
 
 export const EditContentModal = () => {
@@ -65,6 +67,7 @@ export const EditContentModal = () => {
       title: "",
       description: content?.description || "",
       imageUrl: content?.imageUrl || "",
+      isPublic: content?.isPublic || false,
     },
   })
 
@@ -73,6 +76,7 @@ export const EditContentModal = () => {
       form.setValue("title", content.title)
       form.setValue("description", content.description || "")
       form.setValue("imageUrl", content.imageUrl || "")
+      form.setValue("isPublic", content.isPublic || false)
     }
   }, [form, content, isOpen])
 
@@ -177,6 +181,29 @@ export const EditContentModal = () => {
               </div>
             </div>
             <DialogFooter className='bg-gray-100 px-6 py-4'>
+              <FormField
+                control={form.control}
+                name='isPublic'
+                render={({ field }) => (
+                  <FormItem className='rounded-md flex items-center'>
+                    <FormControl>
+                      <Checkbox
+                        checked={field.value}
+                        onCheckedChange={field.onChange}
+                        className='w-5 h-5 mr-1'
+                      />
+                    </FormControl>
+                    <FormLabel className='pb-1.5'>
+                      是否希望此内容和您的名字一起显示在首页
+                    </FormLabel>
+                    {/* <FormDescription>
+                        You can manage your mobile notifications in the{" "}
+                        <Link href='/examples/forms'>mobile settings</Link>{" "}
+                        page.
+                      </FormDescription> */}
+                  </FormItem>
+                )}
+              />
               <Button variant='default' disabled={isLoading}>
                 保存
               </Button>

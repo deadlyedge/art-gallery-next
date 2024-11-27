@@ -65,7 +65,7 @@ export async function PATCH(
 ) {
   try {
     const profile = await currentProfile()
-    const { title, type, imageUrl, description } = await req.json()
+    const { title, type, imageUrl, description, isPublic } = await req.json()
     const { searchParams } = new URL(req.url)
 
     const eventId = searchParams.get("eventId")
@@ -114,6 +114,7 @@ export async function PATCH(
               type,
               imageUrl,
               description,
+              isPublic,
             },
           },
         },
