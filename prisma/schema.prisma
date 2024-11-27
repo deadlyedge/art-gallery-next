@@ -12,7 +12,7 @@ model Profile {
   userId   String @unique
   name     String
   imageUrl String @db.Text
-  email    String @db.Text
+  email    String @db.Text @unique
 
   events   Event[]
   members  Member[]

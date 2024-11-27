@@ -40,7 +40,7 @@ export default function RootLayout({
       appearance={{ baseTheme: dark }}
       signInUrl='/sign-in'
       signUpUrl='/sign-up'
-      signInFallbackRedirectUrl='/setup'
+      signInFallbackRedirectUrl='/'
       signUpFallbackRedirectUrl='/'
       afterSignOutUrl='/'>
       <html lang='en' suppressHydrationWarning>

@@ -198,14 +198,15 @@ export const CreateContentModal = () => {
                     <FormControl>
                       <Checkbox
                         checked={field.value}
+                        disabled={!form.getValues("imageUrl")}
                         onCheckedChange={field.onChange}
-                        className="w-5 h-5 mr-1"
+                        className='w-5 h-5 mr-1'
                       />
                     </FormControl>
-                      <FormLabel className="pb-1.5">
-                        是否希望此内容和您的名字一起显示在首页
-                      </FormLabel>
-                      {/* <FormDescription>
+                    <FormLabel className='pb-1.5'>
+                      是否希望此内容和您的名字一起显示在首页
+                    </FormLabel>
+                    {/* <FormDescription>
                         You can manage your mobile notifications in the{" "}
                         <Link href='/examples/forms'>mobile settings</Link>{" "}
                         page.

@@ -76,9 +76,12 @@ export const EditContentModal = () => {
       form.setValue("title", content.title)
       form.setValue("description", content.description || "")
       form.setValue("imageUrl", content.imageUrl || "")
-      form.setValue("isPublic", content.isPublic || false)
+      form.setValue(
+        "isPublic",
+        (!!content.imageUrl && content.isPublic) || false
+      )
     }
-  }, [form, content, isOpen])
+  }, [form, content, content?.imageUrl, isOpen])
 
   const isLoading = form.formState.isSubmitting
 
@@ -189,6 +192,7 @@ export const EditContentModal = () => {
                     <FormControl>
                       <Checkbox
                         checked={field.value}
+                        disabled={!form.getValues("imageUrl")}
                         onCheckedChange={field.onChange}
                         className='w-5 h-5 mr-1'
                       />

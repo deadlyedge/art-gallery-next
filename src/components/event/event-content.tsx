@@ -1,7 +1,16 @@
 "use client"
 
 import { Content, MemberRole, Event } from "@prisma/client"
-import { Edit, Hash, Lock, Mic, Trash, Video } from "lucide-react"
+import {
+  Edit,
+  Eye,
+  EyeClosed,
+  Hash,
+  Lock,
+  Mic,
+  Trash,
+  Video,
+} from "lucide-react"
 import { useRouter } from "next/navigation"
 
 import { cn } from "@/lib/utils"
@@ -59,6 +68,11 @@ export const EventContent = ({ content, event, role }: EventContentProps) => {
           <p className='line-clamp-1 font-semibold text-sm text-zinc-500 group-hover:text-zinc-600 dark:text-zinc-400 dark:group-hover:text-zinc-300 transition'>
             {content.title}
           </p>
+          {content.isPublic ? (
+            <Eye className='ml-10 w-4 h-4 text-zinc-500 dark:text-zinc-400' />
+          ) : (
+            <EyeClosed className='ml-10 w-4 h-4 text-zinc-500 dark:text-zinc-400' />
+          )}
           {content.title !== "general" && role !== MemberRole.GUEST && (
             <div className='ml-auto flex items-center gap-x-2'>
               <ActionTooltip label='编辑'>

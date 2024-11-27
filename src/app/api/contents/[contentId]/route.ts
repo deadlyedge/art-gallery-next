@@ -114,7 +114,7 @@ export async function PATCH(
               type,
               imageUrl,
               description,
-              isPublic,
+              isPublic: !!imageUrl && isPublic,
             },
           },
         },

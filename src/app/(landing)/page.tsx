@@ -13,31 +13,30 @@ import { InitialModal } from "@/components/modals/initial-modal"
 export default async function Home() {
   const { userId } = await auth()
 
-  if (!userId) {
-    return (
-      <main className='m-0'>
-        <LandingTopbar />
-        <LandingSlidePhoto />
-        <LandingHero />
-        <LandingContent />
-        <Bottom />
-      </main>
-    )
-  }
-  const profile = await initialProfile()
+  let gotoEventClick = ""
+  if (userId) {
+    const profile = await initialProfile()
 
-  const event = await db.event.findFirst({
-    where: {
-      members: {
-        some: {
-          profileId: profile.id,
+    const event = await db.event.findFirst({
+      where: {
+        members: {
+          some: {
+            profileId: profile.id,
+          },
         },
       },
-    },
-  })
+    })
 
-  if (event) {
-    return redirect(`/events/${event.id}`)
+    gotoEventClick = event ? `/events/${event.id}` : "/setup"
   }
-  return <InitialModal />
+
+  return (
+    <main className='m-0'>
+      <LandingTopbar gotoEventClick={gotoEventClick} />
+      <LandingSlidePhoto />
+      <LandingHero />
+      <LandingContent />
+      <Bottom />
+    </main>
+  )
 }

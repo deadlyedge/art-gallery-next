@@ -49,7 +49,7 @@ const LandingSlidePhoto = () => {
           }),
         ]}>
         <CarouselContent className='w-[600px] h-[320px] md:w-[800px] md:h-[500px] lg:w-[1200px] lg:h-[750px] gap-2'>
-          {contents ? (
+          {contents.length > 0 ? (
             contents.map(
               (content) =>
                 content.imageUrl && (
@@ -61,9 +61,10 @@ const LandingSlidePhoto = () => {
                       className='object-cover'
                     />
                     <div className='absolute z-auto bottom-0 h-40 w-full bg-gradient-to-t from-black/70 to-transparent'>
-                      <p className='absolute right-0 bottom-0 mr-8 mb-2 drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)]'>
-                        presented by: {content.profile.name}
-                      </p>
+                      <div className='absolute right-0 bottom-0 mr-8 mb-2 drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)] text-sm'>
+                        <p className="text-lg"># {content.title}</p>
+                        <p>presented by: {content.profile.name}</p>
+                      </div>
                     </div>
                   </CarouselItem>
                 )
