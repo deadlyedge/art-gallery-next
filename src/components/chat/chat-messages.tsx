@@ -105,7 +105,7 @@ export const ChatMessages = ({
       )}
       <div className='flex flex-col-reverse mt-auto'>
         {data?.pages?.map((group, i) => (
-          <Fragment key={i}>
+          <Fragment key={queryKey}>
             {group.items.map((message: MessageWithMemberWithProfile) => (
               <ChatItem
                 key={message.id}

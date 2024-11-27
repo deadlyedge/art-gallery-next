@@ -76,7 +76,17 @@ export const EventContent = ({ content, event, role }: EventContentProps) => {
             </div>
           )}
           {content.title === "general" && (
-            <Lock className='ml-auto w-4 h-4 text-zinc-500 dark:text-zinc-400' />
+            <div className='ml-auto flex items-center gap-x-2'>
+              <ActionTooltip label='编辑'>
+                <Edit
+                  onClick={(e) => onAction(e, "editEvent")}
+                  className='hidden group-hover/content:block w-4 h-4 text-zinc-500 hover:text-zinc-600 dark:text-zinc-400 dark:hover:text-zinc-300 transition'
+                />
+              </ActionTooltip>
+              <ActionTooltip label='事件内容不能从这里删除'>
+                <Lock className='ml-auto w-4 h-4 text-zinc-500 dark:text-zinc-400' />
+              </ActionTooltip>
+            </div>
           )}
         </div>
         {content.description && (

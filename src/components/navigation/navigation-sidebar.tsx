@@ -47,7 +47,7 @@ export const NavigationSidebar = async () => {
       },
     },
   })
- 
+
   return (
     <Sidebar className='group/logo'>
       <SidebarHeader className='h-10 pt-1.5'>
@@ -66,15 +66,16 @@ export const NavigationSidebar = async () => {
           <SidebarGroupContent>
             <SidebarMenu>
               {events.map((event) => (
-                <SidebarMenuItem key={event.id}>
-                  <div key={event.id} className='mb-4'>
-                    <NavigationItem
-                      id={event.id}
-                      title={event.title}
-                      imageUrl={event.imageUrl}
-                    />
-                    <SidebarEventMenu key={event.id} />
-                  </div>
+                <SidebarMenuItem key={event.id} className='mb-4'>
+                  {/* <div key={event.id} className='mb-4'> */}
+                  <NavigationItem
+                    id={event.id}
+                    title={event.title}
+                    imageUrl={event.imageUrl}
+                    key={event.id}
+                  />
+                  {/* <SidebarEventMenu key={event.id} />
+                  </div> */}
                 </SidebarMenuItem>
               ))}
             </SidebarMenu>
@@ -93,7 +94,7 @@ export const NavigationSidebar = async () => {
             />
           </SidebarMenuItem>
           <SidebarMenuItem>
-            <SidebarSearch data={events}/>
+            <SidebarSearch data={events} />
           </SidebarMenuItem>
           {/* <SidebarMenuItem>
             <ModeToggle />
