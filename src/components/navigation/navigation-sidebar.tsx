@@ -19,17 +19,22 @@ import {
 import Image from "next/image"
 import { NavigationItem } from "./navigation-item"
 import SidebarEventMenu from "./sidebar-event-menu"
-import { ModeToggle } from "../mode-toggle"
 import LogoMotion from "../logo-motion"
 import { NavigationAction } from "./navigation-action"
 import { SidebarSearch } from "./sidebar-search"
+import { auth, currentUser } from "@clerk/nextjs/server"
+import { updateProfile } from "@/lib/update-profile"
 
 export const NavigationSidebar = async () => {
   const profile = await currentProfile()
+  const user = await currentUser()
 
   if (!profile) {
     return redirect("/sign-in")
   }
+
+  if (user?.fullName !== profile.name || user.imageUrl !== profile.imageUrl)
+    updateProfile()
 
   const events = await db.event.findMany({
     where: {

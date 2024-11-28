@@ -1,21 +1,29 @@
 import { LandingTopbar } from "@/components/landing/topbar"
 import { Bottom } from "@/components/landing/bottom"
-import { Contents } from "@/components/contents"
 import LandingSlidePhoto from "@/components/landing/slide-photo"
 import { LandingHero } from "@/components/landing/hero"
 import { LandingContent } from "@/components/landing/content"
 import { initialProfile } from "@/lib/initial-profile"
 import { db } from "@/lib/db"
 import { redirect } from "next/navigation"
-import { auth } from "@clerk/nextjs/server"
+import { auth, currentUser } from "@clerk/nextjs/server"
 import { InitialModal } from "@/components/modals/initial-modal"
+import { updateProfile } from "@/lib/update-profile"
 
 export default async function Home() {
   const { userId } = await auth()
 
-  let gotoEventClick = ""
+  let gotoEventClick = "/setup"
   if (userId) {
     const profile = await initialProfile()
+    const user = await currentUser()
+
+    if (!profile) {
+      return redirect("/setup")
+    }
+
+    if (user?.fullName !== profile.name || user.imageUrl !== profile.imageUrl)
+      updateProfile()
 
     const event = await db.event.findFirst({
       where: {
@@ -34,7 +42,7 @@ export default async function Home() {
     <main className='m-0'>
       <LandingTopbar gotoEventClick={gotoEventClick} />
       <LandingSlidePhoto />
-      <LandingHero />
+      <LandingHero gotoEventClick={gotoEventClick} />
       <LandingContent />
       <Bottom />
     </main>
