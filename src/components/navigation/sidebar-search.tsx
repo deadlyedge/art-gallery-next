@@ -2,7 +2,7 @@
 
 import { Hash, Search } from "lucide-react"
 import { useEffect, useState } from "react"
-import { useParams, useRouter } from "next/navigation"
+import { useRouter } from "next/navigation"
 
 import {
   CommandDialog,
@@ -30,7 +30,7 @@ type EventSearchProps = {
 export const SidebarSearch = ({ data }: EventSearchProps) => {
   const [open, setOpen] = useState(false)
   const router = useRouter()
-  const params = useParams()
+  // const params = useParams()
 
   useEffect(() => {
     const down = (e: KeyboardEvent) => {

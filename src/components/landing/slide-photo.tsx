@@ -5,8 +5,8 @@ import {
   Carousel,
   CarouselContent,
   CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
+  // CarouselNext,
+  // CarouselPrevious,
 } from "../ui/carousel"
 import Autoplay from "embla-carousel-autoplay"
 import { useEffect, useState } from "react"

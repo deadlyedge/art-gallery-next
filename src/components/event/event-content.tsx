@@ -7,13 +7,10 @@ import {
   EyeClosed,
   Hash,
   Lock,
-  Mic,
   Trash,
-  Video,
 } from "lucide-react"
 import { useRouter } from "next/navigation"
 
-import { cn } from "@/lib/utils"
 import { ActionTooltip } from "@/components/action-tooltip"
 import { ModalType, useModal } from "@/hooks/use-modal-store"
 import Image from "next/image"

@@ -1,6 +1,6 @@
 "use client"
 
-import { format, formatDistanceToNow } from "date-fns"
+import { formatDistanceToNow } from "date-fns"
 import { Member, Message, Profile } from "@prisma/client"
 import { Loader2, ServerCrash } from "lucide-react"
 
@@ -37,7 +37,7 @@ export const ShowMessages = ({
   socketQuery,
   paramKey,
   paramValue,
-  type,
+  // type,
 }: ChatMessagesProps) => {
   const queryKey = `chat:${chatId}`
 

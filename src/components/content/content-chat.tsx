@@ -1,8 +1,8 @@
 "use client"
 
-import { useRouter } from "next/navigation"
+// import { useRouter } from "next/navigation"
 import Image from "next/image"
-import { Edit, Hash, Lock, Mic, Trash, Video } from "lucide-react"
+import { Edit, Hash, Lock, Trash } from "lucide-react"
 import { Content, MemberRole, Event } from "@prisma/client"
 
 import { ActionTooltip } from "@/components/action-tooltip"
@@ -18,7 +18,7 @@ type EventContentProps = {
 export const EventContent = ({ content, event, role }: EventContentProps) => {
   const { onOpen } = useModal()
   // const params = useParams()
-  const router = useRouter()
+  // const router = useRouter()
 
   // const onClick = () => {
   //   router.push(`/events/${event.id}/contents/${content.id}`)

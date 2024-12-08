@@ -1,8 +1,6 @@
 import { Cable, Codepen } from "lucide-react"
 
-type BottomProps = {}
-
-export const Bottom = ({}: BottomProps) => {
+export const Bottom = () => {
   return (
     <footer className='w-full p-2'>
       <span className='mr-0 text-xs'>

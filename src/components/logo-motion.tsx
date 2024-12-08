@@ -1,4 +1,5 @@
 import { cn } from "@/lib/utils"
+import Link from "next/link"
 
 type LogoMotionProps = {
   className?: string
@@ -57,7 +58,7 @@ const LogoMotion: React.FC<LogoMotionProps> = ({ className, size }) => {
   const { ga, a, nx, textSize } = marginClasses[size]
 
   return (
-    <a href='/' className={cn(className, "group/logo block ml-2", textSize)}>
+    <Link href='/' className={cn(className, "group/logo block ml-2", textSize)}>
       <div className='flex items-center'>
         <MarginFade text='a' hoverText='rt' textSize={textSize} margin={a} />
         <MarginFade
@@ -68,7 +69,7 @@ const LogoMotion: React.FC<LogoMotionProps> = ({ className, size }) => {
         />
         <MarginFade text='nx' textSize={textSize} margin={nx} />
       </div>
-    </a>
+    </Link>
   )
 }
 

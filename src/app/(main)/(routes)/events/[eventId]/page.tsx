@@ -1,15 +1,15 @@
-import { ContentType, MemberRole } from "@prisma/client"
+// import { ContentType, MemberRole } from "@prisma/client"
 import { redirect } from "next/navigation"
-import {
-  Hash,
-  ImageIcon,
-  Mic,
-  ShieldAlert,
-  ShieldCheck,
-  Video,
-} from "lucide-react"
+// import {
+//   Hash,
+//   ImageIcon,
+//   Mic,
+//   ShieldAlert,
+//   ShieldCheck,
+//   Video,
+// } from "lucide-react"
 
-import { ScrollArea } from "@/components/ui/scroll-area"
+// import { ScrollArea } from "@/components/ui/scroll-area"
 import { Separator } from "@/components/ui/separator"
 import { currentProfile } from "@/lib/current-profile"
 import { db } from "@/lib/db"
@@ -22,19 +22,19 @@ import { EventMember } from "@/components/event/event-member"
 import { Suspense } from "react"
 import Loading from "./loading"
 
-const iconMap = {
-  [ContentType.TEXT]: <Hash className='mr-2 h-4 w-4' />,
-  [ContentType.IMAGE]: <ImageIcon className='mr-2 h-4 w-4' />,
-  [ContentType.VIDEO]: <Video className='mr-2 h-4 w-4' />,
-}
+// const iconMap = {
+//   [ContentType.TEXT]: <Hash className='mr-2 h-4 w-4' />,
+//   [ContentType.IMAGE]: <ImageIcon className='mr-2 h-4 w-4' />,
+//   [ContentType.VIDEO]: <Video className='mr-2 h-4 w-4' />,
+// }
 
-const roleIconMap = {
-  [MemberRole.GUEST]: null,
-  [MemberRole.MODERATOR]: (
-    <ShieldCheck className='h-4 w-4 mr-2 text-indigo-500' />
-  ),
-  [MemberRole.ADMIN]: <ShieldAlert className='h-4 w-4 mr-2 text-rose-500' />,
-}
+// const roleIconMap = {
+//   [MemberRole.GUEST]: null,
+//   [MemberRole.MODERATOR]: (
+//     <ShieldCheck className='h-4 w-4 mr-2 text-indigo-500' />
+//   ),
+//   [MemberRole.ADMIN]: <ShieldAlert className='h-4 w-4 mr-2 text-rose-500' />,
+// }
 
 const EventContentsPage = async (props: {
   params: Promise<{ eventId: string; contentTitle?: string }>
@@ -123,9 +123,8 @@ const EventContentsPage = async (props: {
                 label='Contents'
               />
               <div className='space-y-[2px]'>
-
                 {event.contents.map((content) => (
-                  <>
+                  <div key={content.id}>
                     <EventContent
                       key={content.id}
                       content={content}
@@ -133,9 +132,8 @@ const EventContentsPage = async (props: {
                       event={event}
                     />
                     <Separator key={content.id} />
-                  </>
+                  </div>
                 ))}
-
               </div>
             </div>
           )}

@@ -1,6 +1,6 @@
 "use client"
 
-import { ContentType, MemberRole } from "@prisma/client"
+import { MemberRole } from "@prisma/client"
 import { Plus, Settings } from "lucide-react"
 
 import { EventWithMembersWithProfiles } from "@/types"

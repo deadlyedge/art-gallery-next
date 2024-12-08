@@ -1,4 +1,4 @@
-import { Hash } from "lucide-react"
+// import { Hash } from "lucide-react"
 
 type ChatWelcomeProps = {
   title: string

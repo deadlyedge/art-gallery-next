@@ -2,8 +2,6 @@
 
 import { Content, Member } from "@prisma/client"
 
-import { ChatHeader } from "@/components/chat/chat-header"
-import { ChatInput } from "@/components/chat/chat-input"
 import { ShowMessages } from "./show-messages"
 // import { MediaRoom } from "@/components/media-room"
 import axios from "axios"
@@ -27,7 +25,6 @@ export const EventSideMessages = ({
     const res = await axios.get(`/api/chat/${eventId}/${contentId}`)
     setContentAndMember(res.data)
   }
-
   useEffect(() => {
     fetchData()
   }, [])

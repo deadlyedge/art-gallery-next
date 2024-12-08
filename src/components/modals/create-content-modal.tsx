@@ -5,12 +5,11 @@ import axios from "axios"
 import * as z from "zod"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
-import { ContentType } from "@prisma/client"
+// import { ContentType } from "@prisma/client"
 
 import {
   Dialog,
   DialogContent,
-  DialogDescription,
   DialogFooter,
   DialogHeader,
   DialogTitle,
@@ -18,7 +17,6 @@ import {
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -28,18 +26,18 @@ import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { useParams, useRouter } from "next/navigation"
 import { useModal } from "@/hooks/use-modal-store"
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select"
-import { useEffect } from "react"
+// import {
+//   Select,
+//   SelectContent,
+//   SelectItem,
+//   SelectTrigger,
+//   SelectValue,
+// } from "@/components/ui/select"
+// import { useEffect } from "react"
 import { FileUpload } from "../file-upload"
-import { Description } from "@radix-ui/react-dialog"
+// import { Description } from "@radix-ui/react-dialog"
 import { Textarea } from "../ui/textarea"
-import Link from "next/link"
+// import Link from "next/link"
 import { Checkbox } from "../ui/checkbox"
 
 const formSchema = z.object({
@@ -63,7 +61,7 @@ export const CreateContentModal = () => {
   const params = useParams()
 
   const isModalOpen = isOpen && type === "createContent"
-  const { contentType, imageUrl } = data
+  const { imageUrl } = data
 
   const form = useForm({
     resolver: zodResolver(formSchema),

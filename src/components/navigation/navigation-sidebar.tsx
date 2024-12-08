@@ -13,16 +13,16 @@ import {
   SidebarGroupLabel,
   SidebarHeader,
   SidebarMenu,
-  SidebarMenuButton,
+  // SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar"
-import Image from "next/image"
+// import Image from "next/image"
 import { NavigationItem } from "./navigation-item"
-import SidebarEventMenu from "./sidebar-event-menu"
+// import SidebarEventMenu from "./sidebar-event-menu"
 import LogoMotion from "../logo-motion"
 import { NavigationAction } from "./navigation-action"
 import { SidebarSearch } from "./sidebar-search"
-import { auth, currentUser } from "@clerk/nextjs/server"
+import { currentUser } from "@clerk/nextjs/server"
 import { updateProfile } from "@/lib/update-profile"
 
 export const NavigationSidebar = async () => {

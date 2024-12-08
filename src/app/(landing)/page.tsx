@@ -7,7 +7,7 @@ import { initialProfile } from "@/lib/initial-profile"
 import { db } from "@/lib/db"
 import { redirect } from "next/navigation"
 import { auth, currentUser } from "@clerk/nextjs/server"
-import { InitialModal } from "@/components/modals/initial-modal"
+// import { InitialModal } from "@/components/modals/initial-modal"
 import { updateProfile } from "@/lib/update-profile"
 
 export default async function Home() {

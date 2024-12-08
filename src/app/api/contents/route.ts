@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server"
-import { MemberRole, Content } from "@prisma/client"
+import { MemberRole } from "@prisma/client"
 
 import { currentProfile } from "@/lib/current-profile"
 import { db } from "@/lib/db"
@@ -60,7 +60,7 @@ export async function POST(req: Request) {
 
 const CONTENTS_BATCH = 20
 
-export async function GET(req: Request) {
+export async function GET() {
   try {
     // let contents: Content[] = []
 
@@ -73,11 +73,11 @@ export async function GET(req: Request) {
         profile: true,
       },
     })
-    function getRandomElements(arr: Array<any>, count: number): Array<any> {
+    function getRandomElements<T>(arr: Array<T>, count: number): Array<T> {
       return arr.sort(() => Math.random() - 0.5).slice(0, count)
     }
 
-    let randomContents = getRandomElements(contents, 5)
+    const randomContents = getRandomElements(contents, 5)
 
     return NextResponse.json({
       randomContents,

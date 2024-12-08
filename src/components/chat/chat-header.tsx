@@ -14,7 +14,7 @@ type ChatHeaderProps = {
 }
 
 export const ChatHeader = ({
-  eventId,
+  // eventId,
   title,
   type,
   imageUrl,
