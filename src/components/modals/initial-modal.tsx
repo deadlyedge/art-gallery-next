@@ -82,7 +82,7 @@ export const InitialModal = () => {
           <DialogTitle className='text-2xl text-center font-bold'>
             请添加一个事件
           </DialogTitle>
-          <DialogDescription className='text-center text-zinc-500'>
+          <DialogDescription className='text-center'>
             给事件添加一个title和图片。你以后还可以做修改。现在是你第一次来到这个网站，你必须创建一个自己的事件。如果你是通过邀请链接来到这个网站，创建事件后，你可以通过再次使用邀请链接来加入朋友的事件。
           </DialogDescription>
         </DialogHeader>
@@ -94,13 +94,13 @@ export const InitialModal = () => {
                 name='title'
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className='uppercase text-xs font-bold text-zinc-500 dark:text-secondary/70'>
-                      Title
+                    <FormLabel className='uppercase text-xs font-bold text-primary/70'>
+                    Title
                     </FormLabel>
                     <FormControl>
                       <Input
                         disabled={isLoading}
-                        className='bg-zinc-300/50 border-0 focus-visible:ring-0 text-black focus-visible:ring-offset-0'
+                        className='border border-zinc-500 focus:bg-zinc-900/80 focus-visible:ring-0 focus-visible:ring-offset-0'
                         placeholder='Enter event name'
                         {...field}
                       />
@@ -114,13 +114,13 @@ export const InitialModal = () => {
                 name='description'
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className='uppercase text-xs font-bold text-zinc-500 dark:text-secondary/70'>
-                      Description
+                    <FormLabel className='uppercase text-xs font-bold text-primary/70'>
+                    Description
                     </FormLabel>
                     <FormControl>
                       <Textarea
                         disabled={isLoading}
-                        className='bg-zinc-300/50 border-0 focus-visible:ring-0 text-black focus-visible:ring-offset-0'
+                        className='border border-zinc-500 focus:bg-zinc-900/80 focus-visible:ring-0 focus-visible:ring-offset-0'
                         placeholder='Enter Description'
                         {...field}
                       />
@@ -135,8 +135,8 @@ export const InitialModal = () => {
                   name='imageUrl'
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className='uppercase text-xs font-bold text-zinc-500 dark:text-secondary/70'>
-                        Image
+                    <FormLabel className='uppercase text-xs font-bold text-primary/70'>
+                    Image
                       </FormLabel>
                       <FormControl>
                         <FileUpload

@@ -97,12 +97,12 @@ export const MembersModal = () => {
 
   return (
     <Dialog open={isModalOpen} onOpenChange={onClose}>
-      <DialogContent className='bg-white text-black overflow-hidden'>
+      <DialogContent className='overflow-hidden'>
         <DialogHeader className='pt-8 px-6'>
           <DialogTitle className='text-2xl text-center font-bold'>
             管理成员
           </DialogTitle>
-          <DialogDescription className='text-center text-zinc-500'>
+          <DialogDescription className='text-center'>
             {event?.members?.length} 名成员
           </DialogDescription>
         </DialogHeader>
@@ -115,14 +115,14 @@ export const MembersModal = () => {
                   {member.profile.name}
                   {roleIconMap[member.role]}
                 </div>
-                <p className='text-xs text-zinc-500'>{member.profile.email}</p>
+                <p className='text-xs'>{member.profile.email}</p>
               </div>
               {event.profileId !== member.profileId &&
                 loadingId !== member.id && (
                   <div className='ml-auto'>
                     <DropdownMenu>
                       <DropdownMenuTrigger>
-                        <MoreVertical className='h-4 w-4 text-zinc-500' />
+                        <MoreVertical className='h-4 w-4' />
                       </DropdownMenuTrigger>
                       <DropdownMenuContent side='left'>
                         <DropdownMenuSub>

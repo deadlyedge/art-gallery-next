@@ -42,25 +42,25 @@ export const LeaveEventModal = () => {
 
   return (
     <Dialog open={isModalOpen} onOpenChange={onClose}>
-      <DialogContent className='bg-white text-black p-0 overflow-hidden'>
+      <DialogContent className='p-0 overflow-hidden'>
         <DialogHeader className='pt-8 px-6'>
           <DialogTitle className='text-2xl text-center font-bold'>
             离开服务器
           </DialogTitle>
-          <DialogDescription className='text-center text-zinc-500'>
+          <DialogDescription className='text-center'>
             确定要离开{" "}
-            <span className='font-semibold text-indigo-500'>
+            <span className='font-semibold text-indigo-400'>
               {event?.title}
             </span>{" "}
             吗？
           </DialogDescription>
         </DialogHeader>
-        <DialogFooter className='bg-gray-100 px-6 py-4'>
+        <DialogFooter className='px-6 py-4'>
           <div className='flex items-center justify-between w-full'>
-            <Button disabled={isLoading} onClick={onClose} variant='ghost'>
+            <Button disabled={isLoading} onClick={onClose} variant='secondary'>
               留下
             </Button>
-            <Button disabled={isLoading} variant='default' onClick={onClick}>
+            <Button disabled={isLoading} variant='destructive' onClick={onClick}>
               离开
             </Button>
           </div>

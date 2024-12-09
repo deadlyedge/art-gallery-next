@@ -53,8 +53,8 @@ export const InviteModal = () => {
 
   return (
     <Dialog open={isModalOpen} onOpenChange={onClose}>
-      <DialogContent className='bg-white text-black p-0 overflow-hidden'>
-        <DialogDescription className='pt-4 text-center text-zinc-500'>
+      <DialogContent className='p-0 overflow-hidden'>
+        <DialogDescription className='pt-4 text-center'>
           任何人都可以使用此链接加入服务器
         </DialogDescription>
 
@@ -64,13 +64,13 @@ export const InviteModal = () => {
           </DialogTitle>
         </DialogHeader>
         <div className='p-6'>
-          <Label className='uppercase text-xs font-bold text-zinc-500 dark:text-secondary/70'>
+          <Label className='uppercase text-xs font-bold'>
             邀请链接
           </Label>
           <div onClick={onCopy} className='flex items-center mt-2 gap-x-2'>
             <Input
               disabled={isLoading}
-              className='bg-zinc-300/50 border-0 focus-visible:ring-0 text-black focus-visible:ring-offset-0'
+              className='border border-zinc-500 focus:bg-zinc-900/80 focus-visible:ring-0 focus-visible:ring-offset-0'
               value={inviteUrl}
               readOnly
             />
@@ -87,7 +87,7 @@ export const InviteModal = () => {
             disabled={isLoading}
             variant='link'
             size='sm'
-            className='text-xs text-zinc-500 mt-4'>
+            className='text-xs mt-4'>
             生成新链接
             <RefreshCw className='w-4 h-4 ml-2' />
           </Button>

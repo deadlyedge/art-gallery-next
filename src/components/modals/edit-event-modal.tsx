@@ -84,12 +84,12 @@ export const EditEventModal = () => {
 
   return (
     <Dialog open={isModalOpen} onOpenChange={handleClose}>
-      <DialogContent className='bg-white text-black p-0 overflow-hidden'>
+      <DialogContent className='p-0 overflow-hidden'>
         <DialogHeader className='pt-8 px-6'>
           <DialogTitle className='text-2xl text-center font-bold'>
             编辑您的事件
           </DialogTitle>
-          <DialogDescription className='text-center text-zinc-500'>
+          <DialogDescription className='text-center'>
             给事件定义个性化的名称和图标。你以后还可以做修改。
           </DialogDescription>
         </DialogHeader>
@@ -101,13 +101,13 @@ export const EditEventModal = () => {
                 name='title'
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className='uppercase text-xs font-bold text-zinc-500 dark:text-secondary/70'>
-                      名称
+                    <FormLabel className='uppercase text-xs font-bold text-primary/70'>
+                    Title
                     </FormLabel>
                     <FormControl>
                       <Input
                         disabled={isLoading}
-                        className='bg-zinc-300/50 border-0 focus-visible:ring-0 text-black focus-visible:ring-offset-0'
+                        className='border border-zinc-500 focus:bg-zinc-900/80 focus-visible:ring-0 focus-visible:ring-offset-0'
                         placeholder='输入事件名称'
                         {...field}
                       />
@@ -121,13 +121,13 @@ export const EditEventModal = () => {
                 name='description'
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className='uppercase text-xs font-bold text-zinc-500 dark:text-secondary/70'>
-                      Description
+                    <FormLabel className='uppercase text-xs font-bold text-primary/70'>
+                    Description
                     </FormLabel>
                     <FormControl>
                       <Textarea
                         disabled={isLoading}
-                        className='bg-zinc-300/50 border-0 focus-visible:ring-0 text-black focus-visible:ring-offset-0'
+                        className='border border-zinc-500 focus:bg-zinc-900/80 focus-visible:ring-0 focus-visible:ring-offset-0'
                         placeholder='Enter Description'
                         {...field}
                       />
@@ -142,8 +142,8 @@ export const EditEventModal = () => {
                   name='imageUrl'
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className='uppercase text-xs font-bold text-zinc-500 dark:text-secondary/70'>
-                        Image
+                    <FormLabel className='uppercase text-xs font-bold text-primary/70'>
+                    Image
                       </FormLabel>
                       <FormControl>
                         <FileUpload
@@ -157,7 +157,7 @@ export const EditEventModal = () => {
                 />
               </div>
             </div>
-            <DialogFooter className='bg-gray-100 px-6 py-4'>
+            <DialogFooter className='px-6 py-4'>
               <Button variant='default' disabled={isLoading}>
                 保存
               </Button>

@@ -67,6 +67,7 @@ export const FileUpload = ({ onChange, value, endpoint }: FileUploadProps) => {
       onUploadError={(error: Error) => {
         console.log(error)
       }}
+      className="border-dashed border-2 dark:border-primary/50 text-primary rounded-lg p-4 text-center hover:bg-primary-foreground/80"
     />
   )
 }

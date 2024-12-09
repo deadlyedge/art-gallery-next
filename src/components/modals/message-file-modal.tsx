@@ -69,12 +69,12 @@ export const MessageFileModal = () => {
 
   return (
     <Dialog open={isModalOpen} onOpenChange={handleClose}>
-      <DialogContent className='bg-white text-black p-0 overflow-hidden'>
+      <DialogContent className='p-0 overflow-hidden'>
         <DialogHeader className='pt-8 px-6'>
           <DialogTitle className='text-2xl text-center font-bold'>
             发送文件消息
           </DialogTitle>
-          <DialogDescription className='text-center text-zinc-500'>
+          <DialogDescription className='text-center'>
             添加一张图片或一个PDF文件
           </DialogDescription>
         </DialogHeader>
@@ -99,7 +99,7 @@ export const MessageFileModal = () => {
                 />
               </div>
             </div>
-            <DialogFooter className='bg-gray-100 px-6 py-4'>
+            <DialogFooter className='px-6 py-4'>
               <Button variant='default' disabled={isLoading}>
                 发送
               </Button>

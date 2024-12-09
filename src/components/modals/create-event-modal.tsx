@@ -74,7 +74,7 @@ export const CreateEventModal = () => {
 
   return (
     <Dialog open={isModalOpen} onOpenChange={handleClose}>
-      <DialogContent className='bg-white text-black p-0 overflow-hidden'>
+      <DialogContent className='p-0 overflow-hidden'>
         <DialogHeader className='pt-8 px-6'>
           <DialogTitle className='text-2xl text-center font-bold'>
             请添加一个事件
@@ -91,14 +91,14 @@ export const CreateEventModal = () => {
                 name='title'
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className='uppercase text-xs font-bold text-zinc-500 dark:text-secondary/70'>
-                      名称
+                    <FormLabel className='uppercase text-xs font-bold text-primary/70'>
+                      Title
                     </FormLabel>
                     <FormControl>
                       <Input
                         disabled={isLoading}
-                        className='bg-zinc-300/50 border-0 focus-visible:ring-0 text-black focus-visible:ring-offset-0'
-                        placeholder='输入服务器名称'
+                        className='border border-zinc-500 focus:bg-zinc-900/80 focus-visible:ring-0 focus-visible:ring-offset-0'
+                        placeholder='Enter event title'
                         {...field}
                       />
                     </FormControl>
@@ -111,13 +111,13 @@ export const CreateEventModal = () => {
                 name='description'
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className='uppercase text-xs font-bold text-zinc-500 dark:text-secondary/70'>
+                    <FormLabel className='uppercase text-xs font-bold text-primary/70'>
                       Description
                     </FormLabel>
                     <FormControl>
                       <Textarea
                         disabled={isLoading}
-                        className='bg-zinc-300/50 border-0 focus-visible:ring-0 text-black focus-visible:ring-offset-0'
+                        className='border border-zinc-500 focus:bg-zinc-900/80 focus-visible:ring-0 focus-visible:ring-offset-0'
                         placeholder='Enter Description'
                         {...field}
                       />
@@ -132,7 +132,7 @@ export const CreateEventModal = () => {
                   name='imageUrl'
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className='uppercase text-xs font-bold text-zinc-500 dark:text-secondary/70'>
+                      <FormLabel className='uppercase text-xs font-bold text-primary/70'>
                         Image
                       </FormLabel>
                       <FormControl>
@@ -147,7 +147,7 @@ export const CreateEventModal = () => {
                 />
               </div>
             </div>
-            <DialogFooter className='bg-gray-100 px-6 py-4'>
+            <DialogFooter className='px-6 py-4'>
               <Button variant='default' disabled={isLoading}>
                 创建
               </Button>

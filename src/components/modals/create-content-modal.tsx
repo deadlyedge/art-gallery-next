@@ -114,7 +114,7 @@ export const CreateContentModal = () => {
 
   return (
     <Dialog open={isModalOpen} onOpenChange={handleClose}>
-      <DialogContent className='bg-white text-black p-0 overflow-hidden'>
+      <DialogContent className='p-0 overflow-hidden'>
         <DialogHeader className='pt-8 px-6'>
           <DialogTitle className='text-base text-center font-bold'>
             创建内容
@@ -131,13 +131,13 @@ export const CreateContentModal = () => {
                 name='title'
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className='uppercase text-xs font-bold text-zinc-500 dark:text-secondary/70'>
+                    <FormLabel className='uppercase text-xs font-bold text-primary/70'>
                       Title
                     </FormLabel>
                     <FormControl>
                       <Input
                         disabled={isLoading}
-                        className='bg-zinc-300/50 border-0 focus-visible:ring-0 text-black focus-visible:ring-offset-0'
+                        className='border border-zinc-500 focus:bg-zinc-900/80 focus-visible:ring-0 focus-visible:ring-offset-0'
                         placeholder='Enter content title'
                         {...field}
                       />
@@ -151,13 +151,13 @@ export const CreateContentModal = () => {
                 name='description'
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className='uppercase text-xs font-bold text-zinc-500 dark:text-secondary/70'>
+                    <FormLabel className='uppercase text-xs font-bold text-primary/70'>
                       Description
                     </FormLabel>
                     <FormControl>
                       <Textarea
                         disabled={isLoading}
-                        className='bg-zinc-300/50 border-0 focus-visible:ring-0 text-black focus-visible:ring-offset-0'
+                        className='border border-zinc-500 focus:bg-zinc-900/80 focus-visible:ring-0 focus-visible:ring-offset-0'
                         placeholder='Enter Description'
                         {...field}
                       />
@@ -172,7 +172,7 @@ export const CreateContentModal = () => {
                   name='imageUrl'
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className='uppercase text-xs font-bold text-zinc-500 dark:text-secondary/70'>
+                      <FormLabel className='uppercase text-xs font-bold text-primary/70'>
                         Image
                       </FormLabel>
                       <FormControl>
@@ -187,7 +187,7 @@ export const CreateContentModal = () => {
                 />
               </div>
             </div>
-            <DialogFooter className='bg-gray-100 px-6 py-4'>
+            <DialogFooter className='px-6 py-4'>
               <FormField
                 control={form.control}
                 name='isPublic'
