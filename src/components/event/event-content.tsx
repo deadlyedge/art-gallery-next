@@ -59,7 +59,7 @@ export const EventContent = ({ content, event, role }: EventContentProps) => {
         )}
       </div>
 
-      <div className='w-full md:w-1/2 flex flex-col'>
+      <div className='sticky top-12 w-full md:w-1/2 flex flex-col'>
         <div className='flex items-center p-2 md:p-0'>
           <Hash className='flex-shrink-0 w-5 h-5 text-zinc-500 dark:text-zinc-400' />
           <p className='line-clamp-1 font-semibold text-sm text-zinc-500 group-hover:text-zinc-600 dark:text-zinc-400 dark:group-hover:text-zinc-300 transition'>

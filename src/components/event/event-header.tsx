@@ -47,7 +47,7 @@ export const EventHeader = ({ event, role, profileName }: EventHeaderProps) => {
             <DropdownMenuItem
               onClick={() => onOpen("invite", { event })}
               className='text-indigo-600 dark:text-indigo-400 px-3 py-2 text-sm cursor-pointer'>
-              邀请朋友
+              Invite Friends
               <UserPlus className='h-4 w-4 ml-auto' />
             </DropdownMenuItem>
           )}
@@ -55,7 +55,7 @@ export const EventHeader = ({ event, role, profileName }: EventHeaderProps) => {
             <DropdownMenuItem
               onClick={() => onOpen("editEvent", { event })}
               className='px-3 py-2 text-sm cursor-pointer'>
-              服务器设置
+              Event Edit
               <Settings className='h-4 w-4 ml-auto' />
             </DropdownMenuItem>
           )}
@@ -63,7 +63,7 @@ export const EventHeader = ({ event, role, profileName }: EventHeaderProps) => {
             <DropdownMenuItem
               onClick={() => onOpen("members", { event })}
               className='px-3 py-2 text-sm cursor-pointer'>
-              管理成员
+              Member Manage
               <Users className='h-4 w-4 ml-auto' />
             </DropdownMenuItem>
           )}
@@ -71,7 +71,7 @@ export const EventHeader = ({ event, role, profileName }: EventHeaderProps) => {
             <DropdownMenuItem
               onClick={() => onOpen("createContent")}
               className='px-3 py-2 text-sm cursor-pointer'>
-              创建频道
+              Create Content
               <PlusCircle className='h-4 w-4 ml-auto' />
             </DropdownMenuItem>
           )}
@@ -80,7 +80,7 @@ export const EventHeader = ({ event, role, profileName }: EventHeaderProps) => {
             <DropdownMenuItem
               onClick={() => onOpen("deleteEvent", { event })}
               className='text-rose-500 px-3 py-2 text-sm cursor-pointer'>
-              删除服务器
+              Remove Event
               <Trash className='h-4 w-4 ml-auto' />
             </DropdownMenuItem>
           )}
