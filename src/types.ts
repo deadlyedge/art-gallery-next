@@ -1,4 +1,4 @@
-import type { Server as NetServer, Socket } from "net"
+import type { Server as NetServer, Socket } from "node:net"
 import type { Event, Member, Profile } from "@prisma/client"
 import type { NextApiResponse } from "next"
 import type { Server as SocketIOServer } from "socket.io"

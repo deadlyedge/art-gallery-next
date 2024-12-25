@@ -61,7 +61,7 @@ export const EditEventModal = () => {
 			form.setValue("description", event.description || "")
 			form.setValue("imageUrl", event.imageUrl)
 		}
-	}, [event, form, isOpen])
+	}, [event, form])
 
 	const isLoading = form.formState.isSubmitting
 

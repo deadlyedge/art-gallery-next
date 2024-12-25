@@ -112,7 +112,7 @@ export const ChatItem = ({
 		form.reset({
 			text,
 		})
-	}, [text])
+	}, [text, form.reset])
 
 	const fileType = fileUrl?.split(".").pop()
 

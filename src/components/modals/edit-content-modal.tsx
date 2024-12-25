@@ -81,7 +81,7 @@ export const EditContentModal = () => {
 				(!!content.imageUrl && content.isPublic) || false,
 			)
 		}
-	}, [form, content, content?.imageUrl, isOpen])
+	}, [form, content, content?.imageUrl])
 
 	const isLoading = form.formState.isSubmitting
 
