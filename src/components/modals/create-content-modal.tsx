@@ -1,11 +1,11 @@
 "use client"
 
+import { useParams, useRouter } from "next/navigation"
 import qs from "query-string"
 import axios from "axios"
 import * as z from "zod"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
-// import { ContentType } from "@prisma/client"
 
 import {
   Dialog,
@@ -24,21 +24,10 @@ import {
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
-import { useParams, useRouter } from "next/navigation"
 import { useModal } from "@/hooks/use-modal-store"
-// import {
-//   Select,
-//   SelectContent,
-//   SelectItem,
-//   SelectTrigger,
-//   SelectValue,
-// } from "@/components/ui/select"
-// import { useEffect } from "react"
-import { FileUpload } from "../file-upload"
-// import { Description } from "@radix-ui/react-dialog"
-import { Textarea } from "../ui/textarea"
-// import Link from "next/link"
-import { Checkbox } from "../ui/checkbox"
+import { Textarea } from "@/components/ui/textarea"
+import { Checkbox } from "@/components/ui/checkbox"
+import { FileUpload } from "@/components/file-upload"
 
 const formSchema = z.object({
   title: z
@@ -49,7 +38,6 @@ const formSchema = z.object({
     .refine((title) => title !== "general", {
       message: "Content title cannot be 'general'",
     }),
-  // type: z.nativeEnum(ContentType),
   description: z.string().optional(),
   imageUrl: z.string().optional(),
   isPublic: z.boolean().default(false),
@@ -67,25 +55,11 @@ export const CreateContentModal = () => {
     resolver: zodResolver(formSchema),
     defaultValues: {
       title: "",
-      // type: contentType || ContentType.IMAGE,
       description: "",
       imageUrl: imageUrl || "",
       isPublic: false,
     },
   })
-
-  // useEffect(() => {
-  //   if (contentType) {
-  //     form.setValue("type", contentType)
-  //   } else {
-  //     form.setValue("type", ContentType.IMAGE)
-  //   }
-  //   // if (imageUrl) {
-  //   //   form.setValue("imageUrl", imageUrl)
-  //   // } else {
-  //   //   form.setValue("imageUrl", "")
-  //   // }
-  // }, [contentType, form])
 
   const isLoading = form.formState.isSubmitting
 
@@ -119,9 +93,6 @@ export const CreateContentModal = () => {
           <DialogTitle className='text-base text-center font-bold'>
             创建内容
           </DialogTitle>
-          {/* <DialogDescription className='text-center text-zinc-500'>
-            目前只能选择文字类型的频道
-          </DialogDescription> */}
         </DialogHeader>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-8'>
@@ -204,11 +175,6 @@ export const CreateContentModal = () => {
                     <FormLabel className='pb-1.5'>
                       是否希望此内容和您的名字一起显示在首页
                     </FormLabel>
-                    {/* <FormDescription>
-                        You can manage your mobile notifications in the{" "}
-                        <Link href='/examples/forms'>mobile settings</Link>{" "}
-                        page.
-                      </FormDescription> */}
                   </FormItem>
                 )}
               />

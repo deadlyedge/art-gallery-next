@@ -102,7 +102,7 @@ export const EditEventModal = () => {
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel className='uppercase text-xs font-bold text-primary/70'>
-                    Title
+                      Title
                     </FormLabel>
                     <FormControl>
                       <Input
@@ -122,7 +122,7 @@ export const EditEventModal = () => {
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel className='uppercase text-xs font-bold text-primary/70'>
-                    Description
+                      Description
                     </FormLabel>
                     <FormControl>
                       <Textarea
@@ -142,8 +142,8 @@ export const EditEventModal = () => {
                   name='imageUrl'
                   render={({ field }) => (
                     <FormItem>
-                    <FormLabel className='uppercase text-xs font-bold text-primary/70'>
-                    Image
+                      <FormLabel className='uppercase text-xs font-bold text-primary/70'>
+                        Image
                       </FormLabel>
                       <FormControl>
                         <FileUpload

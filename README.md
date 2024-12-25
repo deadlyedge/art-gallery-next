@@ -2,8 +2,12 @@
 
 this project is based on 'fullstack Discord Clone' (https://www.codewithantonio.com/projects/team-chat-platform) on code with antonio (https://www.codewithantonio.com/), which I learnt a lot from.
 
+# test site
 
-todo:
+https://aganx.com/
+(fresh settings: please sign up and create a new event to play with)
+
+# todo:
 1. page ui
 2. ~~complete add content logic: general content need to be changed but not to be deleted~~
 3. ~~add content description error in ~~db~~ api perhaps: solved~~

@@ -24,9 +24,9 @@ import {
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
+import { Textarea } from "@/components/ui/textarea"
 import { FileUpload } from "@/components/file-upload"
 import { useRouter } from "next/navigation"
-import { Textarea } from "../ui/textarea"
 // import { useOrigin } from "@/hooks/use-origin"
 
 const formSchema = z.object({

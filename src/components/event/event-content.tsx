@@ -1,14 +1,7 @@
 "use client"
 
 import { Content, MemberRole, Event } from "@prisma/client"
-import {
-  Edit,
-  Eye,
-  EyeClosed,
-  Hash,
-  Lock,
-  Trash,
-} from "lucide-react"
+import { Edit, Eye, EyeClosed, Hash, Lock, Trash } from "lucide-react"
 import { useRouter } from "next/navigation"
 
 import { ActionTooltip } from "@/components/action-tooltip"
@@ -65,13 +58,17 @@ export const EventContent = ({ content, event, role }: EventContentProps) => {
           <p className='line-clamp-1 font-semibold text-sm text-zinc-500 group-hover:text-zinc-600 dark:text-zinc-400 dark:group-hover:text-zinc-300 transition'>
             {content.title}
           </p>
-          {content.isPublic ? (
-            <Eye className='ml-10 w-4 h-4 text-zinc-500 dark:text-zinc-400' />
-          ) : (
-            <EyeClosed className='ml-10 w-4 h-4 text-zinc-500 dark:text-zinc-400' />
-          )}
           {content.title !== "general" && role !== MemberRole.GUEST && (
             <div className='ml-auto flex items-center gap-x-2'>
+          {content.isPublic ? (
+            <ActionTooltip label='Content could be seen on homepage'>
+              <Eye className='w-4 h-4 text-zinc-500 dark:text-zinc-400' />
+            </ActionTooltip>
+          ) : (
+            <ActionTooltip label='Private Content'>
+              <EyeClosed className='w-4 h-4 text-zinc-500 dark:text-zinc-400' />
+            </ActionTooltip>
+          )}
               <ActionTooltip label='编辑'>
                 <Edit
                   onClick={(e) => onAction(e, "editContent")}

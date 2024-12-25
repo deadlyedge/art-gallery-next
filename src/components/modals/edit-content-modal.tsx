@@ -1,5 +1,7 @@
 "use client"
 
+import { useEffect } from "react"
+import { useRouter } from "next/navigation"
 import qs from "query-string"
 import axios from "axios"
 import * as z from "zod"
@@ -25,7 +27,8 @@ import {
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
-import { useRouter } from "next/navigation"
+import { Textarea } from "@/components/ui/textarea"
+import { Checkbox } from "@/components/ui/checkbox"
 import { useModal } from "@/hooks/use-modal-store"
 // import {
 //   Select,
@@ -34,10 +37,7 @@ import { useModal } from "@/hooks/use-modal-store"
 //   SelectTrigger,
 //   SelectValue,
 // } from "@/components/ui/select"
-import { useEffect } from "react"
-import { FileUpload } from "../file-upload"
-import { Textarea } from "../ui/textarea"
-import { Checkbox } from "../ui/checkbox"
+import { FileUpload } from "@/components/file-upload"
 
 const formSchema = z.object({
   title: z

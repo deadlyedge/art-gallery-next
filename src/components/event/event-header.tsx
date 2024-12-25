@@ -88,7 +88,7 @@ export const EventHeader = ({ event, role, profileName }: EventHeaderProps) => {
             <DropdownMenuItem
               onClick={() => onOpen("leaveEvent", { event })}
               className='text-rose-500 px-3 py-2 text-sm cursor-pointer'>
-              离开服务器
+              Leave Event
               <LogOut className='h-4 w-4 ml-auto' />
             </DropdownMenuItem>
           )}

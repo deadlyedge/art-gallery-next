@@ -45,14 +45,14 @@ export const LeaveEventModal = () => {
       <DialogContent className='p-0 overflow-hidden'>
         <DialogHeader className='pt-8 px-6'>
           <DialogTitle className='text-2xl text-center font-bold'>
-            离开服务器
+            离开此事件
           </DialogTitle>
           <DialogDescription className='text-center'>
             确定要离开{" "}
             <span className='font-semibold text-indigo-400'>
               {event?.title}
             </span>{" "}
-            吗？
+            吗？你将不会再于事件列表中看到此事件。
           </DialogDescription>
         </DialogHeader>
         <DialogFooter className='px-6 py-4'>
