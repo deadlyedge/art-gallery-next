@@ -6,19 +6,20 @@ import { ActionTooltip } from "@/components/action-tooltip"
 import { useModal } from "@/hooks/use-modal-store"
 
 export const NavigationAction = () => {
-  const { onOpen } = useModal()
+	const { onOpen } = useModal()
 
-  return (
-    <div>
-      <ActionTooltip side='right' align='center' label='添加事件'>
-        <div
-          onClick={() => onOpen("createEvent")}
-          className='group flex items-center cursor-pointer'>
-          <div>
-            <Plus size={15} />
-          </div>
-        </div>
-      </ActionTooltip>
-    </div>
-  )
+	return (
+		<div>
+			<ActionTooltip side="right" align="center" label="添加事件">
+				{/* biome-ignore lint/a11y/useKeyWithClickEvents: <explanation> */}
+				<div
+					onClick={() => onOpen("createEvent")}
+					className="group flex items-center cursor-pointer">
+					<div>
+						<Plus size={15} />
+					</div>
+				</div>
+			</ActionTooltip>
+		</div>
+	)
 }

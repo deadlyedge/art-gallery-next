@@ -1,7 +1,7 @@
 import { SignIn } from "@clerk/nextjs"
 
 export default async function Page() {
-  // const profile = await initialProfile()
+	// const profile = await initialProfile()
 
-  return <SignIn />
+	return <SignIn />
 }
