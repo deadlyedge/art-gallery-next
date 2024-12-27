@@ -6,14 +6,11 @@ import { Loader2, ServerCrash } from "lucide-react"
 import { type ComponentRef, Fragment, useRef } from "react"
 
 import { useChatQuery } from "@/hooks/use-chat-query"
-// import { useChatSocket } from "../../../references/use-chat-socket"
 // import { useChatScroll } from "@/hooks/use-chat-scroll"
 
 import { Button } from "../ui/button"
 import { ChatItem } from "./chat-item"
 import { ChatWelcome } from "./chat-welcome"
-
-// const DATE_FORMAT = "MMM d, yyyy, HH:mm"
 
 type MessageWithMemberWithProfile = Message & {
 	member: Member & {
@@ -26,7 +23,6 @@ type ChatMessagesProps = {
 	member: Member
 	chatId: string
 	apiUrl: string
-	// socketUrl: string
 	messageQuery: Record<string, string>
 	paramKey: "contentId" | "conversationId"
 	paramValue: string
@@ -38,15 +34,14 @@ export const ChatMessages = ({
 	member,
 	chatId,
 	apiUrl,
-	// socketUrl,
 	messageQuery,
 	paramKey,
 	paramValue,
 	type,
 }: ChatMessagesProps) => {
 	const queryKey = `chat:${chatId}`
-	const addKey = `chat:${chatId}:messages`
-	const updateKey = `chat:${chatId}:messages:update`
+	// const addKey = `chat:${chatId}:messages`
+	// const updateKey = `chat:${chatId}:messages:update`
 
 	const chatRef = useRef<ComponentRef<"div">>(null)
 	const bottomRef = useRef<ComponentRef<"div">>(null)
@@ -57,8 +52,8 @@ export const ChatMessages = ({
 			apiUrl,
 			paramKey,
 			paramValue,
+			refetchIntervalSeconds: 5,
 		})
-	// useChatSocket({ queryKey, addKey, updateKey })
 	// useChatScroll({
 	//   chatRef,
 	//   bottomRef,

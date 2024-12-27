@@ -41,6 +41,7 @@ export const ShowMessages = ({
 		apiUrl,
 		paramKey,
 		paramValue,
+		refetchIntervalSeconds: 0,
 	})
 
 	if (status === "pending") {

@@ -8,6 +8,7 @@ type ChatQueryProps = {
 	apiUrl: string
 	paramKey: "contentId" | "conversationId"
 	paramValue: string
+	refetchIntervalSeconds: number
 }
 
 export const useChatQuery = ({
@@ -15,6 +16,7 @@ export const useChatQuery = ({
 	apiUrl,
 	paramKey,
 	paramValue,
+	refetchIntervalSeconds,
 }: ChatQueryProps) => {
 	// const { isConnected } = useSocket()
 
@@ -39,7 +41,7 @@ export const useChatQuery = ({
 			queryFn: fetchMessages,
 			initialPageParam: null,
 			getNextPageParam: (lastPage) => lastPage?.nextCursor,
-			refetchInterval: 5000,
+			refetchInterval: refetchIntervalSeconds * 1000
 		})
 
 	return {
