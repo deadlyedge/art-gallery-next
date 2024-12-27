@@ -23,3 +23,4 @@ https://aganx.com/
 13. upvote and downvote for a content
 14. ~~add goto my events on landing page and landing page should allow logged in users to view.~~
 15. signin and signup logic modified, need more test.
+16. try vercel for fast deployment.

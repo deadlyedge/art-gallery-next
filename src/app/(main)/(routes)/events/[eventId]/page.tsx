@@ -60,7 +60,7 @@ const EventContentsPage = async (props: {
 		<div className="flex flex-col h-[100vh]">
 			<Suspense fallback={<Loading />}>
 				<EventHeader event={event} role={role} profileName={profile.name} />
-				<div className="flex-1 px-0 md:px-3 pt-10 overflow-y-auto">
+				<div className="flex-1 px-0 md:px-3 pt-10 -mt-10 overflow-y-auto">
 					{event?.description && (
 						<div className="mb-2">
 							<span className="text-xs uppercase font-semibold">

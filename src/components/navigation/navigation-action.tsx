@@ -11,7 +11,6 @@ export const NavigationAction = () => {
 	return (
 		<div>
 			<ActionTooltip side="right" align="center" label="添加事件">
-				{/* biome-ignore lint/a11y/useKeyWithClickEvents: <explanation> */}
 				<div
 					onClick={() => onOpen("createEvent")}
 					className="group flex items-center cursor-pointer">
