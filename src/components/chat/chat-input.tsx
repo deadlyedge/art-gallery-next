@@ -4,7 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import axios from "axios"
 import { Plus } from "lucide-react"
 import { useRouter } from "next/navigation"
-import qs from "query-string"
+import qs, { type StringifiableRecord } from "query-string"
 import { useForm } from "react-hook-form"
 import * as z from "zod"
 
@@ -15,7 +15,7 @@ import { useModal } from "@/hooks/use-modal-store"
 
 type ChatInputProps = {
 	apiUrl: string
-	query: Record<string, any>
+	query: Record<string, unknown>
 	name: string
 	type: "conversation" | "content"
 }
@@ -41,7 +41,7 @@ export const ChatInput = ({ apiUrl, query, name, type }: ChatInputProps) => {
 		try {
 			const url = qs.stringifyUrl({
 				url: apiUrl,
-				query,
+				query: query as StringifiableRecord, // Type assertion,
 			})
 
 			await axios.post(url, values)

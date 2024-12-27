@@ -6,7 +6,7 @@ import { Loader2, ServerCrash } from "lucide-react"
 import { type ComponentRef, Fragment, useRef } from "react"
 
 import { useChatQuery } from "@/hooks/use-chat-query"
-import { useChatSocket } from "@/hooks/use-chat-socket"
+import { useChatSocket } from "../../../references/use-chat-socket"
 // import { useChatScroll } from "@/hooks/use-chat-scroll"
 
 import { Button } from "../ui/button"
@@ -109,7 +109,11 @@ export const ChatMessages = ({
 			)}
 			<div className="flex flex-col-reverse mt-auto">
 				{data?.pages?.map((group, i) => (
-					<Fragment key={`${queryKey}${i}`}>
+					<Fragment
+						key={`${queryKey}${
+							// biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
+							i
+						}`}>
 						{group.items.map((message: MessageWithMemberWithProfile) => (
 							<ChatItem
 								key={message.id}

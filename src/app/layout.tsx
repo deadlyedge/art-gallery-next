@@ -3,7 +3,6 @@ import { Noto_Serif } from "next/font/google"
 import "./globals.css"
 import { ModalProvider } from "@/components/providers/modal-provider"
 import { QueryProvider } from "@/components/providers/queryProvider"
-import { SocketProvider } from "@/components/providers/socket-provider"
 import { ThemeProvider } from "@/components/providers/themeProvider"
 import { cn } from "@/lib/utils"
 import { ClerkProvider } from "@clerk/nextjs"
@@ -50,10 +49,8 @@ export default function RootLayout({
 						defaultTheme={"dark"}
 						enableSystem
 						storageKey="aganx-theme">
-						<SocketProvider>
-							<ModalProvider />
-							<QueryProvider>{children}</QueryProvider>
-						</SocketProvider>
+						<ModalProvider />
+						<QueryProvider>{children}</QueryProvider>
 					</ThemeProvider>
 				</body>
 			</html>
