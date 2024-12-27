@@ -6,7 +6,7 @@ import { Loader2, ServerCrash } from "lucide-react"
 import { type ComponentRef, Fragment, useRef } from "react"
 
 import { useChatQuery } from "@/hooks/use-chat-query"
-import { useChatSocket } from "../../../references/use-chat-socket"
+// import { useChatSocket } from "../../../references/use-chat-socket"
 // import { useChatScroll } from "@/hooks/use-chat-scroll"
 
 import { Button } from "../ui/button"
@@ -26,8 +26,8 @@ type ChatMessagesProps = {
 	member: Member
 	chatId: string
 	apiUrl: string
-	socketUrl: string
-	socketQuery: Record<string, string>
+	// socketUrl: string
+	// socketQuery: Record<string, string>
 	paramKey: "contentId" | "conversationId"
 	paramValue: string
 	type: "content" | "conversation"
@@ -38,8 +38,8 @@ export const ChatMessages = ({
 	member,
 	chatId,
 	apiUrl,
-	socketUrl,
-	socketQuery,
+	// socketUrl,
+	// socketQuery,
 	paramKey,
 	paramValue,
 	type,
@@ -58,7 +58,7 @@ export const ChatMessages = ({
 			paramKey,
 			paramValue,
 		})
-	useChatSocket({ queryKey, addKey, updateKey })
+	// useChatSocket({ queryKey, addKey, updateKey })
 	// useChatScroll({
 	//   chatRef,
 	//   bottomRef,
@@ -125,8 +125,8 @@ export const ChatMessages = ({
 								deleted={message.deleted}
 								timestamp={formatDistanceToNow(message.createdAt)}
 								isUpdated={message.updatedAt !== message.createdAt}
-								socketUrl={socketUrl}
-								socketQuery={socketQuery}
+								// socketUrl={socketUrl}
+								// socketQuery={socketQuery}
 							/>
 						))}
 					</Fragment>

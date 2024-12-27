@@ -43,11 +43,11 @@ export const EventSideMessages = ({
 				chatId={content.id}
 				type="content"
 				apiUrl="/api/messages"
-				socketUrl="/api/socket/messages"
-				socketQuery={{
-					contentId: content.id,
-					eventId: content.eventId,
-				}}
+				// socketUrl="/api/socket/messages"
+				// socketQuery={{
+				// 	contentId: content.id,
+				// 	eventId: content.eventId,
+				// }}
 				paramKey="contentId"
 				paramValue={content.id}
 			/>

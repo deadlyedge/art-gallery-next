@@ -30,8 +30,8 @@ type ChatItemProps = {
 	deleted: boolean
 	currentMember: Member
 	isUpdated: boolean
-	socketUrl: string
-	socketQuery: Record<string, string>
+	// socketUrl: string
+	// socketQuery: Record<string, string>
 	showMode?: boolean
 }
 
@@ -54,8 +54,8 @@ export const ChatItem = ({
 	deleted,
 	currentMember,
 	isUpdated,
-	socketUrl,
-	socketQuery,
+	// socketUrl,
+	// socketQuery,
 	showMode = false,
 }: ChatItemProps) => {
 	const [isEditing, setIsEditing] = useState(false)

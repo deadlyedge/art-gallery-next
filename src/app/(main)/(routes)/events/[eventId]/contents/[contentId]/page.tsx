@@ -87,18 +87,18 @@ const ContentIdPage = async (props: {
 						chatId={content.id}
 						type="content"
 						apiUrl="/api/messages"
-						socketUrl="/api/socket/messages"
-						socketQuery={{
-							contentId: content.id,
-							eventId: content.eventId,
-						}}
+						// socketUrl="/api/socket/messages"
+						// socketQuery={{
+						// 	contentId: content.id,
+						// 	eventId: content.eventId,
+						// }}
 						paramKey="contentId"
 						paramValue={content.id}
 					/>
 					<ChatInput
 						name={content.title}
 						type="content"
-						apiUrl="/api/socket/messages"
+						apiUrl="/api/messages"
 						query={{
 							contentId: content.id,
 							eventId: content.eventId,
