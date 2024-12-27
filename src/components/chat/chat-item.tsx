@@ -31,8 +31,8 @@ type ChatItemProps = {
 	currentMember: Member
 	isUpdated: boolean
 	// messageUrl: string
-	apiUrl: string
-	messageQuery: Record<string, string>
+	apiUrl?: string
+	messageQuery?: Record<string, string>
 	showMode?: boolean
 }
 
