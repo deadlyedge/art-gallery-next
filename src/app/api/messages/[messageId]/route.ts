@@ -102,7 +102,7 @@ export async function DELETE(
 
 		message = await db.message.update({
 			where: {
-				id: messageId as string,
+				id: messageId,
 			},
 			data: {
 				fileUrl: null,
@@ -150,7 +150,13 @@ export async function PATCH(
 			return NextResponse.json("Channel ID missing", { status: 400 })
 		}
 
-		let message = await getMessage(profile.id, messageId, eventId, contentId)
+		let message = await getMessage(
+			profile.id,
+			messageId,
+			eventId,
+			contentId,
+			true,
+		)
 
 		message = await db.message.update({
 			where: {

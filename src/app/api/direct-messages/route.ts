@@ -1,5 +1,5 @@
 import type { DirectMessage } from "@prisma/client"
-import { NextResponse } from "next/server"
+import { type NextRequest, NextResponse } from "next/server"
 
 import { currentProfile } from "@/lib/current-profile"
 import { db } from "@/lib/db"
@@ -76,6 +76,89 @@ export async function GET(req: Request) {
 		})
 	} catch (error) {
 		console.log("[DIRECT_MESSAGES_GET]", error)
+		return new NextResponse("Internal Error", { status: 500 })
+	}
+}
+
+export async function POST(req: NextRequest) {
+	try {
+		const profile = await currentProfile()
+		const searchParams = req.nextUrl.searchParams
+		const { text, fileUrl } = await req.json()
+		const conversationId = searchParams.get("conversationId")
+		if (!profile) {
+			return NextResponse.json("Unauthorized", { status: 401 })
+		}
+
+		if (!conversationId) {
+			return NextResponse.json("No Conversation", { status: 400 })
+		}
+
+		if (!text) {
+			return NextResponse.json("No Text", { status: 400 })
+		}
+
+		const conversation = await db.conversation.findFirst({
+			where: {
+				id: conversationId,
+				OR: [
+					{
+						memberOne: {
+							profileId: profile.id,
+						},
+					},
+					{
+						memberTwo: {
+							profileId: profile.id,
+						},
+					},
+				],
+			},
+			include: {
+				memberOne: {
+					include: {
+						profile: true,
+					},
+				},
+				memberTwo: {
+					include: {
+						profile: true,
+					},
+				},
+			},
+		})
+
+		if (!conversation) {
+			return NextResponse.json("Conversation not found", { status: 404 })
+		}
+
+		const member =
+			conversation.memberOne.profileId === profile.id
+				? conversation.memberOne
+				: conversation.memberTwo
+
+		if (!member) {
+			return NextResponse.json("Member not found", { status: 404 })
+		}
+
+		const directMessage = await db.directMessage.create({
+			data: {
+				text,
+				fileUrl,
+				conversationId: conversationId,
+				memberId: member.id,
+			},
+			include: {
+				member: {
+					include: {
+						profile: true,
+					},
+				},
+			},
+		})
+		return NextResponse.json(directMessage)
+	} catch (error) {
+		console.log("[DIRECT_MESSAGE_POST]", error)
 		return new NextResponse("Internal Error", { status: 500 })
 	}
 }
