@@ -27,7 +27,7 @@ type ChatMessagesProps = {
 	chatId: string
 	apiUrl: string
 	// socketUrl: string
-	// socketQuery: Record<string, string>
+	messageQuery: Record<string, string>
 	paramKey: "contentId" | "conversationId"
 	paramValue: string
 	type: "content" | "conversation"
@@ -39,7 +39,7 @@ export const ChatMessages = ({
 	chatId,
 	apiUrl,
 	// socketUrl,
-	// socketQuery,
+	messageQuery,
 	paramKey,
 	paramValue,
 	type,
@@ -125,8 +125,8 @@ export const ChatMessages = ({
 								deleted={message.deleted}
 								timestamp={formatDistanceToNow(message.createdAt)}
 								isUpdated={message.updatedAt !== message.createdAt}
-								// socketUrl={socketUrl}
-								// socketQuery={socketQuery}
+								apiUrl={apiUrl}
+								messageQuery={messageQuery}
 							/>
 						))}
 					</Fragment>

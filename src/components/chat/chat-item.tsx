@@ -30,8 +30,9 @@ type ChatItemProps = {
 	deleted: boolean
 	currentMember: Member
 	isUpdated: boolean
-	// socketUrl: string
-	// socketQuery: Record<string, string>
+	// messageUrl: string
+	apiUrl: string
+	messageQuery: Record<string, string>
 	showMode?: boolean
 }
 
@@ -54,8 +55,9 @@ export const ChatItem = ({
 	deleted,
 	currentMember,
 	isUpdated,
-	// socketUrl,
-	// socketQuery,
+	apiUrl,
+	// messageUrl,
+	messageQuery,
 	showMode = false,
 }: ChatItemProps) => {
 	const [isEditing, setIsEditing] = useState(false)
@@ -73,7 +75,7 @@ export const ChatItem = ({
 
 	useEffect(() => {
 		const handleKeyDown = (event: KeyboardEvent) => {
-			if (event.key === "Escape" || event.key === "Enter") {
+			if (event.key === "Escape" ) {
 				setIsEditing(false)
 			}
 		}
@@ -95,8 +97,8 @@ export const ChatItem = ({
 	const onSubmit = async (values: z.infer<typeof formSchema>) => {
 		try {
 			const url = qs.stringifyUrl({
-				url: `${socketUrl}/${id}`,
-				query: socketQuery,
+				url: `${apiUrl}/${id}`,
+				query: messageQuery,
 			})
 
 			await axios.patch(url, values)
@@ -214,7 +216,11 @@ export const ChatItem = ({
 										</FormItem>
 									)}
 								/>
-								<Button disabled={isLoading} size="sm" variant="default">
+								<Button
+									type="submit"
+									disabled={isLoading}
+									size="sm"
+									variant="default">
 									Save
 								</Button>
 							</form>
@@ -239,8 +245,8 @@ export const ChatItem = ({
 						<Trash
 							onClick={() =>
 								onOpen("deleteMessage", {
-									apiUrl: `${socketUrl}/${id}`,
-									query: socketQuery,
+									apiUrl: `${apiUrl}/${id}`,
+									query: messageQuery,
 								})
 							}
 							className="cursor-pointer ml-auto w-4 h-4 text-zinc-500 hover:text-zinc-600 dark:hover:text-zinc-300 transition"

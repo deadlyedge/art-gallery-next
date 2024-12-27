@@ -65,7 +65,7 @@ const ContentIdPage = async (props: {
 			// onClick={onClick}
 			className="group/content px-0 md:px-2 py-2 rounded-md md:flex items-start justify-start gap-x-2 w-full mb-1"
 		>
-			<div className="w-full md:w-1/2">
+			<div className="w-full md:w-1/2 md:sticky md:top-2">
 				{hasImage && (
 					<Image
 						src={hasImage}
@@ -88,10 +88,10 @@ const ContentIdPage = async (props: {
 						type="content"
 						apiUrl="/api/messages"
 						// socketUrl="/api/socket/messages"
-						// socketQuery={{
-						// 	contentId: content.id,
-						// 	eventId: content.eventId,
-						// }}
+						messageQuery={{
+							contentId: content.id,
+							eventId: content.eventId,
+						}}
 						paramKey="contentId"
 						paramValue={content.id}
 					/>
