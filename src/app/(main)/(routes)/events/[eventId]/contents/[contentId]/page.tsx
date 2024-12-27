@@ -67,14 +67,19 @@ const ContentIdPage = async (props: {
 		>
 			<div className="w-full md:w-1/2 md:sticky md:top-2">
 				{hasImage && (
-					<Image
-						src={hasImage}
-						alt="Content Image"
-						width={0}
-						height={0}
-						sizes="100vw"
-						style={{ width: "100%", height: "auto" }}
-					/>
+					<div className="flex flex-col items-center justify-center">
+						<Image
+							src={hasImage}
+							alt="Content Image"
+							width={0}
+							height={0}
+							sizes="100vw"
+							style={{ width: "100%", height: "auto" }}
+						/>
+						<div className="text-xs mt-2">
+							[This content is {content.isPublic ? "Public" : "Private"}]
+						</div>
+					</div>
 				)}
 			</div>
 

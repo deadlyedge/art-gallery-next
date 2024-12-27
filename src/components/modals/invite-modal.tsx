@@ -54,14 +54,13 @@ export const InviteModal = () => {
 	return (
 		<Dialog open={isModalOpen} onOpenChange={onClose}>
 			<DialogContent className="p-0 overflow-hidden">
-				<DialogDescription className="pt-4 text-center">
-					任何人都可以使用此链接加入服务器
-				</DialogDescription>
-
 				<DialogHeader className="pt-8 px-6">
 					<DialogTitle className="text-2xl text-center font-bold">
 						邀请朋友
 					</DialogTitle>
+					<DialogDescription className="pt-4 text-center">
+						任何人都可以使用此链接加入服务器
+					</DialogDescription>
 				</DialogHeader>
 				<div className="p-6">
 					<Label className="uppercase text-xs font-bold">邀请链接</Label>
@@ -88,6 +87,7 @@ export const InviteModal = () => {
 						className="text-xs mt-4">
 						生成新链接
 						<RefreshCw className="w-4 h-4 ml-2" />
+						<div className="ml-2 text-xs">生成新链接后，旧链接将失效</div>
 					</Button>
 				</div>
 			</DialogContent>

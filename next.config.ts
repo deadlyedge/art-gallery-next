@@ -15,6 +15,10 @@ const nextConfig: NextConfig = {
 			},
 			{
 				protocol: "https",
+				hostname: "f.zick.xyz",
+			},
+			{
+				protocol: "https",
 				hostname: "uploadthing.com",
 			},
 		],

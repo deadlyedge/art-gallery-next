@@ -139,11 +139,19 @@ export const InitialModal = () => {
 												Image
 											</FormLabel>
 											<FormControl>
-												<FileUpload
-													endpoint="eventImage"
-													value={field.value}
-													onChange={field.onChange}
-												/>
+												<div className="flex flex-col items-center justify-center">
+													<FileUpload
+														endpoint="eventImage"
+														value={field.value}
+														onChange={field.onChange}
+													/>
+													<Input
+														disabled={isLoading}
+														className="border border-zinc-500 focus:bg-zinc-900/80 focus-visible:ring-0 focus-visible:ring-offset-0 w-80 mt-2"
+														placeholder="Or paste image url"
+														{...field}
+													/>
+												</div>
 											</FormControl>
 										</FormItem>
 									)}
