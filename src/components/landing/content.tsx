@@ -11,18 +11,18 @@ const testimonials = [
 			"Next is good, especially Typescript.  For me, I start coding from python, and then react, nextjs just like python backend + react frontend, combined with typescript, great.",
 	},
 	{
-		name: "Postgres",
+		name: "Discord",
 		avatar: "M",
-		title: "Database",
+		title: "Interaction Logic",
 		description:
-			"I choose mongodb with gridFS support. By some research, I think mongo may be the best way to combine document and file save together.  And mongodb is like a self logical operating JSON.  Simple and intuitive.",
+			"Discord is a good choice for interaction logic.  I throught discord is like a mordern real time bbs.  I'm not a deep discord user, but I learnt a lot from the project: Full Stack Discord Clone by code with antonio.  I think that is a good start point for this project.",
 	},
 	{
 		name: "File Share",
 		avatar: "M",
-		title: "Purpose",
+		title: "Dependency",
 		description:
-			"This is a learning project. I had done some search work on docker hub and github, for a simple file store and share solution, maybe I typed the wrong keyword, I found so few options, so I made this.",
+			"I use uploadthing for this project, it's free for starting projects, their api are easy to use, they are good.  But not enough especially for my network condition.  So I have to make an alternative for file sharing.  With those 2 project (pyBlobServer and UI) which you could find in my github, this aganx runs better.",
 	},
 ]
 
@@ -48,26 +48,25 @@ export const LandingContent = () => {
 						</CardHeader>
 					</Card>
 				))}
-				<Card className="col-span-full p-8">
+				<Card className="col-span-full sm:p-8">
 					<CardHeader>
 						<CardTitle>About</CardTitle>
 					</CardHeader>
 					<CardContent>
+						My kid likes to paint, and I want to make a place for him to show
+						his works. But when I search in github, I found so few options, so I
+						made this project.
+						<br />
+						<br />
 						This project is made for fun. And this site is just a demo or, like
-						temporary or personal file save space for myself, so you could try
-						it if you want to, but I promise NOTHING on consistency, your data
-						must NOT to be private and important, because I may check my
-						database or delete anything without send a warning.
-						<br />
-						<br />I throught it may useful when someone have a vps and want to
-						add a bit more workload to it, and may make some test work easier.
-						<br />
-						<br />I try to run all my project on mongodb, because I love mongo.
-						And I have had a mongodb running, and it looks less code to write.
+						some idea test, so you could try it if you want to, but I promise
+						NOTHING on consistency, your data must NOT to be private and
+						important, because I may check my database or delete anything
+						without send a warning.
 						<br />
 						<br />
 						<code className="text-gray-400">
-							It could help you either, I hope.
+							I hope it helps for you and your kids.
 						</code>
 						<br />
 						<br />
@@ -76,8 +75,10 @@ export const LandingContent = () => {
 							href="https://github.com/deadlyedge/art-gallery-next">
 							<code>Page on GITHUB</code>
 						</a>
-						<code className="float-right text-gray-300">
-							- xdream oldlu: an old student
+						<br />
+						<br />
+						<code className="float-right text-gray-300 mb-4">
+							- xdream an old student
 						</code>
 					</CardContent>
 				</Card>

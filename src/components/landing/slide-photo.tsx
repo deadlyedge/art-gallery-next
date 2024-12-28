@@ -47,7 +47,7 @@ const LandingSlidePhoto = () => {
 						delay: 5000,
 					}),
 				]}>
-				<CarouselContent className="w-[600px] h-[320px] md:w-[800px] md:h-[500px] lg:w-[1200px] lg:h-[750px] gap-2">
+				<CarouselContent className="w-[100vw] h-80 sm:w-[600px] sm:h-[320px] md:w-[800px] md:h-[500px] lg:w-[1200px] lg:h-[750px] gap-2">
 					{contents.length > 0 ? (
 						contents.map(
 							(content) =>
