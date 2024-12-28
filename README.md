@@ -2,6 +2,9 @@
 
 this project is based on 'fullstack Discord Clone' (https://www.codewithantonio.com/projects/team-chat-platform) on code with antonio (https://www.codewithantonio.com/), which I learnt a lot from.
 
+socket chat function has been removed, because i throught this should
+be a content focused site.
+
 # test site
 
 https://aganx.com/
@@ -18,9 +21,9 @@ https://aganx.com/
 8. ~~show 5 messages beside pic in event page~~
 9. ~~share link in contents should be supported.~~
 10. ~~landing picture title show.~~
-11. members conversation are separated by events, which should not.
+11. members conversation are separated by events, which should not. maybe should remove event and content dependencies. considering...
 12. ~~show content privercy in content page.~~
 13. upvote and downvote for a content
 14. ~~add goto my events on landing page and landing page should allow logged in users to view.~~
-15. signin and signup logic, invite link modified, need more test.
+15. signin and signup logic, invite link modified, need more test. Current logic is, if a user come to this site with a invite code, he can sign in or sign up, and the invite code will be lost. and they can only re-paste the invite link to go to the event. which sounds complicated and doesn't make sense to me. onthought: identity would expire one thoekn expires. so sign up of login should never lost the invite code.
 16. ~~try vercel for fast deployment.~~

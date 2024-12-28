@@ -7,7 +7,7 @@ const InviteCodePage = async (props: {
 	params: Promise<{ inviteCode: string }>
 }) => {
 	const profile = await currentProfile()
-	const inviteCode = (await props.params).inviteCode
+	const { inviteCode } = await props.params
 
 	if (!profile) {
 		return redirect("/sign-in")
