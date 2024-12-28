@@ -21,8 +21,6 @@ type ChatMessagesProps = {
 	member: Member
 	chatId: string
 	apiUrl: string
-	socketUrl: string
-	socketQuery: Record<string, string>
 	paramKey: "contentId" | "conversationId"
 	paramValue: string
 	type: "content" | "conversation"
@@ -33,11 +31,8 @@ export const ShowMessages = ({
 	member,
 	chatId,
 	apiUrl,
-	socketUrl,
-	socketQuery,
 	paramKey,
 	paramValue,
-	// type,
 }: ChatMessagesProps) => {
 	const queryKey = `chat:${chatId}`
 
@@ -46,6 +41,7 @@ export const ShowMessages = ({
 		apiUrl,
 		paramKey,
 		paramValue,
+		refetchIntervalSeconds: 0,
 	})
 
 	if (status === "pending") {
@@ -97,8 +93,8 @@ export const ShowMessages = ({
 									deleted={message.deleted}
 									timestamp={formatDistanceToNow(message.createdAt)}
 									isUpdated={message.updatedAt !== message.createdAt}
-									socketUrl={socketUrl}
-									socketQuery={socketQuery}
+									// apiUrl={apiUrl}
+									// messageQuery={socketQuery}
 									showMode={true}
 								/>
 							))}

@@ -137,7 +137,7 @@ export const CreateContentModal = () => {
 									</FormItem>
 								)}
 							/>
-							<div className="flex items-center justify-center text-center">
+							<div className="flex flex-col items-center justify-center text-center">
 								<FormField
 									control={form.control}
 									name="imageUrl"
@@ -147,11 +147,19 @@ export const CreateContentModal = () => {
 												Image
 											</FormLabel>
 											<FormControl>
-												<FileUpload
-													endpoint="contentImage"
-													value={field.value}
-													onChange={field.onChange}
-												/>
+												<div className="flex flex-col items-center justify-center">
+													<FileUpload
+														endpoint="contentImage"
+														value={field.value}
+														onChange={field.onChange}
+													/>
+													<Input
+														disabled={isLoading}
+														className="border border-zinc-500 focus:bg-zinc-900/80 focus-visible:ring-0 focus-visible:ring-offset-0 w-80 mt-2"
+														placeholder="Or paste image url"
+														{...field}
+													/>
+												</div>
 											</FormControl>
 										</FormItem>
 									)}

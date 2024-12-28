@@ -2,7 +2,6 @@
 
 import type { Content, Member } from "@prisma/client"
 
-// import { MediaRoom } from "@/components/media-room"
 import axios from "axios"
 import { useEffect, useState } from "react"
 import { ShowMessages } from "./show-messages"
@@ -43,11 +42,6 @@ export const EventSideMessages = ({
 				chatId={content.id}
 				type="content"
 				apiUrl="/api/messages"
-				socketUrl="/api/socket/messages"
-				socketQuery={{
-					contentId: content.id,
-					eventId: content.eventId,
-				}}
 				paramKey="contentId"
 				paramValue={content.id}
 			/>

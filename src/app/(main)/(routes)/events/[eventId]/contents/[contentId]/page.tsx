@@ -65,16 +65,21 @@ const ContentIdPage = async (props: {
 			// onClick={onClick}
 			className="group/content px-0 md:px-2 py-2 rounded-md md:flex items-start justify-start gap-x-2 w-full mb-1"
 		>
-			<div className="w-full md:w-1/2">
+			<div className="w-full md:w-1/2 md:sticky md:top-2">
 				{hasImage && (
-					<Image
-						src={hasImage}
-						alt="Content Image"
-						width={0}
-						height={0}
-						sizes="100vw"
-						style={{ width: "100%", height: "auto" }}
-					/>
+					<div className="flex flex-col items-center justify-center">
+						<Image
+							src={hasImage}
+							alt="Content Image"
+							width={0}
+							height={0}
+							sizes="100vw"
+							style={{ width: "100%", height: "auto" }}
+						/>
+						<div className="text-xs mt-2">
+							[This content is {content.isPublic ? "Public" : "Private"}]
+						</div>
+					</div>
 				)}
 			</div>
 
@@ -87,8 +92,8 @@ const ContentIdPage = async (props: {
 						chatId={content.id}
 						type="content"
 						apiUrl="/api/messages"
-						socketUrl="/api/socket/messages"
-						socketQuery={{
+						// socketUrl="/api/socket/messages"
+						messageQuery={{
 							contentId: content.id,
 							eventId: content.eventId,
 						}}
@@ -98,7 +103,7 @@ const ContentIdPage = async (props: {
 					<ChatInput
 						name={content.title}
 						type="content"
-						apiUrl="/api/socket/messages"
+						apiUrl="/api/messages"
 						query={{
 							contentId: content.id,
 							eventId: content.eventId,

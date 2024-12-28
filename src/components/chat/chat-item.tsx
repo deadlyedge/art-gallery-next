@@ -30,8 +30,9 @@ type ChatItemProps = {
 	deleted: boolean
 	currentMember: Member
 	isUpdated: boolean
-	socketUrl: string
-	socketQuery: Record<string, string>
+	// messageUrl: string
+	apiUrl?: string
+	messageQuery?: Record<string, string>
 	showMode?: boolean
 }
 
@@ -54,8 +55,9 @@ export const ChatItem = ({
 	deleted,
 	currentMember,
 	isUpdated,
-	socketUrl,
-	socketQuery,
+	apiUrl,
+	// messageUrl,
+	messageQuery,
 	showMode = false,
 }: ChatItemProps) => {
 	const [isEditing, setIsEditing] = useState(false)
@@ -73,7 +75,7 @@ export const ChatItem = ({
 
 	useEffect(() => {
 		const handleKeyDown = (event: KeyboardEvent) => {
-			if (event.key === "Escape" || event.key === "Enter") {
+			if (event.key === "Escape") {
 				setIsEditing(false)
 			}
 		}
@@ -95,8 +97,8 @@ export const ChatItem = ({
 	const onSubmit = async (values: z.infer<typeof formSchema>) => {
 		try {
 			const url = qs.stringifyUrl({
-				url: `${socketUrl}/${id}`,
-				query: socketQuery,
+				url: `${apiUrl}/${id}`,
+				query: messageQuery,
 			})
 
 			await axios.patch(url, values)
@@ -119,7 +121,8 @@ export const ChatItem = ({
 	const isAdmin = currentMember.role === MemberRole.ADMIN
 	const isModerator = currentMember.role === MemberRole.MODERATOR
 	const isOwner = currentMember.id === member.id
-	const canDeleteMessage = !deleted && (isAdmin || isModerator || isOwner)
+	const canDeleteMessage =
+		!deleted && (isAdmin || isModerator || isOwner) && !showMode
 	const canEditMessage = !deleted && isOwner && !fileUrl && !showMode
 	const isPDF = fileType === "pdf" && fileUrl
 	const isImage = !isPDF && fileUrl
@@ -127,22 +130,30 @@ export const ChatItem = ({
 	return (
 		<div className="relative group flex items-center hover:bg-black/10 p-2 my-1 transition w-full">
 			<div className="group flex gap-x-2 items-start w-full">
-				<div
-					onClick={onMemberClick}
-					className="cursor-pointer hover:drop-shadow-md transition">
-					<UserAvatar src={member.profile.imageUrl} />
-				</div>
+				{!showMode && (
+					<div
+						onClick={onMemberClick}
+						className="cursor-pointer hover:drop-shadow-md transition">
+						<UserAvatar src={member.profile.imageUrl} />
+					</div>
+				)}
 				<div className="flex flex-col w-full">
 					<div className="flex items-center gap-x-2">
 						<div className="flex items-center">
-							<p
-								onClick={onMemberClick}
-								className="font-semibold text-xs hover:underline cursor-pointer">
-								{member.profile.name}
-							</p>
-							<ActionTooltip label={member.role}>
-								{roleIconMap[member.role]}
-							</ActionTooltip>
+							{showMode ? (
+								<p className="font-semibold text-xs">{member.profile.name}</p>
+							) : (
+								<p
+									onClick={onMemberClick}
+									className="font-semibold text-xs hover:underline cursor-pointer">
+									{member.profile.name}
+								</p>
+							)}{" "}
+							{!showMode && (
+								<ActionTooltip label={member.role}>
+									{roleIconMap[member.role]}
+								</ActionTooltip>
+							)}
 						</div>
 						<span className="text-[10px] text-zinc-500 dark:text-zinc-400">
 							{timestamp}
@@ -214,7 +225,11 @@ export const ChatItem = ({
 										</FormItem>
 									)}
 								/>
-								<Button disabled={isLoading} size="sm" variant="default">
+								<Button
+									type="submit"
+									disabled={isLoading}
+									size="sm"
+									variant="default">
 									Save
 								</Button>
 							</form>
@@ -239,8 +254,8 @@ export const ChatItem = ({
 						<Trash
 							onClick={() =>
 								onOpen("deleteMessage", {
-									apiUrl: `${socketUrl}/${id}`,
-									query: socketQuery,
+									apiUrl: `${apiUrl}/${id}`,
+									query: messageQuery,
 								})
 							}
 							className="cursor-pointer ml-auto w-4 h-4 text-zinc-500 hover:text-zinc-600 dark:hover:text-zinc-300 transition"
