@@ -15,7 +15,7 @@ import { useModal } from "@/hooks/use-modal-store"
 
 type ChatInputProps = {
 	apiUrl: string
-	query: Record<string, unknown>
+	query: Record<string, string>
 	name: string
 	type: "conversation" | "content"
 }
