@@ -18,7 +18,7 @@ export function LandingHero({
 				<LogoMotion size="xl" />
 			</div>
 			<div className="text-sm md:text-xl mt-12 text-foreground">
-				100% free. No-fee. No ads. No watermark.
+				Share your photography and paintings.
 			</div>
 			<div>
 				<Link href={gotoEventClick}>

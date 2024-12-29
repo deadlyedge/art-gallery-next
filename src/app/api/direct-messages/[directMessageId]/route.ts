@@ -12,26 +12,11 @@ const getDirectMessage = async (
 	const conversation = await db.conversation.findFirst({
 		where: {
 			id: conversationId,
-			OR: [
-				{
-					memberOne: { profileId },
-				},
-				{
-					memberTwo: { profileId },
-				},
-			],
+			OR: [{ memberOne: { profileId } }, { memberTwo: { profileId } }],
 		},
 		include: {
-			memberOne: {
-				include: {
-					profile: true,
-				},
-			},
-			memberTwo: {
-				include: {
-					profile: true,
-				},
-			},
+			memberOne: { include: { profile: true } },
+			memberTwo: { include: { profile: true } },
 		},
 	})
 
@@ -47,17 +32,14 @@ const getDirectMessage = async (
 	if (!member) {
 		return NextResponse.json("Member not found", { status: 404 })
 	}
+
 	const directMessage = await db.directMessage.findFirst({
 		where: {
-			id: directMessageId as string,
-			conversationId: conversationId as string,
+			id: directMessageId,
+			conversationId: conversationId,
 		},
 		include: {
-			member: {
-				include: {
-					profile: true,
-				},
-			},
+			member: { include: { profile: true } },
 		},
 	})
 
@@ -93,6 +75,7 @@ export async function DELETE(
 	if (!conversationId) {
 		return NextResponse.json("No Conversation", { status: 400 })
 	}
+
 	try {
 		let directMessage = await getDirectMessage(
 			profile.id,
@@ -100,25 +83,19 @@ export async function DELETE(
 			conversationId,
 		)
 		directMessage = await db.directMessage.update({
-			where: {
-				id: directMessageId,
-			},
+			where: { id: directMessageId },
 			data: {
 				fileUrl: null,
 				text: "消息已经被删除.",
 				deleted: true,
 			},
 			include: {
-				member: {
-					include: {
-						profile: true,
-					},
-				},
+				member: { include: { profile: true } },
 			},
 		})
 		return NextResponse.json(directMessage)
 	} catch (error) {
-		console.log("[DIRECT_MESSAGE_DELETE]", error)
+		console.error("[DIRECT_MESSAGE_DELETE]", error)
 		return new NextResponse("Internal Error", { status: 500 })
 	}
 }
@@ -132,6 +109,7 @@ export async function PATCH(
 	const { text } = await req.json()
 	const { directMessageId } = await props.params
 	const conversationId = searchParams.get("conversationId")
+
 	if (!profile) {
 		return NextResponse.json("Unauthorized", { status: 401 })
 	}
@@ -147,24 +125,16 @@ export async function PATCH(
 			conversationId,
 		)
 		directMessage = await db.directMessage.update({
-			where: {
-				id: directMessageId,
-			},
-			data: {
-				text,
-			},
+			where: { id: directMessageId },
+			data: { text },
 			include: {
-				member: {
-					include: {
-						profile: true,
-					},
-				},
+				member: { include: { profile: true } },
 			},
 		})
 
 		return NextResponse.json(directMessage)
 	} catch (error) {
-		console.log("[DIRECT_MESSAGE_PATCH]", error)
+		console.error("[DIRECT_MESSAGE_PATCH]", error)
 		return new NextResponse("Internal Error", { status: 500 })
 	}
 }
