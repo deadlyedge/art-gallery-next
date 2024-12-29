@@ -38,6 +38,7 @@ import {
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { useModal } from "@/hooks/use-modal-store"
+import { Bot } from "lucide-react"
 
 const formSchema = z.object({
 	title: z
@@ -64,7 +65,7 @@ export const EditContentModal = () => {
 	const form = useForm({
 		resolver: zodResolver(formSchema),
 		defaultValues: {
-			title: "",
+			title: content?.title || "",
 			description: content?.description || "",
 			imageUrl: content?.imageUrl || "",
 			isPublic: content?.isPublic || false,
@@ -81,6 +82,7 @@ export const EditContentModal = () => {
 				(!!content.imageUrl && content.isPublic) || false,
 			)
 		}
+		// axios.post("/api/aiaa", { imageURL: content?.imageUrl })
 	}, [form, content, content?.imageUrl])
 
 	const isLoading = form.formState.isSubmitting
@@ -103,8 +105,20 @@ export const EditContentModal = () => {
 		}
 	}
 
+	const noImageURL = !form.getValues("imageUrl")
+
+	const onAiDescribeClick = async () => {
+		const userDescription = form.getValues("description")
+		const imageURL = form.getValues("imageUrl")
+		const aiDescription = await axios.get(`/api/aiaa?imageURL=${imageURL}`)
+		form.setValue(
+			"description",
+			`${userDescription} and ai said: ${aiDescription.data}`,
+		)
+	}
+
 	const handleClose = () => {
-		form.reset()
+		// form.reset()
 		onClose()
 	}
 
@@ -148,7 +162,17 @@ export const EditContentModal = () => {
 								render={({ field }) => (
 									<FormItem>
 										<FormLabel className="uppercase text-xs font-bold text-primary/70">
-											Description
+											<div className="flex items-center">
+												Description
+												<Button
+													disabled={noImageURL}
+													type="button"
+													variant="ghost"
+													className="p-1"
+													onClick={onAiDescribeClick}>
+													<Bot className="w-4 h-4" />
+												</Button>
+											</div>
 										</FormLabel>
 										<FormControl>
 											<Textarea
@@ -200,7 +224,7 @@ export const EditContentModal = () => {
 										<FormControl>
 											<Checkbox
 												checked={field.value}
-												disabled={!form.getValues("imageUrl")}
+												disabled={noImageURL}
 												onCheckedChange={field.onChange}
 												className="w-5 h-5 mr-1"
 											/>

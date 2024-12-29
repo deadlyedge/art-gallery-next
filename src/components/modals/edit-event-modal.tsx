@@ -78,7 +78,7 @@ export const EditEventModal = () => {
 	}
 
 	const handleClose = () => {
-		form.reset()
+		// form.reset()
 		onClose()
 	}
 

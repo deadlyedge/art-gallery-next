@@ -20,8 +20,7 @@ type ModalData = {
 	contentType?: ContentType
 	imageUrl?: string
 	apiUrl?: string
-	// biome-ignore lint/suspicious/noExplicitAny: <explanation>
-	query?: Record<string, any>
+	query?: Record<string, string> // xdream note from any
 }
 
 type ModalStore = {
