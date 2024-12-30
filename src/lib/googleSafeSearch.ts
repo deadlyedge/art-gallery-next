@@ -4,7 +4,26 @@ const apiKey = process.env.GOOGLE_VISION_API_KEY
 if (!apiKey) {
 	throw new Error("GOOGLE_VISION_API_KEY is not set")
 }
-const client = new ImageAnnotatorClient({ apiKey })
+
+export const getGCPCredentials = () => {
+	// for Vercel, use environment variables
+	return process.env.GCP_PRIVATE_KEY
+		? {
+				credentials: {
+					client_email: process.env.GCP_SERVICE_ACCOUNT_EMAIL,
+					private_key: process.env.GCP_PRIVATE_KEY,
+				},
+				projectId: process.env.GCP_PROJECT_ID,
+			}
+		: // for local development, use gcloud CLI
+			{}
+}
+
+const client = new ImageAnnotatorClient(
+	process.env.NODE_ENV !== "production" 
+		? { apiKey }
+		: getGCPCredentials()
+)
 
 export async function safeSearchPass(
 	imageUrl: string,
