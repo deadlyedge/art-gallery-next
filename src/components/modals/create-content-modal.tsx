@@ -1,9 +1,12 @@
 "use client"
 
+import { cn } from "@/lib/utils"
 import { zodResolver } from "@hookform/resolvers/zod"
 import axios from "axios"
+import { Bot, ShieldCheck } from "lucide-react"
 import { useParams, useRouter } from "next/navigation"
 import qs from "query-string"
+import { useEffect, useState } from "react"
 import { useForm } from "react-hook-form"
 import * as z from "zod"
 
@@ -13,6 +16,7 @@ import { Checkbox } from "@/components/ui/checkbox"
 import {
 	Dialog,
 	DialogContent,
+	DialogDescription,
 	DialogFooter,
 	DialogHeader,
 	DialogTitle,
@@ -28,8 +32,6 @@ import {
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { useModal } from "@/hooks/use-modal-store"
-import { Bot } from "lucide-react"
-import { useEffect, useState } from "react"
 
 const formSchema = z.object({
 	title: z
@@ -47,7 +49,7 @@ const formSchema = z.object({
 
 export const CreateContentModal = () => {
 	const { isOpen, onClose, type, data } = useModal()
-	const [isChecking, setIsChecking] = useState(false)
+	const [isChecked, setIsChecked] = useState(false)
 	const [isNSFW, setIsNSFW] = useState(false)
 	const router = useRouter()
 	const params = useParams()
@@ -66,41 +68,18 @@ export const CreateContentModal = () => {
 	})
 
 	useEffect(() => {
-		const subscription = form.watch(async (value, { name }) => {
-			if (name === "isPublic" && value.isPublic) {
-				const imageUrl = value.imageUrl
-				if (imageUrl) {
-					setIsChecking(true)
-					try {
-						const url = qs.stringifyUrl({
-							url: "/api/safe-search",
-							query: {
-								imageURL: imageUrl,
-							},
-						})
-						const res = await axios.get(url)
-						if (res.status === 222) {
-							setIsNSFW(true)
-							form.setValue("isPublic", false)
-						} else {
-							setIsNSFW(false)
-						}
-					} catch (error) {
-						console.error("Error checking image URL:", error)
-					}
-				}
+		const subscription = form.watch((value, { name }) => {
+			if (name === "imageUrl") {
+				setIsChecked(false)
 			}
-			setIsChecking(false)
 		})
 		return () => subscription.unsubscribe()
-	}, [form]) // Only need form as a dependency
+	}, [form])
 
 	const isLoading = form.formState.isSubmitting
 
 	const onSubmit = async (values: z.infer<typeof formSchema>) => {
 		try {
-			// add NSFW check
-
 			const url = qs.stringifyUrl({
 				url: "/api/contents",
 				query: {
@@ -129,6 +108,31 @@ export const CreateContentModal = () => {
 		)
 	}
 
+	const onResetAll = () => {
+		form.reset()
+		setIsChecked(false)
+		setIsNSFW(false)
+	}
+
+	const onCheckClick = async () => {
+		const imageURL = form.getValues("imageUrl")
+		if (!imageURL) return
+		const url = qs.stringifyUrl({
+			url: "/api/safe-search",
+			query: {
+				imageURL: imageURL,
+			},
+		})
+		const res = await axios.get(url)
+		if (res.status === 222) {
+			setIsNSFW(true)
+			form.setValue("isPublic", false)
+		} else {
+			setIsNSFW(false)
+		}
+		setIsChecked(true)
+	}
+
 	const handleClose = () => {
 		// form.reset()
 		onClose()
@@ -141,6 +145,7 @@ export const CreateContentModal = () => {
 					<DialogTitle className="text-base text-center font-bold">
 						创建内容
 					</DialogTitle>
+					<DialogDescription hidden />
 				</DialogHeader>
 				<Form {...form}>
 					<form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
@@ -168,6 +173,26 @@ export const CreateContentModal = () => {
 														// onChange={onImageUrlChange}
 														{...field}
 													/>
+													<div className="flex items-center mt-2">
+														<p className="text-sm">
+															Show it public or use AI, you must do:
+														</p>
+														<Button
+															type="button"
+															size="sm"
+															onClick={onCheckClick}
+															className={cn(
+																"ml-1",
+																!isChecked
+																	? "*:text-zinc-500"
+																	: isNSFW
+																		? "*:text-red-500"
+																		: "*:text-green-500",
+															)}>
+															<ShieldCheck className="w-4 h-4" />
+															Safe Check
+														</Button>
+													</div>
 												</div>
 											</FormControl>
 										</FormItem>
@@ -204,7 +229,7 @@ export const CreateContentModal = () => {
 												Description
 												{!noImageURL && (
 													<Button
-														disabled={noImageURL || isNSFW}
+														disabled={noImageURL || isNSFW || !isChecked}
 														type="button"
 														variant="ghost"
 														className="p-1"
@@ -231,12 +256,10 @@ export const CreateContentModal = () => {
 						<DialogFooter className="px-6 py-4">
 							<div className="flex w-full items-center justify-between">
 								<Button
+									type="button"
 									variant="secondary"
 									disabled={isLoading}
-									onClick={() => {
-										form.reset()
-										setIsNSFW(false)
-									}}>
+									onClick={onResetAll}>
 									reset
 								</Button>
 								{!noImageURL && (
@@ -248,23 +271,21 @@ export const CreateContentModal = () => {
 												<FormControl>
 													<Checkbox
 														checked={field.value}
-														disabled={isNSFW}
+														disabled={isNSFW || !isChecked}
 														onCheckedChange={field.onChange}
 														className="w-5 h-5 mr-1"
 													/>
 												</FormControl>
 												<FormLabel className="pb-1.5">
-													{isChecking
-														? "Safe Checking..."
-														: isNSFW
-															? "此内容无法公开展示"
-															: "是否希望此内容和您的名字一起显示在首页"}{" "}
+													{isNSFW
+														? "此内容无法公开展示"
+														: "是否希望此内容和您的名字一起显示在首页"}
 												</FormLabel>
 											</FormItem>
 										)}
 									/>
 								)}
-								<Button variant="default" disabled={isLoading || isChecking}>
+								<Button variant="default" disabled={isLoading}>
 									创建
 								</Button>
 							</div>

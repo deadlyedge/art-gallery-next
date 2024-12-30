@@ -1,4 +1,4 @@
-'use server'
+"use server"
 // create a function that takes a URL of an image and use openai to describe the image
 
 import OpenAI from "openai"
