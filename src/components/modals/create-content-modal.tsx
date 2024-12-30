@@ -29,6 +29,7 @@ import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { useModal } from "@/hooks/use-modal-store"
 import { Bot } from "lucide-react"
+import { useEffect, useState } from "react"
 
 const formSchema = z.object({
 	title: z
@@ -46,6 +47,8 @@ const formSchema = z.object({
 
 export const CreateContentModal = () => {
 	const { isOpen, onClose, type, data } = useModal()
+	const [isChecking, setIsChecking] = useState(false)
+	const [isNSFW, setIsNSFW] = useState(false)
 	const router = useRouter()
 	const params = useParams()
 
@@ -62,10 +65,42 @@ export const CreateContentModal = () => {
 		},
 	})
 
+	useEffect(() => {
+		const subscription = form.watch(async (value, { name }) => {
+			if (name === "isPublic" && value.isPublic) {
+				const imageUrl = value.imageUrl
+				if (imageUrl) {
+					setIsChecking(true)
+					try {
+						const url = qs.stringifyUrl({
+							url: "/api/safe-search",
+							query: {
+								imageURL: imageUrl,
+							},
+						})
+						const res = await axios.get(url)
+						if (res.status === 222) {
+							setIsNSFW(true)
+							form.setValue("isPublic", false)
+						} else {
+							setIsNSFW(false)
+						}
+					} catch (error) {
+						console.error("Error checking image URL:", error)
+					}
+				}
+			}
+			setIsChecking(false)
+		})
+		return () => subscription.unsubscribe()
+	}, [form]) // Only need form as a dependency
+
 	const isLoading = form.formState.isSubmitting
 
 	const onSubmit = async (values: z.infer<typeof formSchema>) => {
 		try {
+			// add NSFW check
+
 			const url = qs.stringifyUrl({
 				url: "/api/contents",
 				query: {
@@ -90,7 +125,7 @@ export const CreateContentModal = () => {
 		const aiDescription = await axios.get(`/api/aiaa?imageURL=${imageURL}`)
 		form.setValue(
 			"description",
-			`${userDescription} and ai said: ${aiDescription.data}`,
+			`${userDescription} and ai said: ${aiDescription.data}`.trim(),
 		)
 	}
 
@@ -110,6 +145,35 @@ export const CreateContentModal = () => {
 				<Form {...form}>
 					<form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
 						<div className="space-y-2 px-6">
+							<div className="flex flex-col items-center justify-center text-center">
+								<FormField
+									control={form.control}
+									name="imageUrl"
+									render={({ field }) => (
+										<FormItem>
+											<FormLabel className="uppercase text-xs font-bold text-primary/70">
+												Image
+											</FormLabel>
+											<FormControl>
+												<div className="flex flex-col items-center justify-center">
+													<FileUpload
+														endpoint="contentImage"
+														value={field.value}
+														onChange={field.onChange}
+													/>
+													<Input
+														disabled={isLoading}
+														className="border border-zinc-500 focus:bg-zinc-900/80 focus-visible:ring-0 focus-visible:ring-offset-0 w-80 mt-2"
+														placeholder="Or paste image url"
+														// onChange={onImageUrlChange}
+														{...field}
+													/>
+												</div>
+											</FormControl>
+										</FormItem>
+									)}
+								/>
+							</div>
 							<FormField
 								control={form.control}
 								name="title"
@@ -136,16 +200,19 @@ export const CreateContentModal = () => {
 								render={({ field }) => (
 									<FormItem>
 										<FormLabel className="uppercase text-xs font-bold text-primary/70">
-											<div className="flex items-center">
+											<div className="flex items-center justify-between">
 												Description
-												<Button
-													disabled={noImageURL}
-													type="button"
-													variant="ghost"
-													className="p-1"
-													onClick={onAiDescribeClick}>
-													<Bot className="w-4 h-4" />
-												</Button>
+												{!noImageURL && (
+													<Button
+														disabled={noImageURL || isNSFW}
+														type="button"
+														variant="ghost"
+														className="p-1"
+														onClick={onAiDescribeClick}>
+														<Bot className="w-4 h-4" />
+														ai art appreciation
+													</Button>
+												)}
 											</div>
 										</FormLabel>
 										<FormControl>
@@ -160,58 +227,47 @@ export const CreateContentModal = () => {
 									</FormItem>
 								)}
 							/>
-							<div className="flex flex-col items-center justify-center text-center">
-								<FormField
-									control={form.control}
-									name="imageUrl"
-									render={({ field }) => (
-										<FormItem>
-											<FormLabel className="uppercase text-xs font-bold text-primary/70">
-												Image
-											</FormLabel>
-											<FormControl>
-												<div className="flex flex-col items-center justify-center">
-													<FileUpload
-														endpoint="contentImage"
-														value={field.value}
-														onChange={field.onChange}
-													/>
-													<Input
-														disabled={isLoading}
-														className="border border-zinc-500 focus:bg-zinc-900/80 focus-visible:ring-0 focus-visible:ring-offset-0 w-80 mt-2"
-														placeholder="Or paste image url"
-														{...field}
-													/>
-												</div>
-											</FormControl>
-										</FormItem>
-									)}
-								/>
-							</div>
 						</div>
 						<DialogFooter className="px-6 py-4">
-							<FormField
-								control={form.control}
-								name="isPublic"
-								render={({ field }) => (
-									<FormItem className="rounded-md flex items-center">
-										<FormControl>
-											<Checkbox
-												checked={field.value}
-												disabled={noImageURL}
-												onCheckedChange={field.onChange}
-												className="w-5 h-5 mr-1"
-											/>
-										</FormControl>
-										<FormLabel className="pb-1.5">
-											是否希望此内容和您的名字一起显示在首页
-										</FormLabel>
-									</FormItem>
+							<div className="flex w-full items-center justify-between">
+								<Button
+									variant="secondary"
+									disabled={isLoading}
+									onClick={() => {
+										form.reset()
+										setIsNSFW(false)
+									}}>
+									reset
+								</Button>
+								{!noImageURL && (
+									<FormField
+										control={form.control}
+										name="isPublic"
+										render={({ field }) => (
+											<FormItem className="rounded-md flex items-center">
+												<FormControl>
+													<Checkbox
+														checked={field.value}
+														disabled={isNSFW}
+														onCheckedChange={field.onChange}
+														className="w-5 h-5 mr-1"
+													/>
+												</FormControl>
+												<FormLabel className="pb-1.5">
+													{isChecking
+														? "Safe Checking..."
+														: isNSFW
+															? "此内容无法公开展示"
+															: "是否希望此内容和您的名字一起显示在首页"}{" "}
+												</FormLabel>
+											</FormItem>
+										)}
+									/>
 								)}
-							/>
-							<Button variant="default" disabled={isLoading}>
-								创建
-							</Button>
+								<Button variant="default" disabled={isLoading || isChecking}>
+									创建
+								</Button>
+							</div>
 						</DialogFooter>
 					</form>
 				</Form>
