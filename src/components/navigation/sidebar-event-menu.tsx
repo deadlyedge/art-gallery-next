@@ -1,11 +1,11 @@
-import { MoreHorizontal } from "lucide-react"
 import {
 	DropdownMenu,
 	DropdownMenuContent,
 	DropdownMenuItem,
 	DropdownMenuTrigger,
-} from "../ui/dropdown-menu"
-import { SidebarMenuAction } from "../ui/sidebar"
+} from "@/components/ui/dropdown-menu"
+import { SidebarMenuAction } from "@/components/ui/sidebar"
+import { MoreHorizontal } from "lucide-react"
 
 const SidebarEventMenu = () => {
 	return (

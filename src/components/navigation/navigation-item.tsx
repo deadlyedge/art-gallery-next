@@ -39,8 +39,10 @@ export const NavigationItem = ({
 				/>
 				<div
 					className={cn(
-						"relative group/tooltip flex mx-3 h-[120px] w-[245px] group-hover/tooltip:rounded-[16px] transition-all overflow-hidden",
-						params?.eventId === id && "bg-primary/10 text-primary",
+						"relative group/tooltip flex mx-3 h-[120px] w-[200px] group-hover/tooltip:rounded-[16px] transition-all overflow-hidden",
+						params?.eventId === id
+							? "bg-primary/10 text-primary"
+							: "opacity-50",
 					)}>
 					<Image
 						fill
@@ -49,7 +51,7 @@ export const NavigationItem = ({
 						sizes="(max-width: 500px) 30vw, (max-width: 800px) 40vw, 50vw"
 						className="object-cover"
 					/>
-					<div className="absolute w-full h-[120px] mx-auto mt-12 text-xl drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)]">
+					<div className="absolute w-full h-[120px] mx-auto mt-10 text-xl drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)] truncate p-1">
 						{title}
 					</div>
 				</div>

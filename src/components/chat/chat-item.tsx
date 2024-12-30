@@ -170,8 +170,8 @@ export const ChatItem = ({
 								alt={text}
 								width={0}
 								height={0}
-								sizes="100vw"
-								style={{ width: "auto", height: "100%" }}
+								sizes="50vw"
+								style={{ width: "auto", height: "100%", objectFit: "contain" }}
 							/>
 						</a>
 					)}

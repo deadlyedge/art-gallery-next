@@ -19,6 +19,7 @@ import {
 import { Form, FormControl, FormField, FormItem } from "@/components/ui/form"
 import { useModal } from "@/hooks/use-modal-store"
 import { useRouter } from "next/navigation"
+import { Input } from "../ui/input"
 
 const formSchema = z.object({
 	fileUrl: z.string().min(1, {
@@ -88,11 +89,19 @@ export const MessageFileModal = () => {
 									render={({ field }) => (
 										<FormItem>
 											<FormControl>
-												<FileUpload
-													endpoint="messageFile"
-													value={field.value}
-													onChange={field.onChange}
-												/>
+												<div className="flex flex-col items-center justify-center">
+													<FileUpload
+														endpoint="messageFile"
+														value={field.value}
+														onChange={field.onChange}
+													/>
+													<Input
+														disabled={isLoading}
+														className="border border-zinc-500 focus:bg-zinc-900/80 focus-visible:ring-0 focus-visible:ring-offset-0 w-80 mt-2"
+														placeholder="Or paste image url"
+														{...field}
+													/>
+												</div>
 											</FormControl>
 										</FormItem>
 									)}

@@ -83,7 +83,7 @@ export const EventContent = ({ content, event, role }: EventContentProps) => {
 							</ActionTooltip>
 						</div>
 					)}
-					{content.title === "general" && (
+					{content.title === "general" && role === MemberRole.ADMIN && (
 						<div className="ml-auto flex items-center gap-x-2">
 							<ActionTooltip label="编辑">
 								<Edit
