@@ -64,9 +64,7 @@ export const NavigationSidebar = async () => {
 			<SidebarContent>
 				<SidebarGroup>
 					<SidebarGroupLabel>Events</SidebarGroupLabel>
-					<SidebarGroupAction>
-						<NavigationAction />
-					</SidebarGroupAction>
+					<NavigationAction />
 					<SidebarGroupContent>
 						<SidebarMenu>
 							{events.map((event) => (

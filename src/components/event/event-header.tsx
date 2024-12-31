@@ -36,13 +36,13 @@ export const EventHeader = ({ event, role, profileName }: EventHeaderProps) => {
 	return (
 		<div className="sticky top-0 z-20 bg-black/40 flex items-center justify-center w-full h-10 gap-2 text-foreground/50 mb-2 backdrop-blur">
 			<DropdownMenu>
-				<DropdownMenuTrigger className="focus:outline-none truncate" asChild>
-					<button
+				<DropdownMenuTrigger className="focus:outline-none text-base font-semibold px-3 flex items-center h-10 text-foreground border-neutral-800 hover:text-white hover:bg-zinc-700/50 transition gap-2 max-w-64">
+					{/* <button
 						type="button"
-						className="text-base font-semibold px-3 flex items-center h-10 text-foreground border-neutral-200 dark:border-neutral-800 hover:bg-zinc-700/10 hover:dark:text-white dark:hover:bg-zinc-700/50 transition gap-2">
-						{event.title}
-						<ChevronDown className="h-5 w-5 ml-auto" />
-					</button>
+						className="text-base font-semibold px-3 flex items-center h-10 text-foreground border-neutral-800 hover:text-white hover:bg-zinc-700/50 transition gap-2 max-w-48 truncate"> */}
+					<span className="w-64 truncate">{event.title}</span>
+					<ChevronDown className="h-5 w-5 ml-auto" />
+					{/* </button> */}
 				</DropdownMenuTrigger>
 				<DropdownMenuContent className="w-56 text-xs font-medium text-black dark:text-neutral-400 space-y-[2px]">
 					{isModerator && (
@@ -96,8 +96,10 @@ export const EventHeader = ({ event, role, profileName }: EventHeaderProps) => {
 					)}
 				</DropdownMenuContent>
 			</DropdownMenu>
-			<div className="text-xs">{event.createdAt.toLocaleDateString()}</div>
-			<div className="text-xs">by {profileName}</div>
+			<div className="text-xs hidden sm:dark:block">
+				{event.createdAt.toLocaleDateString()}
+			</div>
+			<div className="text-xs hidden md:dark:block">by {profileName}</div>
 		</div>
 	)
 }

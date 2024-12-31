@@ -3,7 +3,7 @@
 import { cn } from "@/lib/utils"
 import { zodResolver } from "@hookform/resolvers/zod"
 import axios from "axios"
-import { Bot, ShieldCheck } from "lucide-react"
+import { Bot, ShieldCheck, X } from "lucide-react"
 import { useRouter } from "next/navigation"
 import qs from "query-string"
 import { useEffect, useState } from "react"
@@ -53,6 +53,7 @@ export const EditContentModal = () => {
 	const isModalOpen = isOpen && type === "editContent"
 	const { content, event } = data
 
+	const [hasImage, setHasImage] = useState(!!content?.imageUrl)
 	const [isChecked, setIsChecked] = useState(content?.isPublic || false)
 	const [isNSFW, setIsNSFW] = useState(false)
 	const router = useRouter()
@@ -80,10 +81,12 @@ export const EditContentModal = () => {
 		const subscription = form.watch((value, { name }) => {
 			if (name === "imageUrl") {
 				setIsChecked(false)
+				form.setValue("isPublic", false)
+				setHasImage(!!value.imageUrl)
 			}
 		})
 		return () => subscription.unsubscribe()
-	}, [form.watch])
+	}, [form.watch, form.setValue])
 
 	const isLoading = form.formState.isSubmitting
 
@@ -104,8 +107,6 @@ export const EditContentModal = () => {
 			console.log(error)
 		}
 	}
-
-	const noImageURL = !form.getValues("imageUrl")
 
 	const onAiDescribeClick = async () => {
 		const userDescription = form.getValues("description")
@@ -235,9 +236,9 @@ export const EditContentModal = () => {
 										<FormLabel className="uppercase text-xs font-bold text-primary/70">
 											<div className="flex items-center justify-between">
 												Description
-												{!noImageURL && (
+												{hasImage && (
 													<Button
-														disabled={noImageURL || isNSFW || !isChecked}
+														disabled={isNSFW || !isChecked}
 														type="button"
 														variant="ghost"
 														className="p-1"
@@ -270,21 +271,23 @@ export const EditContentModal = () => {
 									onClick={onResetAll}>
 									reset
 								</Button>
-								{!noImageURL && (
+								{hasImage && (
 									<FormField
 										control={form.control}
 										name="isPublic"
 										render={({ field }) => (
 											<FormItem className="rounded-md flex items-center">
 												<FormControl>
-													<Checkbox
-														checked={field.value}
-														disabled={
-															(isNSFW || !isChecked) && !content?.isPublic
-														}
-														onCheckedChange={field.onChange}
-														className="w-5 h-5 mr-1"
-													/>
+													{isNSFW ? (
+														<X />
+													) : (
+														<Checkbox
+															checked={field.value}
+															disabled={!(field.value || isChecked)}
+															onCheckedChange={field.onChange}
+															className="w-5 h-5 mr-1"
+														/>
+													)}
 												</FormControl>
 												<FormLabel className="pb-1.5">
 													{isNSFW

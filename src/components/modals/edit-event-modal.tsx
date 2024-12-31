@@ -90,12 +90,12 @@ export const EditEventModal = () => {
 						编辑您的事件
 					</DialogTitle>
 					<DialogDescription className="text-center">
-						给事件定义个性化的名称和图标。你以后还可以做修改。
+					事件的名称名称、说明和标题图片。你以后还可以做修改。
 					</DialogDescription>
 				</DialogHeader>
 				<Form {...form}>
 					<form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-						<div className="space-y-8 px-6">
+						<div className="space-y-2 px-6">
 							<FormField
 								control={form.control}
 								name="title"
@@ -165,7 +165,7 @@ export const EditEventModal = () => {
 								/>
 							</div>
 						</div>
-						<DialogFooter className="px-6 py-4">
+						<DialogFooter className="px-6 py-2">
 							<Button variant="default" disabled={isLoading}>
 								保存
 							</Button>

@@ -77,15 +77,15 @@ export const CreateEventModal = () => {
 			<DialogContent className="p-0 overflow-hidden">
 				<DialogHeader className="pt-8 px-6">
 					<DialogTitle className="text-2xl text-center font-bold">
-						请添加一个事件
+						添加事件
 					</DialogTitle>
 					<DialogDescription className="text-center text-zinc-500">
-						给服务器定义个性化的名称和图标。你以后还可以做修改。
+						事件的名称名称、说明和标题图片。你以后还可以做修改。
 					</DialogDescription>
 				</DialogHeader>
 				<Form {...form}>
 					<form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-						<div className="space-y-8 px-6">
+						<div className="space-y-2 px-6">
 							<FormField
 								control={form.control}
 								name="title"
@@ -155,7 +155,7 @@ export const CreateEventModal = () => {
 								/>
 							</div>
 						</div>
-						<DialogFooter className="px-6 py-4">
+						<DialogFooter className="px-6 py-2">
 							<Button variant="default" disabled={isLoading}>
 								创建
 							</Button>

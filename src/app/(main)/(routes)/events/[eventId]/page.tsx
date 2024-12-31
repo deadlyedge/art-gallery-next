@@ -62,7 +62,7 @@ const EventContentsPage = async (props: {
 				<EventHeader event={event} role={role} profileName={profile.name} />
 				<div className="flex-1 px-0 md:px-3 pt-10 -mt-10 overflow-y-auto">
 					{event?.description && (
-						<div className="mb-2">
+						<div className="mb-2 px-2 md:px-0">
 							<span className="text-xs uppercase font-semibold">
 								description:
 							</span>{" "}

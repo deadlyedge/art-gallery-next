@@ -62,7 +62,7 @@ const ContentIdPage = async (props: {
 
 	return (
 		<div className="group/content px-0 md:px-2 py-2 rounded-md md:flex items-start justify-start gap-x-2 w-full mb-1">
-			<div className="w-full md:w-1/2 sticky top-10 md:top-0">
+			<div className="w-full md:w-1/2 sticky top-10 md:top-2">
 				{hasImage && (
 					<div className="flex flex-col items-center justify-center">
 						<Image
@@ -73,14 +73,14 @@ const ContentIdPage = async (props: {
 							sizes="100vw"
 							style={{ width: "100%", height: "auto" }}
 						/>
-						<div className="text-xs mt-2">
+						<div className="text-xs mt-2 hidden md:block">
 							[This content is {content.isPublic ? "Public" : "Private"}]
 						</div>
 					</div>
 				)}
 			</div>
 
-			<div className="sticky top-0 w-full md:w-1/2 flex flex-col drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)]">
+			<div className="sticky top-0 mt-8 sm:mt-0 w-full md:w-1/2 flex flex-col drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)]">
 				<ContentHeader content={content} member={member} event={event} />
 				<div className="flex flex-col">
 					<ChatMessages

@@ -173,26 +173,28 @@ export const CreateContentModal = () => {
 														// onChange={onImageUrlChange}
 														{...field}
 													/>
-													<div className="flex items-center mt-2">
-														<p className="text-sm">
-															Show it public or use AI, you must do:
-														</p>
-														<Button
-															type="button"
-															size="sm"
-															onClick={onCheckClick}
-															className={cn(
-																"ml-1",
-																!isChecked
-																	? "*:text-zinc-500"
-																	: isNSFW
-																		? "*:text-red-500"
-																		: "*:text-green-500",
-															)}>
-															<ShieldCheck className="w-4 h-4" />
-															Safe Check
-														</Button>
-													</div>
+													{!noImageURL && (
+														<div className="flex items-center mt-2">
+															<p className="text-xs">
+																Show it public or use AI, you must do:
+															</p>
+															<Button
+																type="button"
+																size="sm"
+																onClick={onCheckClick}
+																className={cn(
+																	"ml-1",
+																	!isChecked
+																		? "*:text-zinc-500"
+																		: isNSFW
+																			? "*:text-red-500"
+																			: "*:text-green-500",
+																)}>
+																<ShieldCheck className="w-4 h-4" />
+																Safe Check
+															</Button>
+														</div>
+													)}{" "}
 												</div>
 											</FormControl>
 										</FormItem>

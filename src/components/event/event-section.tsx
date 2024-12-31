@@ -33,8 +33,9 @@ export const EventSection = ({
 					<button
 						type="button"
 						onClick={() => onOpen("createContent", { contentType })}
-						className="text-zinc-500 hover:text-zinc-600 dark:text-zinc-400 dark:hover:text-zinc-300 transition">
+						className="text-zinc-400 hover:text-zinc-300 transition text-sm flex flex-row items-center gap-x-1">
 						<Plus className="h-4 w-4" />
+						add
 					</button>
 				</ActionTooltip>
 			)}

@@ -1,24 +1,19 @@
 "use client"
 
-import { Plus } from "lucide-react"
-
-import { ActionTooltip } from "@/components/action-tooltip"
 import { useModal } from "@/hooks/use-modal-store"
+import { SidebarGroupAction } from "@/components/ui/sidebar"
+import { Plus } from "lucide-react"
 
 export const NavigationAction = () => {
 	const { onOpen } = useModal()
 
 	return (
-		<div>
-			<ActionTooltip side="right" align="center" label="添加事件">
-				<div
-					onClick={() => onOpen("createEvent")}
-					className="group flex items-center cursor-pointer">
-					<div>
-						<Plus size={15} />
-					</div>
-				</div>
-			</ActionTooltip>
-		</div>
+		<SidebarGroupAction
+			title="create event"
+			onClick={() => onOpen("createEvent")}
+			className="flex items-center text-sm p-0">
+			<Plus className="w-4 h-4" />
+			{/* add */}
+		</SidebarGroupAction>
 	)
 }
