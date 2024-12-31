@@ -25,9 +25,9 @@ import {
 	FormMessage,
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
+import { Textarea } from "@/components/ui/textarea"
 import { useModal } from "@/hooks/use-modal-store"
 import { useRouter } from "next/navigation"
-import { Textarea } from "../ui/textarea"
 
 const formSchema = z.object({
 	title: z.string().min(1, {

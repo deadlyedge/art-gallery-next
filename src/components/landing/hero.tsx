@@ -1,7 +1,7 @@
 import Link from "next/link"
 
 import { Button } from "@/components/ui/button"
-import LogoMotion from "../logo-motion"
+import LogoMotion from "@/components/logo-motion"
 
 export function LandingHero({
 	gotoEventClick,

@@ -16,14 +16,10 @@ export const getGCPCredentials = () => {
 				projectId: process.env.GCP_PROJECT_ID,
 			}
 		: // for local development, use gcloud CLI
-			{}
+			{ apiKey }
 }
 
-const client = new ImageAnnotatorClient(
-	process.env.NODE_ENV !== "production" 
-		? { apiKey }
-		: getGCPCredentials()
-)
+const client = new ImageAnnotatorClient(getGCPCredentials())
 
 export async function safeSearchPass(
 	imageUrl: string,

@@ -17,9 +17,9 @@ import {
 	DialogTitle,
 } from "@/components/ui/dialog"
 import { Form, FormControl, FormField, FormItem } from "@/components/ui/form"
+import { Input } from "@/components/ui/input"
 import { useModal } from "@/hooks/use-modal-store"
 import { useRouter } from "next/navigation"
-import { Input } from "../ui/input"
 
 const formSchema = z.object({
 	fileUrl: z.string().min(1, {

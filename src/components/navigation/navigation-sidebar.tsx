@@ -1,7 +1,7 @@
 import { UserButton } from "@clerk/nextjs"
+import { currentUser } from "@clerk/nextjs/server"
 import { redirect } from "next/navigation"
 
-// import SidebarEventMenu from "./sidebar-event-menu"
 import LogoMotion from "@/components/logo-motion"
 import {
 	Sidebar,
@@ -19,7 +19,6 @@ import {
 import { currentProfile } from "@/lib/current-profile"
 import { db } from "@/lib/db"
 import { updateProfile } from "@/lib/update-profile"
-import { currentUser } from "@clerk/nextjs/server"
 import { NavigationAction } from "./navigation-action"
 // import Image from "next/image"
 import { NavigationItem } from "./navigation-item"

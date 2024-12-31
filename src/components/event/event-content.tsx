@@ -3,10 +3,10 @@
 import { type Content, type Event, MemberRole } from "@prisma/client"
 import { Edit, Eye, EyeClosed, Hash, Lock, Trash } from "lucide-react"
 import { useRouter } from "next/navigation"
+import Image from "next/image"
 
 import { ActionTooltip } from "@/components/action-tooltip"
 import { type ModalType, useModal } from "@/hooks/use-modal-store"
-import Image from "next/image"
 import { EventSideMessages } from "./event-side-messages"
 
 type EventContentProps = {
