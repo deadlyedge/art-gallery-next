@@ -61,9 +61,7 @@ const ContentIdPage = async (props: {
 			: event.imageUrl
 
 	return (
-		<div
-			className="group/content px-0 md:px-2 py-2 rounded-md md:flex items-start justify-start gap-x-2 w-full mb-1"
-		>
+		<div className="group/content px-0 md:px-2 py-2 rounded-md md:flex items-start justify-start gap-x-2 w-full mb-1">
 			<div className="w-full md:w-1/2 sticky top-10 md:top-0">
 				{hasImage && (
 					<div className="flex flex-col items-center justify-center">

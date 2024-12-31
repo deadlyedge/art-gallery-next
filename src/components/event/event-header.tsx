@@ -11,7 +11,6 @@ import {
 	UserPlus,
 	Users,
 } from "lucide-react"
-import { formatDistanceToNow } from "date-fns"
 
 import {
 	DropdownMenu,
@@ -97,9 +96,7 @@ export const EventHeader = ({ event, role, profileName }: EventHeaderProps) => {
 					)}
 				</DropdownMenuContent>
 			</DropdownMenu>
-			<div className="text-xs">
-				{event.createdAt.toLocaleDateString()}
-			</div>
+			<div className="text-xs">{event.createdAt.toLocaleDateString()}</div>
 			<div className="text-xs">by {profileName}</div>
 		</div>
 	)
