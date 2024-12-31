@@ -74,7 +74,7 @@ export const CreateEventModal = () => {
 
 	return (
 		<Dialog open={isModalOpen} onOpenChange={handleClose}>
-			<DialogContent className="p-0 overflow-hidden">
+			<DialogContent className="p-0 max-h-[90vh] overflow-y-auto">
 				<DialogHeader className="pt-8 px-6">
 					<DialogTitle className="text-2xl text-center font-bold">
 						添加事件
