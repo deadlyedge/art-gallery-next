@@ -1,7 +1,7 @@
 "use client"
 
-import { useModal } from "@/hooks/use-modal-store"
 import { SidebarGroupAction } from "@/components/ui/sidebar"
+import { useModal } from "@/hooks/use-modal-store"
 import { Plus } from "lucide-react"
 
 export const NavigationAction = () => {

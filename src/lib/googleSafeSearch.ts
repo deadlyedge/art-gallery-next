@@ -7,7 +7,7 @@ if (!apiKey) {
 	throw new Error("GOOGLE_VISION_API_KEY is not set")
 }
 
-export const getGCPCredentials = async () => {
+const getGCPCredentials = () => {
 	// for Vercel, use environment variables
 	return process.env.GCP_PRIVATE_KEY
 		? {
@@ -17,7 +17,7 @@ export const getGCPCredentials = async () => {
 				},
 				projectId: process.env.GCP_PROJECT_ID,
 			}
-		: // for local development, use gcloud CLI
+		: // for local development, use cloud vision api
 			{ apiKey }
 }
 

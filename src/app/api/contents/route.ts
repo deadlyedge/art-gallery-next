@@ -59,11 +59,10 @@ export async function POST(req: Request) {
 }
 
 const CONTENTS_BATCH = 20
+const TOTAL_LANDING_PAGE_SHOWS = 5
 
 export async function GET() {
 	try {
-		// let contents: Content[] = []
-
 		const contents = await db.content.findMany({
 			take: CONTENTS_BATCH,
 			where: {
@@ -77,7 +76,7 @@ export async function GET() {
 			return arr.sort(() => Math.random() - 0.5).slice(0, count)
 		}
 
-		const randomContents = getRandomElements(contents, 5)
+		const randomContents = getRandomElements(contents, TOTAL_LANDING_PAGE_SHOWS)
 
 		return NextResponse.json({
 			randomContents,

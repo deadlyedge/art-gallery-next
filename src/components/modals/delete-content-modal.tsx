@@ -52,7 +52,7 @@ export const DeleteContentModal = () => {
 			<DialogContent className="p-0 overflow-hidden">
 				<DialogHeader className="pt-8 px-6">
 					<DialogTitle className="text-2xl text-center font-bold">
-						删除频道
+						删除内容
 					</DialogTitle>
 					<DialogDescription className="text-center">
 						确定要删除吗？ <br />

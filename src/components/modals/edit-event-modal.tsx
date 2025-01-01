@@ -90,7 +90,7 @@ export const EditEventModal = () => {
 						编辑您的事件
 					</DialogTitle>
 					<DialogDescription className="text-center">
-					事件的名称名称、说明和标题图片。你以后还可以做修改。
+						事件的名称名称、说明和标题图片。你以后还可以做修改。
 					</DialogDescription>
 				</DialogHeader>
 				<Form {...form}>

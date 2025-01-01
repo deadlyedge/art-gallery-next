@@ -24,10 +24,10 @@ import { useModal } from "@/hooks/use-modal-store"
 type EventHeaderProps = {
 	event: EventWithMembersWithProfiles
 	role?: MemberRole
-	profileName: string
+	founderName: string
 }
 
-export const EventHeader = ({ event, role, profileName }: EventHeaderProps) => {
+export const EventHeader = ({ event, role, founderName }: EventHeaderProps) => {
 	const { onOpen } = useModal()
 
 	const isAdmin = role === MemberRole.ADMIN
@@ -99,7 +99,7 @@ export const EventHeader = ({ event, role, profileName }: EventHeaderProps) => {
 			<div className="text-xs hidden sm:dark:block">
 				{event.createdAt.toLocaleDateString()}
 			</div>
-			<div className="text-xs hidden md:dark:block">by {profileName}</div>
+			<div className="text-xs hidden md:dark:block">by {founderName}</div>
 		</div>
 	)
 }

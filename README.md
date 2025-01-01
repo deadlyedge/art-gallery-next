@@ -25,7 +25,12 @@ https://aganx.com/
 12. ~~show content privercy in content page.~~
 13. upvote and downvote for a content
 14. ~~add goto my events on landing page and landing page should allow logged in users to view.~~
-15. signin and signup logic, invite link modified, need more test. Current logic is, if a user come to this site with a invite code, he can sign in or sign up, and the invite code will be lost. and they can only re-paste the invite link to go to the event. which sounds complicated and doesn't make sense to me. onthought: identity would expire one thoekn expires. so sign up of login should never lost the invite code.
+15. signin and signup logic, invite link modified, need more test. Current logic is, if a user come to this site with a invite code, he can sign in or sign up, and the invite code will be lost. and they can only re-paste the invite link to go to the event. which sounds complicated and doesn't make sense to me. onthought: initial a default event for new users. so sign up of login should never lost the invite code.
 16. ~~try vercel for fast deployment.~~
 17. ~~mobile landing page~~
-18. add AI Image Art Appreciation for content image description.
+18. ~~add AI Image Art Appreciation for content image description.~~
+19. ~~add google safe search for image~~ 
+20. debug /setup
+21. move event image to content and add 'to event title image'
+22. minimal members lists in event and content pages.
+23. unread direct messages.(new messages alert)

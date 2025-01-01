@@ -42,13 +42,15 @@ const EventContentsPage = async (props: {
 		},
 	})
 
-	const members = event?.members.filter(
-		(member) => member.profileId !== profile.id,
-	)
-
 	if (!event) {
 		return redirect("/")
 	}
+
+	const founder = event.members.find((member) => member.role === "ADMIN")
+
+	const members = event.members.filter(
+		(member) => member.profileId !== profile.id,
+	)
 
 	const role = event.members.find(
 		(member) => member.profileId === profile.id,
@@ -59,9 +61,13 @@ const EventContentsPage = async (props: {
 	return (
 		<div className="flex flex-col h-[100vh]">
 			<Suspense fallback={<Loading />}>
-				<EventHeader event={event} role={role} profileName={profile.name} />
+				<EventHeader
+					event={event}
+					role={role}
+					founderName={founder?.profile.name as string}
+				/>
 				<div className="flex-1 px-0 md:px-3 pt-10 -mt-10 overflow-y-auto">
-					{event?.description && (
+					{event.description && (
 						<div className="mb-2 px-2 md:px-0">
 							<span className="text-xs uppercase font-semibold">
 								description:

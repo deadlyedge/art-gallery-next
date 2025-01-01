@@ -4,7 +4,7 @@ const publicPaths = createRouteMatcher([
 	"/",
 	"/sign-in(.*)",
 	"/sign-up(.*)",
-	"/api/webhook",
+	// "/api/webhook",
 	"/api/uploadthing",
 	"/api/contents",
 ])
