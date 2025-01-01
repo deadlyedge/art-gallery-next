@@ -20,9 +20,9 @@ type EventMemberProps = {
 const roleIconMap = {
 	[MemberRole.GUEST]: null,
 	[MemberRole.MODERATOR]: (
-		<ShieldCheck className="h-4 w-4 ml-2 text-indigo-500" />
+		<ShieldCheck className="h-4 w-4 text-indigo-500" />
 	),
-	[MemberRole.ADMIN]: <ShieldAlert className="h-4 w-4 ml-2 text-rose-500" />,
+	[MemberRole.ADMIN]: <ShieldAlert className="h-4 w-4 text-rose-500" />,
 }
 
 export const EventMember = ({ member }: EventMemberProps) => {
@@ -40,8 +40,8 @@ export const EventMember = ({ member }: EventMemberProps) => {
 			type="button"
 			onClick={onClick}
 			className={cn(
-				"group px-2 py-2 rounded-md flex items-center gap-x-2 hover:bg-zinc-700/10 dark:hover:bg-zinc-700/50 transition mb-1",
-				params?.memberId === member.id && "bg-zinc-700/20 dark:bg-zinc-700",
+				"group px-2 py-2 rounded-md flex items-center gap-x-2 hover:bg-zinc-700/50 transition mb-1",
+				params?.memberId === member.id && "bg-zinc-700",
 			)}>
 			<UserAvatar
 				src={member.profile.imageUrl}
@@ -49,9 +49,9 @@ export const EventMember = ({ member }: EventMemberProps) => {
 			/>
 			<p
 				className={cn(
-					"font-semibold text-sm text-zinc-500 group-hover:text-zinc-600 dark:text-zinc-400 dark:group-hover:text-zinc-300 transition",
+					"font-semibold text-sm text-zinc-400 group-hover:text-zinc-300 transition max-w-40 truncate",
 					params?.memberId === member.id &&
-						"text-primary dark:text-zinc-200 dark:group-hover:text-white",
+						"text-primary group-hover:text-white",
 				)}>
 				{member.profile.name}
 			</p>

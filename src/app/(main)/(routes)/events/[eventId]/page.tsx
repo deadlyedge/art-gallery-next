@@ -86,7 +86,7 @@ const EventContentsPage = async (props: {
 								label="Members"
 								event={event}
 							/>
-							<div className="space-y-[2px]">
+							<div className="space-y-[2px] flex flex-row flex-wrap items-center">
 								{members.map((member) => (
 									<EventMember key={member.id} member={member} event={event} />
 								))}

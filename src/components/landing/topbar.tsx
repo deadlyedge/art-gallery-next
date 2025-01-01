@@ -19,7 +19,9 @@ export const LandingTopbar = ({
 			<div className="flex items-center">
 				<SignedOut>
 					<div className="hover:text-white">
-						<SignInButton mode="modal">login</SignInButton>
+						<SignInButton mode="modal" fallbackRedirectUrl={gotoEventClick}>
+							login
+						</SignInButton>
 					</div>
 				</SignedOut>
 				<SignedIn>
