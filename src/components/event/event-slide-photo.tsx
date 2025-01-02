@@ -1,0 +1,71 @@
+"use client"
+
+import {
+	Carousel,
+	CarouselContent,
+	CarouselItem,
+	// CarouselNext,
+	// CarouselPrevious,
+} from "@/components/ui/carousel"
+import type { Content } from "@prisma/client"
+import Autoplay from "embla-carousel-autoplay"
+import Image from "next/image"
+import { useEffect, useState } from "react"
+
+const EventSlidePhoto = ({ eventId }: { eventId: string }) => {
+	const [showContents, setShowContents] = useState<Content[]>([])
+
+	useEffect(() => {
+		const fetchData = async () => {
+			try {
+				const response = await fetch(`/api/events/${eventId}`)
+				const data = await response.json()
+				console.log(data)
+				setShowContents(data.randomContents)
+			} catch (error) {
+				console.error("Error fetching data:", error)
+			}
+		}
+		fetchData()
+	}, [eventId])
+
+	if (!showContents) {
+		return <div>Loading...</div> // Handle the loading state
+	}
+
+	return (
+		<Carousel
+			plugins={[
+				Autoplay({
+					delay: 5000,
+				}),
+			]}>
+			<CarouselContent>
+				{showContents.length > 0 &&
+					showContents.map(
+						(content) =>
+							content.imageUrl && (
+								<CarouselItem
+									key={content.id}
+									className="flex aspect-square items-center justify-center">
+									<Image
+										src={content.imageUrl}
+										alt={content.title}
+										width={0}
+										height={0}
+										sizes="100vw"
+										style={{
+											width: "100%",
+											height: "100%",
+											objectFit: "cover",
+										}}
+									/>
+								</CarouselItem>
+							),
+					)}
+			</CarouselContent>
+		</Carousel>
+	)
+}
+
+export default EventSlidePhoto

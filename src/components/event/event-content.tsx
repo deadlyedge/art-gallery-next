@@ -8,6 +8,7 @@ import { useRouter } from "next/navigation"
 import { ActionTooltip } from "@/components/action-tooltip"
 import { type ModalType, useModal } from "@/hooks/use-modal-store"
 import { EventSideMessages } from "./event-side-messages"
+import EventSlidePhoto from "./event-slide-photo"
 
 type EventContentProps = {
 	content: Content
@@ -37,10 +38,9 @@ export const EventContent = ({ content, event, role }: EventContentProps) => {
 	return (
 		<div
 			key={content.id}
-			onClick={onClick}
-			className="group/content px-0 md:px-2 py-2 rounded-md md:flex items-start justify-start gap-x-2 w-full mb-1 cursor-pointer">
+			className="group/content px-0 md:px-2 py-2 rounded-md md:flex items-start justify-start gap-x-2 w-full mb-1">
 			<div className="w-full sticky top-0 md:w-1/2">
-				{hasImage && (
+				{content.title !== "general" ? (
 					<Image
 						src={hasImage}
 						alt="Content Image"
@@ -49,10 +49,14 @@ export const EventContent = ({ content, event, role }: EventContentProps) => {
 						sizes="100vw"
 						style={{ width: "100%", height: "auto" }}
 					/>
+				) : (
+					<EventSlidePhoto eventId={event.id} />
 				)}
 			</div>
 
-			<div className="sticky top-0 w-full md:w-1/2 flex flex-col drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)]">
+			<div
+				className="sticky top-0 w-full md:w-1/2 flex flex-col cursor-pointer drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)]"
+				onClick={onClick}>
 				<div className="flex items-center p-2 md:p-0">
 					<Hash className="flex-shrink-0 w-5 h-5 text-zinc-400" />
 					<p className="line-clamp-1 font-semibold text-sm text-zinc-500 group-hover:text-zinc-600 dark:text-zinc-400 dark:group-hover:text-zinc-300 transition">
