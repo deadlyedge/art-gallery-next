@@ -35,6 +35,9 @@ const EventSlidePhoto = ({ eventId }: { eventId: string }) => {
 
 	return (
 		<Carousel
+			opts={{
+				align: "start",
+			}}
 			plugins={[
 				Autoplay({
 					delay: 5000,
@@ -47,13 +50,13 @@ const EventSlidePhoto = ({ eventId }: { eventId: string }) => {
 							content.imageUrl && (
 								<CarouselItem
 									key={content.id}
-									className="flex aspect-square items-center justify-center">
+									className="basis-1/2 flex aspect-square items-center justify-center">
 									<Image
 										src={content.imageUrl}
 										alt={content.title}
 										width={0}
 										height={0}
-										sizes="100vw"
+										sizes="50vw"
 										style={{
 											width: "100%",
 											height: "100%",
