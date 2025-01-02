@@ -27,6 +27,7 @@ import { Input } from "@/components/ui/input"
 import { useModal } from "@/hooks/use-modal-store"
 import { useRouter } from "next/navigation"
 import { Textarea } from "../ui/textarea"
+// import { useOrigin } from "@/hooks/use-origin"
 
 const formSchema = z.object({
 	title: z.string().min(1, {
@@ -41,6 +42,7 @@ const formSchema = z.object({
 export const CreateEventModal = () => {
 	const { isOpen, onClose, type } = useModal()
 	const router = useRouter()
+	// const origin = useOrigin()
 
 	const isModalOpen = isOpen && type === "createEvent"
 
@@ -49,7 +51,7 @@ export const CreateEventModal = () => {
 		defaultValues: {
 			title: "",
 			description: "",
-			imageUrl: "",
+			imageUrl: "/wall-e.with.love.jpg",
 		},
 	})
 

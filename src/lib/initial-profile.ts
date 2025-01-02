@@ -17,7 +17,17 @@ export const initialProfile = async () => {
 	})
 
 	if (profile) {
-		return profile
+		const updateProfile = db.profile.update({
+			where: {
+				id: profile.id,
+			},
+			data: {
+				userId: user.id,
+				name: `${user.firstName} ${user.lastName}`,
+				imageUrl: user.imageUrl,
+			},
+		})
+		return updateProfile
 	}
 
 	const newProfile = await db.profile.create({

@@ -1,20 +1,18 @@
-import { redirect } from "next/navigation"
-import {
-	SignInButton,
-	SignedOut,
-} from "@clerk/nextjs"
-
 import { currentProfile } from "@/lib/current-profile"
 import { db } from "@/lib/db"
+import { SignInButton, SignedOut } from "@clerk/nextjs"
+import { redirect } from "next/navigation"
+
+import LogoMotion from "@/components/logo-motion"
+import { Button } from "@/components/ui/button"
 import {
 	Card,
 	CardContent,
 	CardDescription,
+	CardFooter,
 	CardHeader,
 	CardTitle,
 } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import LogoMotion from "@/components/logo-motion"
 
 const InviteCodePage = async (props: {
 	params: Promise<{ inviteCode: string }>
@@ -69,11 +67,12 @@ const InviteCodePage = async (props: {
 	})
 
 	return (
-		<div className="w-full h-80 flex flex-col items-center justify-center">
-			<Card className="w-[30rem]">
+		<div className="w-full h-80 flex flex-row items-center justify-center">
+			<Card>
 				<CardContent className="p-0 overflow-hidden">
 					<CardHeader className="pt-8 px-6">
-						<CardTitle className="flex items-center justify-center font-normal">
+						<CardTitle className="flex items-center justify-center font-normal gap-x-3">
+							欢迎来到
 							<LogoMotion size="xl" />
 						</CardTitle>
 						<CardDescription className="text-center">
@@ -84,7 +83,7 @@ const InviteCodePage = async (props: {
 							{" 。"}
 						</CardDescription>
 					</CardHeader>
-					<CardContent className="px-6 flex items-center justify-center">
+					<CardFooter className="px-6 flex items-center justify-center">
 						<SignedOut>
 							<div className="hover:text-white">
 								<SignInButton
@@ -102,7 +101,7 @@ const InviteCodePage = async (props: {
 							</Link>
 							<UserButton />
 						</SignedIn> */}
-					</CardContent>
+					</CardFooter>
 				</CardContent>
 			</Card>
 		</div>

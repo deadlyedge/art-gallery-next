@@ -45,6 +45,7 @@ const formSchema = z.object({
 	description: z.string().optional(),
 	imageUrl: z.string().optional(),
 	isPublic: z.boolean().default(false),
+	setEventImage: z.boolean().default(false),
 })
 
 export const CreateContentModal = () => {
@@ -64,6 +65,7 @@ export const CreateContentModal = () => {
 			description: "",
 			imageUrl: imageUrl || "",
 			isPublic: false,
+			setEventImage: false,
 		},
 	})
 
@@ -140,7 +142,7 @@ export const CreateContentModal = () => {
 
 	return (
 		<Dialog open={isModalOpen} onOpenChange={handleClose}>
-			<DialogContent className="p-0 overflow-hidden">
+			<DialogContent className="p-0 overflow-y-auto max-h-[90vh]">
 				<DialogHeader className="pt-8 px-6">
 					<DialogTitle className="text-base text-center font-bold">
 						创建内容
@@ -265,27 +267,50 @@ export const CreateContentModal = () => {
 									reset
 								</Button>
 								{!noImageURL && (
-									<FormField
-										control={form.control}
-										name="isPublic"
-										render={({ field }) => (
-											<FormItem className="rounded-md flex items-center">
-												<FormControl>
-													<Checkbox
-														checked={field.value}
-														disabled={isNSFW || !isChecked}
-														onCheckedChange={field.onChange}
-														className="w-5 h-5 mr-1"
-													/>
-												</FormControl>
-												<FormLabel className="pb-1.5">
-													{isNSFW
-														? "此内容无法公开展示"
-														: "是否希望此内容和您的名字一起显示在首页"}
-												</FormLabel>
-											</FormItem>
-										)}
-									/>
+									<div className="flex flex-col items-start justify-start">
+										<FormField
+											control={form.control}
+											name="isPublic"
+											render={({ field }) => (
+												<FormItem className="rounded-md flex items-center">
+													<FormControl>
+														<Checkbox
+															checked={field.value}
+															disabled={isNSFW || !isChecked}
+															onCheckedChange={field.onChange}
+															className="w-5 h-5 mr-1"
+														/>
+													</FormControl>
+													<FormLabel className="pb-1.5">
+														{isNSFW
+															? "此内容无法公开展示"
+															: "是否希望此内容和您的名字一起显示在首页"}
+													</FormLabel>
+												</FormItem>
+											)}
+										/>
+										<FormField
+											control={form.control}
+											name="setEventImage"
+											render={({ field }) => (
+												<FormItem className="rounded-md flex items-center">
+													<FormControl>
+														<Checkbox
+															checked={field.value}
+															// disabled={isNSFW || !isChecked}
+															onCheckedChange={field.onChange}
+															className="w-5 h-5 mr-1"
+														/>
+													</FormControl>
+													<FormLabel className="pb-1.5">
+														{isNSFW
+															? "此内容无法公开展示"
+															: "是否希望此内容设置为事件封面"}
+													</FormLabel>
+												</FormItem>
+											)}
+										/>
+									</div>
 								)}
 								<Button variant="default" disabled={isLoading}>
 									创建

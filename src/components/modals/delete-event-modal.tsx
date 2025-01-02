@@ -31,8 +31,8 @@ export const DeleteEventModal = () => {
 			await axios.delete(`/api/events/${event?.id}`)
 
 			onClose()
-			router.refresh()
-			router.push("/")
+			// router.refresh()
+			router.push("/setup")
 		} catch (error) {
 			console.log(error)
 		} finally {

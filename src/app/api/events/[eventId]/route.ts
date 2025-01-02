@@ -42,14 +42,27 @@ export async function PATCH(
 			return new NextResponse("Unauthorized", { status: 401 })
 		}
 
+		if (title && description && imageUrl) {
+			const event = await db.event.update({
+				where: {
+					id: params.eventId,
+					profileId: profile.id,
+				},
+				data: {
+					title,
+					description,
+					imageUrl,
+				},
+			})
+			return NextResponse.json(event)
+		}
+
 		const event = await db.event.update({
 			where: {
 				id: params.eventId,
 				profileId: profile.id,
 			},
 			data: {
-				title,
-				description,
 				imageUrl,
 			},
 		})

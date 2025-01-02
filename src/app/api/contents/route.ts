@@ -1,13 +1,14 @@
-import { MemberRole } from "@prisma/client"
-import { NextResponse } from "next/server"
-
 import { currentProfile } from "@/lib/current-profile"
 import { db } from "@/lib/db"
+import { MemberRole } from "@prisma/client"
+import axios from "axios"
+import { NextResponse } from "next/server"
 
 export async function POST(req: Request) {
 	try {
 		const profile = await currentProfile()
-		const { title, imageUrl, description, isPublic } = await req.json()
+		const { title, imageUrl, description, isPublic, setEventImage } =
+			await req.json()
 		const type = "IMAGE"
 
 		const { searchParams } = new URL(req.url)
@@ -23,6 +24,18 @@ export async function POST(req: Request) {
 
 		if (title === "general") {
 			return new NextResponse("Name cannot be 'general'", { status: 400 })
+		}
+
+		if (setEventImage) {
+			await db.event.update({
+				where: {
+					id: eventId,
+					profileId: profile.id,
+				},
+				data: {
+					imageUrl,
+				},
+			})
 		}
 
 		const event = await db.event.update({

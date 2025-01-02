@@ -22,7 +22,7 @@ export async function POST(req: Request) {
 				imageUrl,
 				inviteCode: uuidv4(),
 				contents: {
-					create: [{ title: "general", profileId: profile.id }],
+					create: [{ title: "general", profileId: profile.id, imageUrl }],
 				},
 				members: {
 					create: [{ profileId: profile.id, role: MemberRole.ADMIN }],

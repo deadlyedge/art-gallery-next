@@ -7,7 +7,7 @@ const publicPaths = createRouteMatcher([
 	// "/api/webhook",
 	"/api/uploadthing",
 	"/api/contents",
-	"/invite(.*)"
+	"/invite(.*)",
 ])
 
 export default clerkMiddleware(async (auth, request) => {
