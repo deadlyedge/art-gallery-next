@@ -21,11 +21,11 @@ export async function DELETE(
 		}
 
 		if (!eventId) {
-			return new NextResponse("Server ID missing", { status: 400 })
+			return new NextResponse("Event ID missing", { status: 400 })
 		}
 
 		if (!contentId) {
-			return new NextResponse("Channel ID missing", { status: 400 })
+			return new NextResponse("Content ID missing", { status: 400 })
 		}
 
 		const event = await db.event.update({
@@ -65,9 +65,11 @@ export async function PATCH(
 ) {
 	try {
 		const profile = await currentProfile()
-		const { title, type, imageUrl, description, isPublic } = await req.json()
-		const { searchParams } = new URL(req.url)
+		const { title, imageUrl, description, isPublic, setEventImage } =
+			await req.json()
+		const type = "IMAGE"
 
+		const { searchParams } = new URL(req.url)
 		const eventId = searchParams.get("eventId")
 
 		const { contentId } = await props.params
@@ -77,15 +79,27 @@ export async function PATCH(
 		}
 
 		if (!eventId) {
-			return new NextResponse("Server ID missing", { status: 400 })
+			return new NextResponse("Event ID missing", { status: 400 })
 		}
 
 		if (!contentId) {
-			return new NextResponse("Channel ID missing", { status: 400 })
+			return new NextResponse("Content ID missing", { status: 400 })
 		}
 
 		if (title === "general") {
 			return new NextResponse("Name cannot be 'general'", { status: 400 })
+		}
+
+		if (setEventImage) {
+			await db.event.update({
+				where: {
+					id: eventId,
+					profileId: profile.id,
+				},
+				data: {
+					imageUrl,
+				},
+			})
 		}
 
 		const event = await db.event.update({

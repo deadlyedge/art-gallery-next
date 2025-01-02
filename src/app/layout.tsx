@@ -36,11 +36,12 @@ export default function RootLayout({
 		<ClerkProvider
 			dynamic
 			appearance={{ baseTheme: dark }}
-			signInUrl="/sign-in"
-			signUpUrl="/sign-up"
-			signInFallbackRedirectUrl="/"
-			signUpFallbackRedirectUrl="/"
-			afterSignOutUrl="/">
+			// signInUrl="/sign-in"
+			// signUpUrl="/sign-up"
+			// signInFallbackRedirectUrl="/"
+			// signUpFallbackRedirectUrl="/"
+			afterSignOutUrl="/"
+		>
 			<html lang="en" suppressHydrationWarning>
 				<body className={cn(notoSerif.className, "antialiased")}>
 					<ThemeProvider

@@ -18,9 +18,9 @@ export default async function Home() {
 		const profile = await initialProfile()
 		const user = await currentUser()
 
-		if (!profile) {
-			return redirect("/setup")
-		}
+		// if (!profile) {
+		// 	return redirect("/")
+		// }
 
 		if (user?.fullName !== profile.name || user.imageUrl !== profile.imageUrl)
 			updateProfile()

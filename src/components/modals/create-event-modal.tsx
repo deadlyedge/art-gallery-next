@@ -51,7 +51,7 @@ export const CreateEventModal = () => {
 		defaultValues: {
 			title: "",
 			description: "",
-			imageUrl: "/wall-e.with.love.jpg",
+			imageUrl: "", //wall-e.with.love.jpg
 		},
 	})
 
@@ -62,8 +62,8 @@ export const CreateEventModal = () => {
 			await axios.post("/api/events", values)
 
 			form.reset()
-			router.refresh()
 			onClose()
+			router.refresh()
 		} catch (error) {
 			console.log(error)
 		}

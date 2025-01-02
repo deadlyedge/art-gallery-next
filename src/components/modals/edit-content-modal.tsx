@@ -46,6 +46,7 @@ const formSchema = z.object({
 	description: z.string().optional(),
 	imageUrl: z.string().optional(),
 	isPublic: z.boolean().default(false),
+	setEventImage: z.boolean().default(false),
 })
 
 export const EditContentModal = () => {
@@ -65,6 +66,7 @@ export const EditContentModal = () => {
 			description: content?.description || "",
 			imageUrl: content?.imageUrl || "",
 			isPublic: content?.isPublic || false,
+			setEventImage: false,
 		},
 	})
 
@@ -114,7 +116,7 @@ export const EditContentModal = () => {
 		const aiDescription = await axios.get(`/api/aiaa?imageURL=${imageURL}`)
 		form.setValue(
 			"description",
-			`${userDescription} and ai said: ${aiDescription.data}`,
+			`${userDescription} and ai said: ${aiDescription.data}`.trim(),
 		)
 	}
 
@@ -150,9 +152,9 @@ export const EditContentModal = () => {
 
 	return (
 		<Dialog open={isModalOpen} onOpenChange={handleClose}>
-			<DialogContent className="p-0 overflow-hidden">
+			<DialogContent className="p-0 overflow-y-auto max-h-[90vh]">
 				<DialogHeader className="pt-8 px-6">
-					<DialogTitle className="text-2xl text-center font-bold">
+					<DialogTitle className="text-base text-center font-bold">
 						编辑内容
 					</DialogTitle>
 					<DialogDescription hidden />
@@ -169,7 +171,7 @@ export const EditContentModal = () => {
 											<FormLabel className="uppercase text-xs font-bold text-primary/70">
 												Image
 											</FormLabel>
-											<FormControl className="flex items-center justify-center">
+											<FormControl>
 												<div className="flex flex-col items-center justify-center">
 													<FileUpload
 														endpoint="contentImage"
@@ -182,26 +184,28 @@ export const EditContentModal = () => {
 														placeholder="Or paste image url"
 														{...field}
 													/>
-													<div className="flex items-center mt-2">
-														<p className="text-sm">
-															Show it public or use AI, you must do:
-														</p>
-														<Button
-															type="button"
-															size="sm"
-															onClick={onCheckClick}
-															className={cn(
-																"ml-1",
-																!isChecked
-																	? "*:text-zinc-500"
-																	: isNSFW
-																		? "*:text-red-500"
-																		: "*:text-green-500",
-															)}>
-															<ShieldCheck className="w-4 h-4" />
-															Safe Check
-														</Button>
-													</div>
+													{hasImage && (
+														<div className="flex items-center mt-2">
+															<p className="text-xs">
+																Show it public or use AI, you must do:
+															</p>
+															<Button
+																type="button"
+																size="sm"
+																onClick={onCheckClick}
+																className={cn(
+																	"ml-1",
+																	!isChecked
+																		? "*:text-zinc-500"
+																		: isNSFW
+																			? "*:text-red-500"
+																			: "*:text-green-500",
+																)}>
+																<ShieldCheck className="w-4 h-4" />
+																Safe Check
+															</Button>
+														</div>
+													)}
 												</div>
 											</FormControl>
 										</FormItem>
@@ -214,13 +218,13 @@ export const EditContentModal = () => {
 								render={({ field }) => (
 									<FormItem>
 										<FormLabel className="uppercase text-xs font-bold text-primary/70">
-											title
+											Title
 										</FormLabel>
 										<FormControl>
 											<Input
 												disabled={isLoading}
 												className="border border-zinc-500 focus:bg-zinc-900/80 focus-visible:ring-0 focus-visible:ring-offset-0"
-												placeholder="输入内容标题"
+												placeholder="Enter content title"
 												{...field}
 											/>
 										</FormControl>
@@ -272,31 +276,54 @@ export const EditContentModal = () => {
 									reset
 								</Button>
 								{hasImage && (
-									<FormField
-										control={form.control}
-										name="isPublic"
-										render={({ field }) => (
-											<FormItem className="rounded-md flex items-center">
-												<FormControl>
-													{isNSFW ? (
-														<X />
-													) : (
+									<div className="flex flex-col items-start justify-start">
+										<FormField
+											control={form.control}
+											name="isPublic"
+											render={({ field }) => (
+												<FormItem className="rounded-md flex items-center">
+													<FormControl>
+														{isNSFW ? (
+															<X />
+														) : (
+															<Checkbox
+																checked={field.value}
+																disabled={!(field.value || isChecked)}
+																onCheckedChange={field.onChange}
+																className="w-5 h-5 mr-1"
+															/>
+														)}
+													</FormControl>
+													<FormLabel className="pb-1.5">
+														{isNSFW
+															? "此内容无法公开展示"
+															: "是否希望此内容和您的名字一起显示在首页"}
+													</FormLabel>
+												</FormItem>
+											)}
+										/>
+										<FormField
+											control={form.control}
+											name="setEventImage"
+											render={({ field }) => (
+												<FormItem className="rounded-md flex items-center">
+													<FormControl>
 														<Checkbox
 															checked={field.value}
-															disabled={!(field.value || isChecked)}
+															// disabled={isNSFW || !isChecked}
 															onCheckedChange={field.onChange}
 															className="w-5 h-5 mr-1"
 														/>
-													)}
-												</FormControl>
-												<FormLabel className="pb-1.5">
-													{isNSFW
-														? "此内容无法公开展示"
-														: "是否希望此内容和您的名字一起显示在首页"}
-												</FormLabel>
-											</FormItem>
-										)}
-									/>
+													</FormControl>
+													<FormLabel className="pb-1.5">
+														{isNSFW
+															? "此内容无法公开展示"
+															: "是否希望此内容设置为事件封面"}
+													</FormLabel>
+												</FormItem>
+											)}
+										/>
+									</div>
 								)}
 								<Button variant="default" disabled={isLoading}>
 									保存

@@ -3,7 +3,7 @@
 import { cn } from "@/lib/utils"
 import { zodResolver } from "@hookform/resolvers/zod"
 import axios from "axios"
-import { Bot, ShieldCheck } from "lucide-react"
+import { Bot, ShieldCheck, X } from "lucide-react"
 import { useParams, useRouter } from "next/navigation"
 import qs from "query-string"
 import { useEffect, useState } from "react"
@@ -50,6 +50,8 @@ const formSchema = z.object({
 
 export const CreateContentModal = () => {
 	const { isOpen, onClose, type, data } = useModal()
+
+	const [hasImage, setHasImage] = useState(false)
 	const [isChecked, setIsChecked] = useState(false)
 	const [isNSFW, setIsNSFW] = useState(false)
 	const router = useRouter()
@@ -73,10 +75,12 @@ export const CreateContentModal = () => {
 		const subscription = form.watch((value, { name }) => {
 			if (name === "imageUrl") {
 				setIsChecked(false)
+				form.setValue("isPublic", false)
+				setHasImage(!!value.imageUrl)
 			}
 		})
 		return () => subscription.unsubscribe()
-	}, [form])
+	}, [form.watch, form.setValue])
 
 	const isLoading = form.formState.isSubmitting
 
@@ -97,8 +101,6 @@ export const CreateContentModal = () => {
 			console.log(error)
 		}
 	}
-
-	const noImageURL = !form.getValues("imageUrl")
 
 	const onAiDescribeClick = async () => {
 		const userDescription = form.getValues("description")
@@ -175,7 +177,7 @@ export const CreateContentModal = () => {
 														// onChange={onImageUrlChange}
 														{...field}
 													/>
-													{!noImageURL && (
+													{hasImage && (
 														<div className="flex items-center mt-2">
 															<p className="text-xs">
 																Show it public or use AI, you must do:
@@ -196,7 +198,7 @@ export const CreateContentModal = () => {
 																Safe Check
 															</Button>
 														</div>
-													)}{" "}
+													)}
 												</div>
 											</FormControl>
 										</FormItem>
@@ -231,9 +233,9 @@ export const CreateContentModal = () => {
 										<FormLabel className="uppercase text-xs font-bold text-primary/70">
 											<div className="flex items-center justify-between">
 												Description
-												{!noImageURL && (
+												{hasImage && (
 													<Button
-														disabled={noImageURL || isNSFW || !isChecked}
+														disabled={isNSFW || !isChecked}
 														type="button"
 														variant="ghost"
 														className="p-1"
@@ -266,7 +268,7 @@ export const CreateContentModal = () => {
 									onClick={onResetAll}>
 									reset
 								</Button>
-								{!noImageURL && (
+								{hasImage && (
 									<div className="flex flex-col items-start justify-start">
 										<FormField
 											control={form.control}
@@ -274,12 +276,16 @@ export const CreateContentModal = () => {
 											render={({ field }) => (
 												<FormItem className="rounded-md flex items-center">
 													<FormControl>
-														<Checkbox
-															checked={field.value}
-															disabled={isNSFW || !isChecked}
-															onCheckedChange={field.onChange}
-															className="w-5 h-5 mr-1"
-														/>
+														{isNSFW ? (
+															<X />
+														) : (
+															<Checkbox
+																checked={field.value}
+																disabled={!(field.value || isChecked)}
+																onCheckedChange={field.onChange}
+																className="w-5 h-5 mr-1"
+															/>
+														)}
 													</FormControl>
 													<FormLabel className="pb-1.5">
 														{isNSFW

@@ -2,6 +2,7 @@ import Link from "next/link"
 
 import LogoMotion from "@/components/logo-motion"
 import { Button } from "@/components/ui/button"
+import { SignInButton, SignedIn, SignedOut } from "@clerk/nextjs"
 
 export function LandingHero({
 	gotoEventClick,
@@ -21,11 +22,20 @@ export function LandingHero({
 				Share your photography and paintings.
 			</div>
 			<div>
-				<Link href={gotoEventClick}>
-					<Button className="md:text-lg p-4 md:p-6 rounded-full font-semibold w-fit">
-						Start NOW!
+				<SignedOut>
+					<Button
+						className="md:text-lg p-4 md:p-6 rounded-full font-semibold w-fit"
+						asChild>
+						<SignInButton mode="modal" fallbackRedirectUrl={gotoEventClick}>
+							Start NOW!
+						</SignInButton>
 					</Button>
-				</Link>
+				</SignedOut>
+				<SignedIn>
+					<Button className="md:text-lg p-4 md:p-6 rounded-full font-semibold w-fit">
+						<Link href={gotoEventClick}>Go To My Events</Link>
+					</Button>
+				</SignedIn>
 			</div>
 			<div className="text-foreground text-xs md:text-sm font-normal">
 				use vercel or vps and docker to serve.

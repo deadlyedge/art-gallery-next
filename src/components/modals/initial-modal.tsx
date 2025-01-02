@@ -39,6 +39,7 @@ const formSchema = z.object({
 	}),
 })
 
+// deprecated
 export const InitialModal = () => {
 	const [isMounted, setIsMounted] = useState(false)
 	const router = useRouter()
@@ -65,7 +66,7 @@ export const InitialModal = () => {
 			form.reset()
 			// router.push(origin)
 			router.refresh()
-			window.location.reload()
+			// window.location.reload()
 		} catch (error) {
 			console.log(error)
 		}

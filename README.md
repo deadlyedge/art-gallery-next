@@ -32,7 +32,7 @@ https://aganx.com/
 19. ~~Current logic is, if a user come to this site with a invite code, he can sign in or sign up, and the invite code will be lost. and they can only re-paste the invite link to go to the event. which sounds complicated and doesn't make sense to me.~~ 
 20. signin and signup logic, invite link modified, need more test. onthought: initial a default event for new users. so sign up of login should never lost the invite code.
 21. debug /setup
-22. consider move /setup page to api route
+22. consider move /setup page to api route...ok forget it.
 23. ~~remove account after clerk account deleted.~~
 24. move event image to content and add 'to event title image'
 25. ~~minimal members lists in event and content pages.~~
@@ -41,3 +41,5 @@ https://aganx.com/
 28. i18n.
 29. ~~[Known Issue] User can't remove their account. Once they do remove their account and sign up back in, app will crash because the user profile already in database and the user id from clerk is different from the one in database.~~
 30. [Known Issue] User can't change their email because the 'same user detection' is using email as unique identifier.
+31. can't use apple auth, maybe try it later with no proxy.
+32. consider use combined photos for general content show.
