@@ -3,9 +3,10 @@
 import { FileIcon, X } from "lucide-react"
 import Image from "next/image"
 
-import { UploadDropzone } from "@/lib/uploadthing"
+// import { UploadDropzone } from "@/lib/uploadthing"
 
-import "@uploadthing/react/styles.css"
+// import "@uploadthing/react/styles.css"
+import { UploadZoneS3 } from "./upload-zone-s3"
 
 type FileUploadProps = {
 	onChange: (url?: string) => void
@@ -59,15 +60,19 @@ export const FileUpload = ({ onChange, value, endpoint }: FileUploadProps) => {
 	}
 
 	return (
-		<UploadDropzone
-			endpoint={endpoint}
-			onClientUploadComplete={(res) => {
-				onChange(res?.[0].url)
-			}}
-			onUploadError={(error: Error) => {
-				console.log(error)
-			}}
-			className="border-dashed border-2 dark:border-primary/50 text-primary rounded-lg p-4 text-center hover:bg-primary-foreground/80"
+		// <UploadDropzone
+		// 	endpoint={endpoint}
+		// 	onClientUploadComplete={(res) => {
+		// 		onChange(res?.[0].url)
+		// 	}}
+		// 	onUploadError={(error: Error) => {
+		// 		console.log(error)
+		// 	}}
+		// 	className="border-dashed border-2 dark:border-primary/50 text-primary rounded-lg p-4 text-center hover:bg-primary-foreground/80"
+		// />
+		<UploadZoneS3
+			onClientUploadComplete={(res) => onChange(res)}
+			onUploadError={(error: Error) => console.log(error)}
 		/>
 	)
 }

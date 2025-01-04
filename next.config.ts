@@ -21,6 +21,14 @@ const nextConfig: NextConfig = {
 				protocol: "https",
 				hostname: "uploadthing.com",
 			},
+			{
+				protocol: "https",
+				hostname: "aganx-images.s3.ap-east-1.amazonaws.com",
+			},
+			{
+				protocol: "https",
+				hostname: "aganx-images-bucket.s3.ap-northeast-1.amazonaws.com",
+			},
 		],
 	},
 }
