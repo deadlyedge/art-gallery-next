@@ -1,27 +1,49 @@
 "use client"
 
+import { cn } from "@/lib/utils"
 import axios from "axios"
 import { Loader } from "lucide-react"
 import { useState } from "react"
-import { useDropzone } from "react-dropzone"
+import { type FileRejection, useDropzone } from "react-dropzone"
 
 type UploadZoneS3Props = {
 	onClientUploadComplete: (url: string) => void
 	onUploadError: (error: Error) => void
 }
 
-const MAX_FILE_SIZE = 10 * 1024 * 1024 // 10MB
+const MAX_FILE_SIZE =
+	(process.env.NEXT_PUBLIC_MAX_UPLOAD_FILE_SIZE_MB as unknown as number) *
+	1024 *
+	1024
 
 export const UploadZoneS3 = ({
 	onClientUploadComplete,
 	onUploadError,
 }: UploadZoneS3Props) => {
 	const [uploading, setUploading] = useState(false)
-
-	const onDrop = async (acceptedFiles: File[]) => {
-		setUploading(true)
+	const [uploadInfo, setUploadInfo] = useState(
+		`file size limit: ${MAX_FILE_SIZE / 1024 / 1024} MB`,
+	)
+	const onDrop = async (
+		acceptedFiles: File[],
+		fileRejections: FileRejection[],
+	) => {
+		const failFile = fileRejections[0]
+		if (failFile) {
+			if (failFile.errors[0].code === "file-too-large") {
+				setUploadInfo("File is too large.")
+			} else if (failFile.errors[0].code === "file-invalid-type") {
+				setUploadInfo("Only jpeg & png")
+			} else if (failFile.errors[0].code === "too-many-files") {
+				setUploadInfo("Too many files.")
+			} else {
+				setUploadInfo("Unknown error.")
+			}
+			return
+		}
 
 		const file = acceptedFiles[0]
+		setUploading(true)
 
 		const response = await fetch("/api/upload", {
 			method: "POST",
@@ -43,6 +65,7 @@ export const UploadZoneS3 = ({
 
 			const uploadResponse = await axios.post(url, formData)
 
+			setUploading(false)
 			if (uploadResponse.status === 204) {
 				onClientUploadComplete(`https://images.aganx.com/${key}`)
 			} else {
@@ -52,23 +75,23 @@ export const UploadZoneS3 = ({
 		} else {
 			onUploadError(new Error("Failed to get pre-signed URL."))
 		}
-
-		setUploading(false)
 	}
 
-	const { getRootProps, getInputProps, isDragActive } = useDropzone({
+	const { getRootProps, getInputProps, fileRejections } = useDropzone({
 		onDrop,
 		multiple: false,
 		maxSize: MAX_FILE_SIZE,
 		accept: {
-			"image/*": [".jpeg", ".png", ".jpg"],
+			"image/jpeg": [],
+			"image/png": [],
+			// "image/webp": [],
 		},
 	})
 
 	return (
 		<div
 			{...getRootProps()}
-			className="w-48 h-48 p-4 flex flex-col gap-4 justify-center items-center border-2 border-dashed border-zinc-400 text-zinc-300 rounded bg-secondary cursor-pointer group hover:bg-primary/10 duration-200 uppercase relative">
+			className="w-48 h-48 p-4 flex flex-col gap-4 justify-center items-center border-2 border-dashed border-zinc-400 text-zinc-300 rounded bg-secondary cursor-pointer group hover:bg-primary/10 duration-200 relative">
 			<div className="text-lg ">Drop Files Here</div>
 			<input {...getInputProps()} />
 			<svg
@@ -80,7 +103,9 @@ export const UploadZoneS3 = ({
 				<path d="M13.41 12l4.3-4.29a1 1 0 1 0-1.42-1.42L12 10.59l-4.29-4.3a1 1 0 0 0-1.42 1.42l4.3 4.29-4.3 4.29a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l4.29-4.3 4.29 4.3a1 1 0 0 0 1.42 0 1 1 0 0 0 0-1.42z" />
 			</svg>
 			<div className="text-xs">
-				file size limit: {MAX_FILE_SIZE / 1024 / 1024} MB
+				<span className={cn(fileRejections.length > 0 && "text-red-400")}>
+					{uploadInfo}
+				</span>
 			</div>
 			<div className="text-md">click to select</div>
 			{uploading && (
