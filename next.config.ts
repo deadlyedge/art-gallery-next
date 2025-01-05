@@ -29,6 +29,14 @@ const nextConfig: NextConfig = {
 				protocol: "https",
 				hostname: "aganx-images-bucket.s3.ap-northeast-1.amazonaws.com",
 			},
+			{
+				protocol: "https",
+				hostname: "images.aganx.com",
+			},
+			{
+				protocol: "https",
+				hostname: "d1gpl33muq2m2e.cloudfront.net",
+			},
 		],
 	},
 }

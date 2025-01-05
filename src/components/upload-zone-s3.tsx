@@ -44,7 +44,7 @@ export const UploadZoneS3 = ({
 			const uploadResponse = await axios.post(url, formData)
 
 			if (uploadResponse.status === 204) {
-				onClientUploadComplete(`${url}${key}`)
+				onClientUploadComplete(`https://images.aganx.com/${key}`)
 			} else {
 				console.error("S3 Upload Error:", uploadResponse)
 				onUploadError(new Error("S3 Upload Error"))

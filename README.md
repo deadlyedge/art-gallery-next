@@ -43,4 +43,8 @@ https://aganx.com/
 30. [Known Issue] User can't change their email because the 'same user detection' is using email as unique identifier.
 31. ~~can't use apple auth, maybe try it later with no proxy. depricated, use microsoft auth instead.~~
 32. ~~consider use combined photos for general content show.~~
-33. image upload speed seems slow, try aws s3.
+33. ~~image upload speed seems slow, try aws s3.~~
+34. ~~use cloudfront for image delivery.~~
+35. ?event theme customize?
+36. add user usage meter.
+37. image size optimize for better performance.
