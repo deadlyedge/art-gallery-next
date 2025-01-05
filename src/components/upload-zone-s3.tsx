@@ -12,7 +12,8 @@ type UploadZoneS3Props = {
 }
 
 const MAX_FILE_SIZE =
-	(process.env.NEXT_PUBLIC_MAX_UPLOAD_FILE_SIZE_MB as unknown as number) *
+	((process.env.NEXT_PUBLIC_MAX_UPLOAD_FILE_SIZE_MB as unknown as number) ||
+		10) *
 	1024 *
 	1024
 
