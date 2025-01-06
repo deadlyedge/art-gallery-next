@@ -1,7 +1,7 @@
 "use client"
 
-import { Hash } from "lucide-react"
 import { UserAvatar } from "@/components/user-avatar"
+import { Hash } from "lucide-react"
 
 type ChatHeaderProps = {
 	eventId: string

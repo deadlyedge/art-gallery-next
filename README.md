@@ -47,4 +47,6 @@ https://aganx.com/
 34. ~~use cloudfront for image delivery.~~
 35. ?event theme customize?
 36. add user usage meter.
-37. image size optimize for better performance.
+37. add motions for content showing.
+38. image size optimize for better performance.
+39. use ipv6 for passing through the wall
