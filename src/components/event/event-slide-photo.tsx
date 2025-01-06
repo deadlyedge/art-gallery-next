@@ -56,7 +56,7 @@ const EventSlidePhoto = ({ eventId }: { eventId: string }) => {
 										alt={content.title}
 										width={0}
 										height={0}
-										sizes="50vw"
+										sizes="(max-width: 768px) 50vw, 30vw"
 										style={{
 											width: "100%",
 											height: "100%",

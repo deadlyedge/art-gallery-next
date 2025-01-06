@@ -26,7 +26,7 @@ export const FileUpload = ({ onChange, value, endpoint }: FileUploadProps) => {
 					width={0}
 					height={0}
 					style={{ width: "auto", height: "100%" }}
-					sizes="(max-width: 500px) 40vw, (max-width: 500px) 40vw, 40vw"
+					sizes="(max-width: 768px) 80vw, 20vw"
 				/>
 				<button
 					onClick={() => onChange("")}

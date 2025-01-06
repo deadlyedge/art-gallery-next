@@ -48,5 +48,5 @@ https://aganx.com/
 35. ?event theme customize?
 36. add user usage meter.
 37. add motions for content showing.
-38. image size optimize for better performance.
-39. use ipv6 for passing through the wall
+38. ~~image size optimize for better performance.~~
+39. ~~use ipv6 for passing through the wall~~

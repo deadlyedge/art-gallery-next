@@ -45,11 +45,12 @@ export const NavigationItem = ({
 							: "opacity-50",
 					)}>
 					<Image
-						fill
 						src={imageUrl}
 						alt="Content"
-						sizes="(max-width: 500px) 30vw, (max-width: 800px) 40vw, 50vw"
-						className="object-cover"
+						width={0}
+						height={0}
+						sizes="(max-width: 768px) 60vw, (max-width: 1200px) 30vw, 20vw"
+						style={{ width: "100%", height: "auto", objectFit: "cover" }}
 					/>
 					<div className="absolute w-full h-[120px] mx-auto mt-10 text-xl drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)] truncate p-1">
 						{title}

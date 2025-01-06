@@ -160,31 +160,32 @@ export const ChatItem = ({
 						</span>
 					</div>
 					{isImage && (
-						<a
-							href={fileUrl}
-							target="_blank"
-							rel="noopener noreferrer"
-							className="relative rounded-md mt-2 flex items-center justify-center h-48 w-48">
+						<div
+							// href={fileUrl}
+							// target="_blank"
+							// rel="noopener noreferrer"
+							className="relative rounded-md mt-2 flex items-center justify-center h-48 w-48"
+						>
 							<Image
 								src={fileUrl}
 								alt={text}
 								width={0}
 								height={0}
-								sizes="50vw"
+								sizes="(max-width: 768px) 50vw, 20vw"
 								style={{ width: "auto", height: "100%", objectFit: "contain" }}
 							/>
-						</a>
+						</div>
 					)}
 					{isPDF && (
 						<div className="relative flex items-center p-2 mt-2 rounded-md bg-background/10">
 							<FileIcon className="h-10 w-10 fill-indigo-200 stroke-indigo-400" />
-							<a
+							{/* <a
 								href={fileUrl}
 								target="_blank"
 								rel="noopener noreferrer"
 								className="ml-2 text-sm text-indigo-500 dark:text-indigo-400 hover:underline">
 								PDF File
-							</a>
+							</a> */}
 						</div>
 					)}
 					{!fileUrl && !isEditing && (
