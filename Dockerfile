@@ -12,6 +12,7 @@ WORKDIR /app
 
 # Copy package manager files and install pnpm
 COPY package.json pnpm-lock.yaml ./
+COPY /prisma /app/prisma
 # RUN npm install -g pnpm
 
 # Install dependencies

@@ -2,7 +2,7 @@
 
 import { ImageAnnotatorClient } from "@google-cloud/vision"
 
-const apiKey = process.env.GOOGLE_VISION_API_KEY
+const apiKey = process.env.GOOGLE_VISION_API_KEY || "my-google-vision-api-key"
 if (!apiKey) {
 	throw new Error("GOOGLE_VISION_API_KEY is not set")
 }

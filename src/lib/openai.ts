@@ -4,7 +4,7 @@
 import OpenAI from "openai"
 
 const client = new OpenAI({
-	apiKey: process.env.OPENAI_API_KEY, // This is the default and can be omitted
+	apiKey: process.env.OPENAI_API_KEY || "my-openai-key", // This is the default and can be omitted
 })
 
 export async function describeImage(imageUrl: string) {
