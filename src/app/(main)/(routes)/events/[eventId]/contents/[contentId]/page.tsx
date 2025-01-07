@@ -80,7 +80,7 @@ const ContentIdPage = async (props: {
 				)}
 			</div>
 			{/* drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)] */}
-			<div className="sticky top-0 mt-8 sm:mt-0 w-full md:w-1/2 flex flex-col bg-gray-800/50">
+			<div className="sticky top-0 mt-8 sm:mt-0 w-full md:w-1/2 flex flex-col bg-zinc-800/50">
 				<ContentHeader content={content} member={member} event={event} />
 				<div className="flex flex-col">
 					<ChatMessages

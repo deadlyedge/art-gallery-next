@@ -51,7 +51,7 @@ export const ContentHeader = ({
 				)}
 			</div>
 			{content.description && (
-				<div className="text-xs h-auto mx-2 md:mx-0 text-gray-100 mb-2">
+				<div className="text-xs h-auto mx-2 md:mx-0 text-zinc-100 mb-2">
 					{content.description}
 				</div>
 			)}

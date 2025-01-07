@@ -7,7 +7,7 @@ export async function GET() {
 		updateProfile()
 		return new NextResponse("OK", { status: 200 })
 	} catch (error) {
-		console.log("[MESSAGES_GET]", error)
+		console.log("[REFRESH_PROFILE]", error)
 		return new NextResponse("Internal Error", { status: 500 })
 	}
 }

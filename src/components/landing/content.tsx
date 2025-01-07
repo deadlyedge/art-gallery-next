@@ -65,19 +65,19 @@ export const LandingContent = () => {
 						without send a warning.
 						<br />
 						<br />
-						<code className="text-gray-400">
+						<code className="text-zinc-400">
 							I hope it helps for you and your kids.
 						</code>
 						<br />
 						<br />
 						<a
-							className="text-sm bg-gray-200 rounded-full px-3 pb-0.5 text-zinc-800"
+							className="text-sm bg-zinc-200 rounded-full px-3 pb-0.5 text-zinc-800"
 							href="https://github.com/deadlyedge/art-gallery-next">
 							<code>Page on GITHUB</code>
 						</a>
 						<br />
 						<br />
-						<code className="float-right text-gray-300 mb-4">
+						<code className="float-right text-zinc-300 mb-4">
 							- xdream an old student
 						</code>
 					</CardContent>

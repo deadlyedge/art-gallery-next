@@ -34,7 +34,7 @@ export const EventHeader = ({ event, role, founderName }: EventHeaderProps) => {
 	const isModerator = isAdmin || role === MemberRole.MODERATOR
 
 	return (
-		<div className="sticky top-0 z-20 bg-black/40 flex items-center justify-center w-full h-10 gap-2 text-foreground/50 mb-2 backdrop-blur">
+		<div className="sticky top-0 z-20 bg-black/40 flex items-center justify-center w-full h-10 gap-2 text-foreground/50 sm:mb-2 backdrop-blur">
 			<DropdownMenu>
 				<DropdownMenuTrigger className="focus:outline-none text-base font-semibold px-3 flex items-center h-10 text-foreground border-neutral-800 hover:text-white hover:bg-zinc-700/50 transition gap-2 max-w-64">
 					{/* <button

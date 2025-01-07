@@ -97,7 +97,7 @@ export const ShowMessages = ({
 								/>
 							))}
 						{group.items.length > 5 && (
-							<div className="text-center text-gray-300">[more messages]</div>
+							<div className="text-center text-zinc-300">[more messages]</div>
 						)}
 					</Suspense>
 				))}
