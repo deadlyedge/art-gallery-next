@@ -53,13 +53,13 @@ export const EventContent = ({ content, event, role }: EventContentProps) => {
 					<EventSlidePhoto eventId={event.id} />
 				)}
 			</div>
-
+			{/* drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)] */}
 			<div
-				className="sticky top-0 w-full md:w-1/2 flex flex-col cursor-pointer drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)]"
+				className="sticky top-0 w-full md:w-1/2 flex flex-col cursor-pointer bg-gray-800/50"
 				onClick={onClick}>
-				<div className="flex items-center p-2 md:p-0">
-					<Hash className="flex-shrink-0 w-5 h-5 text-zinc-400" />
-					<p className="line-clamp-1 font-semibold text-sm text-zinc-500 group-hover:text-zinc-600 dark:text-zinc-400 dark:group-hover:text-zinc-300 transition">
+				<div className="flex items-center p-2 md:p-0 text-zinc-100">
+					<Hash className="flex-shrink-0 w-5 h-5" />
+					<p className="line-clamp-1 font-semibold text-sm group-hover:text-zinc-600  dark:group-hover:text-zinc-300 transition">
 						{content.title}
 					</p>
 					{content.title !== "general" && role !== MemberRole.GUEST && (
@@ -102,7 +102,7 @@ export const EventContent = ({ content, event, role }: EventContentProps) => {
 					)}
 				</div>
 				{content.description && (
-					<div className="text-xs h-auto mx-2 md:mx-0">
+					<div className="text-xs h-auto mx-2 md:mx-0 text-gray-100 mb-2">
 						{content.description}
 					</div>
 				)}

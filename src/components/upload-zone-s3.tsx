@@ -2,7 +2,7 @@
 
 import { cn } from "@/lib/utils"
 import axios from "axios"
-import { Loader } from "lucide-react"
+import { Loader2 } from "lucide-react"
 import { useState } from "react"
 import { type FileRejection, useDropzone } from "react-dropzone"
 
@@ -111,7 +111,7 @@ export const UploadZoneS3 = ({
 			<div className="text-md">click to select</div>
 			{uploading && (
 				<div className="absolute z-10 top-0 left-0 w-full h-full flex justify-center items-center bg-black/90">
-					<Loader color="#2F80ED" className="w-8 h-8 animate-spin" />
+					<Loader2 color="#2F80ED" className="w-8 h-8 animate-spin" />
 				</div>
 			)}
 		</div>

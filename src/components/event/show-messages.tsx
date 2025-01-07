@@ -50,9 +50,7 @@ export const ShowMessages = ({
 				key={name}
 				className="flex flex-col flex-1 justify-center items-center">
 				<Loader2 className="h-7 w-7 text-zinc-500 animate-spin my-4" />
-				<p className="text-xs text-zinc-500 dark:text-zinc-400">
-					reading messages...
-				</p>
+				<p className="text-xs text-zinc-400">reading messages...</p>
 			</div>
 		)
 	}
@@ -99,7 +97,7 @@ export const ShowMessages = ({
 								/>
 							))}
 						{group.items.length > 5 && (
-							<div className="text-center text-gray-500">[more messages]</div>
+							<div className="text-center text-gray-300">[more messages]</div>
 						)}
 					</Suspense>
 				))}

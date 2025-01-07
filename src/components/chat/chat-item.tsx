@@ -155,9 +155,9 @@ export const ChatItem = ({
 								</ActionTooltip>
 							)}
 						</div>
-						<span className="text-[10px] text-zinc-500 dark:text-zinc-400">
-							{timestamp}
-						</span>
+						{!showMode && (
+							<span className="text-[10px] text-zinc-300">{timestamp}</span>
+						)}
 					</div>
 					{isImage && (
 						<div
@@ -191,15 +191,12 @@ export const ChatItem = ({
 					{!fileUrl && !isEditing && (
 						<p
 							className={cn(
-								"text-sm text-zinc-600 dark:text-zinc-300",
-								deleted &&
-									"italic line-through text-zinc-400 dark:text-zinc-500 text-xs mt-1",
+								"text-sm text-zinc-300",
+								deleted && "italic line-through text-zinc-400 text-xs mt-1",
 							)}>
 							{text}
 							{isUpdated && !deleted && (
-								<span className="text-[10px] mx-2 text-zinc-500 dark:text-zinc-400">
-									(编辑过)
-								</span>
+								<span className="text-[10px] mx-2 text-zinc-400">(编辑过)</span>
 							)}
 						</p>
 					)}
