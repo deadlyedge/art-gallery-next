@@ -55,7 +55,7 @@ export const EventContent = ({ content, event, role }: EventContentProps) => {
 			</div>
 			{/* drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)] */}
 			<div
-				className="sticky top-0 w-full md:w-1/2 flex flex-col cursor-pointer bg-zinc-800/50"
+				className="sticky top-0 w-full md:w-1/2 flex flex-col cursor-pointer bg-background/50"
 				onClick={onClick}>
 				<div className="flex items-center p-2 md:p-0 text-zinc-100">
 					<Hash className="flex-shrink-0 w-5 h-5" />

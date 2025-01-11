@@ -25,7 +25,10 @@ export const LandingTopbar = ({
 					</div>
 				</SignedOut>
 				<SignedIn>
-					<Link href={gotoEventClick} className="mr-2 hover:text-white">
+					<Link
+						href={gotoEventClick}
+						prefetch
+						className="mr-2 hover:text-white">
 						go to my events
 					</Link>
 					<UserButton />

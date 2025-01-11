@@ -5,6 +5,7 @@ import { useParams, useRouter } from "next/navigation"
 
 import { ActionTooltip } from "@/components/action-tooltip"
 import { cn } from "@/lib/utils"
+import Link from "next/link"
 
 type NavigationItemProps = {
 	id: string
@@ -26,10 +27,15 @@ export const NavigationItem = ({
 
 	return (
 		<ActionTooltip side="right" align="center" label={title}>
-			<button
+			{/* <button
 				type="button"
 				onClick={onClick}
-				className="group/tooltip relative flex items-center">
+				className="group/tooltip relative flex items-center"> */}
+			<Link
+				href={`/events/${id}`}
+				// prefetch
+				className="group/tooltip relative flex items-center text-center"
+			>
 				<div
 					className={cn(
 						"absolute left-0 bg-primary rounded-r-full transition-all w-[4px]",
@@ -56,7 +62,8 @@ export const NavigationItem = ({
 						{title}
 					</div>
 				</div>
-			</button>
+			</Link>
+			{/* </button> */}
 		</ActionTooltip>
 	)
 }

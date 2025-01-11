@@ -50,3 +50,5 @@ https://aganx.com/
 37. add motions for content showing.
 38. ~~image size optimize for better performance.~~
 39. ~~use ipv6 for passing through the wall~~
+40. add auto pagination for contents
+41. fix mobile contents view

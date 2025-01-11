@@ -71,7 +71,7 @@ export const LandingContent = () => {
 						<br />
 						<br />
 						<a
-							className="text-sm bg-zinc-200 rounded-full px-3 pb-0.5 text-zinc-800"
+							className="text-sm bg-zinc-200 rounded-full px-3 pb-0.5 text-background"
 							href="https://github.com/deadlyedge/art-gallery-next">
 							<code>Page on GITHUB</code>
 						</a>
