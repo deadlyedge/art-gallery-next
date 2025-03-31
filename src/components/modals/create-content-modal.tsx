@@ -43,7 +43,7 @@ const formSchema = z.object({
 			message: "Content title cannot be 'general'",
 		}),
 	description: z.string().optional(),
-	imageUrl: z.string().optional(),
+	imageUrl: z.string().default(""),
 	isPublic: z.boolean().default(false),
 	setEventImage: z.boolean().default(false),
 })
@@ -104,7 +104,7 @@ export const CreateContentModal = () => {
 
 	const onAiDescribeClick = async () => {
 		const userDescription = form.getValues("description")
-		const imageURL = form.getValues("imageUrl")
+		const imageURL = form.getValues("imageUrl") ?? ""
 		const aiDescription = await axios.get(`/api/aiaa?imageURL=${imageURL}`)
 		form.setValue(
 			"description",
@@ -119,7 +119,7 @@ export const CreateContentModal = () => {
 	}
 
 	const onCheckClick = async () => {
-		const imageURL = form.getValues("imageUrl")
+		const imageURL = form.getValues("imageUrl") ?? ""
 		if (!imageURL) return
 		const url = qs.stringifyUrl({
 			url: "/api/safe-search",
@@ -167,15 +167,15 @@ export const CreateContentModal = () => {
 												<div className="flex flex-col items-center justify-center">
 													<FileUpload
 														endpoint="contentImage"
-														value={field.value}
+														value={field.value ?? ""}
 														onChange={field.onChange}
 													/>
 													<Input
 														disabled={isLoading}
 														className="border border-zinc-500 focus:bg-zinc-900/80 focus-visible:ring-0 focus-visible:ring-offset-0 w-80 mt-2"
 														placeholder="Or paste image url"
-														// onChange={onImageUrlChange}
-														{...field}
+														value={field.value ?? ""}
+														onChange={(e) => field.onChange(e.target.value)}
 													/>
 													{hasImage && (
 														<div className="flex items-center mt-2">
