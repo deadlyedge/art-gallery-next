@@ -175,7 +175,7 @@ export const EditContentModal = () => {
 												<div className="flex flex-col items-center justify-center">
 													<FileUpload
 														endpoint="contentImage"
-														value={field.value}
+														value={field.value ?? ""}
 														onChange={field.onChange}
 													/>
 													<Input
