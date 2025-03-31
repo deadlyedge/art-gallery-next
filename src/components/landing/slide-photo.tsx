@@ -62,7 +62,7 @@ const LandingSlidePhoto = () => {
 											sizes="100vw"
 											style={{ objectFit: "cover" }}
 										/>
-										<div className="absolute z-auto bottom-0 h-40 w-full bg-gradient-to-t from-black/70 to-transparent">
+										<div className="absolute z-auto bottom-0 h-40 w-full bg-linear-to-t from-black/70 to-transparent">
 											<div className="absolute right-0 bottom-0 mr-8 mb-2 drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)] text-sm">
 												<p className="text-lg"># {content.title}</p>
 												<p>presented by: {content.profile.name}</p>

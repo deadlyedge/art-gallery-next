@@ -26,7 +26,7 @@ export const ContentHeader = ({
 	return (
 		<>
 			<div className="flex items-center text-zinc-100 p-2 md:p-0">
-				<Hash className="flex-shrink-0 w-5 h-5" />
+				<Hash className="shrink-0 w-5 h-5" />
 				<p className="line-clamp-1 font-semibold text-sm group-hover:text-zinc-50 transition">
 					{content.title}
 				</p>

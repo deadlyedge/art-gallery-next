@@ -39,7 +39,7 @@ export default async function Home() {
 	}
 
 	return (
-		<main className="h-[100vh] z-50 flex flex-col gap-8 row-start-2 items-center justify-center backdrop-blur">
+		<main className="h-[100vh] z-50 flex flex-col gap-8 row-start-2 items-center justify-center backdrop-blur-sm">
 			<LandingTopbar gotoEventClick={gotoEventClick} />
 			<div className="overflow-y-auto pt-12">
 				<LandingSlidePhoto />

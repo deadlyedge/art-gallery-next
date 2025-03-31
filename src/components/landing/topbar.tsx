@@ -14,7 +14,7 @@ export const LandingTopbar = ({
 	gotoEventClick: string
 }) => {
 	return (
-		<nav className="fixed top-0 z-20 bg-black/50 text-xs md:text-base flex items-center justify-between w-full h-12 p-2 backdrop-blur">
+		<nav className="fixed top-0 z-20 bg-black/50 text-xs md:text-base flex items-center justify-between w-full h-12 p-2 backdrop-blur-sm">
 			<LogoMotion size="lg" />
 			<div className="flex items-center">
 				<SignedOut>
