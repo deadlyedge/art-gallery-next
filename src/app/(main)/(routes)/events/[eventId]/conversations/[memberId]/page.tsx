@@ -6,14 +6,17 @@ import { ChatMessages } from "@/components/chat/chat-messages"
 import { getOrCreateConversation } from "@/lib/conversation"
 import { currentProfile } from "@/lib/current-profile"
 import { db } from "@/lib/db"
-// import { MediaRoom } from "@/components/media-room"
 
-const MemberIdPage = async (props: {
-	params: Promise<{ memberId: string; eventId: string }>
-}) => {
+type Props = {
+	params: Promise<{
+		memberId: string
+		eventId: string
+	}>
+}
+
+const MemberIdPage = async ({ params }: Props) => {
 	const profile = await currentProfile()
-	const { memberId, eventId } = await props.params
-	// const { video } = await searchParams
+	const { memberId, eventId } = await params
 
 	if (!profile) {
 		return redirect("/sign-in")
@@ -51,9 +54,6 @@ const MemberIdPage = async (props: {
 				eventId={eventId}
 				type="conversation"
 			/>
-			{/* {searchParams.video && (
-        <MediaRoom chatId={conversation.id} video={true} audio={true} />
-      )} */}
 
 			<ChatMessages
 				member={currentMember}

@@ -2,15 +2,13 @@ import { redirect } from "next/navigation"
 
 import { currentProfile } from "@/lib/current-profile"
 import { db } from "@/lib/db"
-// import { EventSidebar } from "@/components/event/event-sidebar"
 
-const EventIdLayout = async ({
-	children,
-	params,
-}: {
+type EventIdLayoutProps = {
 	children: React.ReactNode
-	params: { eventId: string }
-}) => {
+	params: Promise<{ eventId: string }>
+}
+
+const EventIdLayout = async ({ children, params }: EventIdLayoutProps) => {
 	const profile = await currentProfile()
 
 	if (!profile) {

@@ -10,16 +10,6 @@ export const updateProfile = async () => {
 		return redirect("/sign-in")
 	}
 
-	// const profile = await db.profile.findUnique({
-	//   where: {
-	//     email: user.emailAddresses[0].emailAddress,
-	//   },
-	// })
-
-	// if (profile) {
-	//   return profile
-	// }
-	// console.log(user)
 	const newProfile = await db.profile.update({
 		where: { userId: user.id },
 		data: {

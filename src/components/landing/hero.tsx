@@ -1,6 +1,6 @@
 import Link from "next/link"
 
-import LogoMotion from "@/components/logo-motion"
+import { LogoMotion } from "@/components/logo-motion"
 import { Button } from "@/components/ui/button"
 import { SignInButton, SignedIn, SignedOut } from "@clerk/nextjs"
 

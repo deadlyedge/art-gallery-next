@@ -6,7 +6,7 @@ import {
 	UserButton,
 } from "@clerk/nextjs"
 import Link from "next/link"
-import LogoMotion from "../logo-motion"
+import { LogoMotion } from "../logo-motion"
 
 export const LandingTopbar = ({
 	gotoEventClick,

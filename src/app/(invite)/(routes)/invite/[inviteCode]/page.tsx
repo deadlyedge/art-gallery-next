@@ -3,7 +3,7 @@ import { db } from "@/lib/db"
 import { SignInButton, SignedOut } from "@clerk/nextjs"
 import { redirect } from "next/navigation"
 
-import LogoMotion from "@/components/logo-motion"
+import { LogoMotion } from "@/components/logo-motion"
 import { Button } from "@/components/ui/button"
 import {
 	Card,
@@ -14,11 +14,13 @@ import {
 	CardTitle,
 } from "@/components/ui/card"
 
-const InviteCodePage = async (props: {
+type Props = {
 	params: Promise<{ inviteCode: string }>
-}) => {
+}
+
+const InviteCodePage = async ({ params }: Props) => {
 	const profile = await currentProfile()
-	const { inviteCode } = await props.params
+	const { inviteCode } = await params
 
 	if (!inviteCode) {
 		return redirect("/")

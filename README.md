@@ -54,3 +54,7 @@ https://aganx.com/
 - [ ] fix mobile contents view
 - [ ] fix params interface for every page
 - [ ] try drizzle/trpc for better performance
+- [ ] add share link for event and content
+  - [ ] share link should not require login to view and should not show conversation and members list.
+  - [ ] content share should only show the content and title.
+- [ ] add confirm for kick member and delete content.

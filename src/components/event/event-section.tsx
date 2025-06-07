@@ -11,7 +11,6 @@ type EventSectionProps = {
 	label: string
 	role?: MemberRole
 	sectionType: "contents" | "members"
-	// contentType?: ContentType
 	event?: EventWithMembersWithProfiles
 }
 
@@ -19,7 +18,6 @@ export const EventSection = ({
 	label,
 	role,
 	sectionType,
-	// contentType,
 	event,
 }: EventSectionProps) => {
 	const { onOpen } = useModal()

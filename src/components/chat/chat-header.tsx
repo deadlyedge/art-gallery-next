@@ -4,7 +4,7 @@ import { UserAvatar } from "@/components/user-avatar"
 import { Hash } from "lucide-react"
 
 type ChatHeaderProps = {
-	eventId: string
+	// eventId: string
 	title: string
 	type: "content" | "conversation"
 	imageUrl?: string
@@ -26,9 +26,6 @@ export const ChatHeader = ({
 			<p className="font-semibold text-md text-black dark:text-white">
 				{title}
 			</p>
-			{/* <div className="ml-auto flex items-center">
-				<SocketIndicator />
-			</div> */}
 		</div>
 	)
 }

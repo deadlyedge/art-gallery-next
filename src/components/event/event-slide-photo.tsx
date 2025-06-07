@@ -12,7 +12,11 @@ import Autoplay from "embla-carousel-autoplay"
 import Image from "next/image"
 import { useEffect, useState } from "react"
 
-const EventSlidePhoto = ({ eventId }: { eventId: string }) => {
+type EventSlidePhotoProps = {
+	eventId: string
+}
+
+export const EventSlidePhoto = ({ eventId }: EventSlidePhotoProps) => {
 	const [showContents, setShowContents] = useState<Content[]>([])
 
 	useEffect(() => {
@@ -70,5 +74,3 @@ const EventSlidePhoto = ({ eventId }: { eventId: string }) => {
 		</Carousel>
 	)
 }
-
-export default EventSlidePhoto

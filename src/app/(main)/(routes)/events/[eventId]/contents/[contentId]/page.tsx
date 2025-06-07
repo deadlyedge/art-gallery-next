@@ -7,11 +7,16 @@ import { ChatInput } from "@/components/chat/chat-input"
 import { ChatMessages } from "@/components/chat/chat-messages"
 import { ContentHeader } from "@/components/content/content-header"
 
-const ContentIdPage = async (props: {
-	params: Promise<{ eventId: string; contentId: string }>
-}) => {
+type Props = {
+	params: Promise<{
+		eventId: string
+		contentId: string
+	}>
+}
+
+const ContentIdPage = async ({ params }: Props) => {
 	const profile = await currentProfile()
-	const { eventId, contentId } = await props.params
+	const { eventId, contentId } = await params
 
 	if (!profile) {
 		return redirect("/sign-in")

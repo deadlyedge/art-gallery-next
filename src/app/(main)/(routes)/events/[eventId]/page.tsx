@@ -11,11 +11,13 @@ import { EventSection } from "@/components/event/event-section"
 import { Suspense } from "react"
 import Loading from "./loading"
 
-const EventContentsPage = async (props: {
-	params: Promise<{ eventId: string; contentTitle?: string }>
-}) => {
+type EventContentsPageProps = {
+	params: Promise<{ eventId: string }>
+}
+
+const EventContentsPage = async ({ params }: EventContentsPageProps) => {
 	const profile = await currentProfile()
-	const { eventId } = await props.params
+	const { eventId } = await params
 
 	if (!profile) {
 		return redirect("/")
@@ -56,7 +58,7 @@ const EventContentsPage = async (props: {
 		(member) => member.profileId === profile.id,
 	)?.role
 
-	// redirect to hashtag after page fully loaded
+	// TODO: redirect to hashtag after page fully loaded
 
 	return (
 		<div className="flex flex-col h-[100vh]">

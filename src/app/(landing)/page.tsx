@@ -5,10 +5,8 @@ import LandingSlidePhoto from "@/components/landing/slide-photo"
 import { LandingTopbar } from "@/components/landing/topbar"
 import { db } from "@/lib/db"
 import { initialProfile } from "@/lib/initial-profile"
-// import { InitialModal } from "@/components/modals/initial-modal"
 import { updateProfile } from "@/lib/update-profile"
 import { auth, currentUser } from "@clerk/nextjs/server"
-import { redirect } from "next/navigation"
 
 export default async function Home() {
 	const { userId } = await auth()
@@ -17,10 +15,6 @@ export default async function Home() {
 	if (userId) {
 		const profile = await initialProfile()
 		const user = await currentUser()
-
-		// if (!profile) {
-		// 	return redirect("/")
-		// }
 
 		if (user?.fullName !== profile.name || user.imageUrl !== profile.imageUrl)
 			updateProfile()

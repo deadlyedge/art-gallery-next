@@ -54,7 +54,7 @@ const MarginFade = ({
 	</div>
 )
 
-const LogoMotion: React.FC<LogoMotionProps> = ({ className, size }) => {
+export const LogoMotion: React.FC<LogoMotionProps> = ({ className, size }) => {
 	const { ga, a, nx, textSize } = marginClasses[size]
 
 	return (
@@ -72,5 +72,3 @@ const LogoMotion: React.FC<LogoMotionProps> = ({ className, size }) => {
 		</Link>
 	)
 }
-
-export default LogoMotion

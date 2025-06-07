@@ -6,7 +6,7 @@ export const Bottom = () => {
 			<span className="mr-0 text-xs">© 2025 aganx. built with ❤️ by oldlu.</span>
 			<Cable className="inline mx-1" />
 			<Codepen className="inline mx-1" />
-			<code className="text-xs">v25.6.7</code>
+			<code className="text-xs">v25.6.7.1</code>
 		</footer>
 	)
 }

@@ -8,7 +8,7 @@ import { useRouter } from "next/navigation"
 import { ActionTooltip } from "@/components/action-tooltip"
 import { type ModalType, useModal } from "@/hooks/use-modal-store"
 import { EventSideMessages } from "./event-side-messages"
-import EventSlidePhoto from "./event-slide-photo"
+import { EventSlidePhoto } from "./event-slide-photo"
 
 type EventContentProps = {
 	content: Content
@@ -18,7 +18,6 @@ type EventContentProps = {
 
 export const EventContent = ({ content, event, role }: EventContentProps) => {
 	const { onOpen } = useModal()
-	// const params = useParams()
 	const router = useRouter()
 
 	const onClick = () => {

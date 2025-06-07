@@ -2,7 +2,7 @@ import { UserButton } from "@clerk/nextjs"
 import { currentUser } from "@clerk/nextjs/server"
 import { redirect } from "next/navigation"
 
-import LogoMotion from "@/components/logo-motion"
+import { LogoMotion } from "@/components/logo-motion"
 import {
 	Sidebar,
 	SidebarContent,
