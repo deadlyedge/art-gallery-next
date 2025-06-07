@@ -22,7 +22,7 @@ const testimonials = [
 		avatar: "M",
 		title: "Dependency",
 		description:
-			"I use uploadthing for this project, it's free for starting projects, their api are easy to use, they are good.  But not enough especially for my network condition.  So I have to make an alternative for file sharing.  With those 2 project (pyBlobServer and UI) which you could find in my github, this aganx runs better.",
+			"I use amazon s3 for file share now instead of uploadthing, because uploadthing became slow for my network condition.    So I have to make an alternative for file sharing.  With those 2 project (pyBlobServer and UI) which you could find in my github, this aganx runs better.",
 	},
 ]
 
