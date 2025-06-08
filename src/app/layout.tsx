@@ -1,11 +1,14 @@
 import type { Metadata } from "next"
 import { Noto_Serif } from "next/font/google"
 import "./globals.css"
+
 import { ModalProvider } from "@/components/providers/modal-provider"
 import { QueryProvider } from "@/components/providers/queryProvider"
 import { ThemeProvider } from "@/components/providers/themeProvider"
 import { cn } from "@/lib/utils"
 import { ClerkProvider } from "@clerk/nextjs"
+import { TRPCReactProvider } from "@/trpc/client"
+
 import { dark } from "@clerk/themes"
 
 const notoSerif = Noto_Serif({
@@ -36,24 +39,22 @@ export default function RootLayout({
 		<ClerkProvider
 			dynamic
 			appearance={{ baseTheme: dark }}
-			// signInUrl="/sign-in"
-			// signUpUrl="/sign-up"
-			// signInFallbackRedirectUrl="/"
-			// signUpFallbackRedirectUrl="/"
 			afterSignOutUrl="/"
 		>
-			<html lang="en" suppressHydrationWarning>
-				<body className={cn(notoSerif.className, "antialiased")}>
-					<ThemeProvider
-						attribute={"class"}
-						defaultTheme={"dark"}
-						enableSystem
-						storageKey="aganx-theme">
-						<ModalProvider />
-						<QueryProvider>{children}</QueryProvider>
-					</ThemeProvider>
-				</body>
-			</html>
+			<TRPCReactProvider>
+				<html lang="en" suppressHydrationWarning>
+					<body className={cn(notoSerif.className, "antialiased")}>
+						<ThemeProvider
+							attribute={"class"}
+							defaultTheme={"dark"}
+							enableSystem
+							storageKey="aganx-theme">
+							<ModalProvider />
+							<QueryProvider>{children}</QueryProvider>
+						</ThemeProvider>
+					</body>
+				</html>
+			</TRPCReactProvider>
 		</ClerkProvider>
 	)
 }
