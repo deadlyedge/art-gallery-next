@@ -51,7 +51,7 @@ const MemberIdPage = async ({ params }: Props) => {
 			<ChatHeader
 				imageUrl={otherMember.profile.imageUrl}
 				title={otherMember.profile.name}
-				eventId={eventId}
+				// eventId={eventId}
 				type="conversation"
 			/>
 
